@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="378.0" prefWidth="578.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Views.ConsulterListeEnfantsController">
+   <children>
+      <TableView fx:id="tableAct" layoutX="183.0" layoutY="69.0" prefHeight="240.0" prefWidth="338.0">
+         <columns>
+            <TableColumn fx:id="activite" prefWidth="112.0" text="Nom" />
+            <TableColumn fx:id="description" prefWidth="118.0" text="Prenom" />
+            <TableColumn fx:id="date" prefWidth="107.0" text="Date Naissance" />
+         </columns>
+      </TableView>
+      <Button layoutX="38.0" layoutY="80.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" text="Afficher" />
+      <Button layoutX="51.0" layoutY="163.0" mnemonicParsing="false" text="Button" />
+   </children>
+</AnchorPane>
