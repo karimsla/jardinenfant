@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  * @author karim
  */
 public class ConnexionBD {
-    private String url = "jdbc:mysql://127.0.0.1:3306/esprit?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private String url = "jdbc:mysql://127.0.0.1:3306/esprit";
     private String login = "root";
-    private String pwd = "root";
+    private String pwd = "";
     private Connection cnx;
     private static ConnexionBD instance;
 
