@@ -26,6 +26,10 @@ public class FXMLController implements Initializable {
     private AnchorPane root;
     @FXML
     private Button act_btn;
+    @FXML
+    private Button enfant_btn;
+    @FXML
+    private Button btn;
 
     /**
      * Initializes the controller class.
@@ -43,5 +47,15 @@ public class FXMLController implements Initializable {
             root.getChildren().setAll(pane);
         }
     }
+
+    @FXML
+    private void RedirectToListeEnfant(ActionEvent event) throws IOException {
+        
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/ConsulterEnfants.fxml"));
+            root.getChildren().setAll(pane);
+        
+    }
+
+    
     
 }
