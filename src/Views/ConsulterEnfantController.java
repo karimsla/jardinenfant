@@ -7,6 +7,7 @@ package views;
 
 import Entities.Activite;
 import Entities.Enfant;
+import Entities.Parents;
 import Utils.ConnexionBD;
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +56,9 @@ public class ConsulterEnfantController implements Initializable {
     public ObservableList<Enfant> data = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Enfant, Date> date;
+    @FXML
+    private Button ajou;
+    
 
     /**
      * Initializes the controller class.
@@ -79,17 +83,18 @@ public class ConsulterEnfantController implements Initializable {
                  p.setNom(rs.getString("nom"));
                  p.setPrenom(rs.getString("prenom"));
                   p.setDatenaiss(rs.getDate("datenaiss"));
+                 
                
                 
                 data.add(p);
             }
         } catch (SQLException ex) {
-             Logger.getLogger(views.ConsulterEnfantController.class.getName()).log(Level.SEVERE, null, ex);
+           
          }
         
         nom.setCellValueFactory(new PropertyValueFactory<Enfant,String>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<Enfant,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<Enfant,Date>("date"));
+        date.setCellValueFactory(new PropertyValueFactory<Enfant,Date>("datenaiss"));
        
         afficher.setItems(data);
         
@@ -97,6 +102,14 @@ public class ConsulterEnfantController implements Initializable {
         
         
        
+    }
+
+    @FXML
+    private void redirect(ActionEvent event) throws IOException {
+        if(event.getSource() == ajou){
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("AjoutActivite.fxml"));
+            root.getChildren().setAll(pane);
+        }
     }
 
 }

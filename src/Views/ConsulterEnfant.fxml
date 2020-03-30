@@ -7,13 +7,14 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #046380;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ConsulterEnfantController">
   <children>
-      <TableView fx:id="afficher" layoutX="206.0" layoutY="71.0" prefHeight="200.0" prefWidth="302.0">
+      <TableView fx:id="afficher" layoutX="175.0" layoutY="69.0" prefHeight="279.0" prefWidth="408.0">
         <columns>
           <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
-          <TableColumn fx:id="prenom" prefWidth="75.0" text="Prenom" />
-            <TableColumn fx:id="date" prefWidth="75.0" text="Date Naissance" />
+          <TableColumn fx:id="prenom" prefWidth="89.60003662109375" text="Prenom" />
+            <TableColumn fx:id="date" prefWidth="117.5999755859375" text="Date Naissance" />
         </columns>
       </TableView>
-      <Button fx:id="aff" layoutX="71.0" layoutY="101.0" mnemonicParsing="false" onAction="#Afficher" text="Afficher" />
+      <Button fx:id="aff" layoutX="37.0" layoutY="101.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="92.0" text="Afficher" />
+      <Button fx:id="ajou" layoutX="37.0" layoutY="161.0" mnemonicParsing="false" onAction="#redirect" prefHeight="26.0" prefWidth="92.0" text="Ajouter" />
    </children>
 </AnchorPane>
