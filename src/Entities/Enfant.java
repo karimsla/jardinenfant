@@ -45,5 +45,77 @@ public class Enfant {
     
     private  Collection<PartActivite> participerActivite;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public Date getDatenaiss() {
+        return datenaiss;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public Collection<Abonnement> get$abonnements() {
+        return $abonnements;
+    }
+
+    public Parents getParent() {
+        return parent;
+    }
+
+    public Collection<Participer> getParticipation() {
+        return participation;
+    }
+
+    public Collection<PartActivite> getParticiperActivite() {
+        return participerActivite;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setDatenaiss(Date datenaiss) {
+        this.datenaiss = datenaiss;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public void set$abonnements(Collection<Abonnement> $abonnements) {
+        this.$abonnements = $abonnements;
+    }
+
+    public void setParent(Parents parent) {
+        this.parent = parent;
+    }
+
+    public void setParticipation(Collection<Participer> participation) {
+        this.participation = participation;
+    }
+
+    public void setParticiperActivite(Collection<PartActivite> participerActivite) {
+        this.participerActivite = participerActivite;
+    }
+
     
 }
