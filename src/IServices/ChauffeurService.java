@@ -32,13 +32,12 @@ public class ChauffeurService {
    public void ajouterPersonne(Chauffeur p)
    {
        try {
-           String res="Insert into chauffeur (cin,nom,tel,sexe,jardin_id) values('"+p.getCin()+"','"+p.getNom()+"','"+p.getTel()+"','"+p.getSexe()+"','"+p.getTel()+"',3)";
+           String res="Insert into chauffeur (jardin_id,cin,nom,tel,sexe) values (3,'"+p.getCin()+"','"+p.getNom()+"','"+p.getTel()+"','"+p.getSexe()+"')";
            Statement statement=cnx.createStatement();
-       statement.executeUpdate(res);
+           statement.executeUpdate(res);
            System.out.println("ajout réussie!");
        } catch (SQLException ex) {
-           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
-       }
+      System.out.println(ex); }
    }
    
    

@@ -5,6 +5,8 @@
  */
 package jardin.enfant;
 
+import Entities.Chauffeur;
+import IServices.ChauffeurService;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -58,7 +60,10 @@ public void events(Stage stage,Parent scene)
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        
+         ChauffeurService cs=new ChauffeurService();
+        cs.ajouterPersonne(new Chauffeur(1,"11223342","dorra","33115533","femme",1));
+        
     }
     
 }
