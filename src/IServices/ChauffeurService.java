@@ -32,7 +32,7 @@ public class ChauffeurService {
    public void ajouterPersonne(Chauffeur p)
    {
        try {
-           String res="Insert into chauffeur (cin,nom,prenom,tel,sexe,jardin_id) values('"+p.getCin()+"','"+p.getNom()+"','"+p.getTel()+"','"+p.getSexe()+"','"+p.getTel()+"',3)";
+           String res="Insert into chauffeur (cin,nom,tel,sexe,jardin_id) values('"+p.getCin()+"','"+p.getNom()+"','"+p.getTel()+"','"+p.getSexe()+"','"+p.getTel()+"',3)";
            Statement statement=cnx.createStatement();
        statement.executeUpdate(res);
            System.out.println("ajout réussie!");
@@ -78,7 +78,8 @@ public class ChauffeurService {
            Statement statement=cnx.createStatement();
        statement.executeUpdate(res);
            System.out.println("Modification réussie!" );
-       } catch (SQLException ex) {
+       } catch (SQLException ex) 
+       {
            Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
