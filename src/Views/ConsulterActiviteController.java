@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -57,12 +59,21 @@ public class ConsulterActiviteController implements Initializable {
     private AnchorPane root;
     @FXML
     private Button modifier_btn;
+    @FXML
+    private ComboBox<String> club_box;
+    @FXML
+    private Button det_btn;
     
-    
+       public ObservableList<String> nom = FXCollections.observableArrayList();
+       
+        HashMap<String, Integer> map;
     
      @FXML
     private void Afficher(){
+        
 
+        
+        data.clear();
         try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             String res="SELECT typeact,detailles, date FROM `activite" ;
@@ -74,7 +85,7 @@ public class ConsulterActiviteController implements Initializable {
                  Activite p = new Activite();
                  p.setTypeact(rs.getString("typeact"));
                  p.setDetailles(rs.getString("detailles"));
-                 p.setDate(rs.getDate("date"));
+                 p.setDate(rs.getString("date"));
                 
                 data.add(p);
             }
@@ -96,6 +107,15 @@ public class ConsulterActiviteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+         map = new HashMap<>();  
+        LoadData();
+          
+        for(int i=0; i<nom.size(); i++){ 
+            club_box.setValue((String)nom.get(i));
+           
+        }
+        club_box.setItems(nom);
     }    
 
     @FXML
@@ -115,4 +135,58 @@ public class ConsulterActiviteController implements Initializable {
     }
     
 }
+
+    @FXML
+    private void Detail(ActionEvent event) {
+        data.clear();
+         String nom = club_box.getSelectionModel().getSelectedItem();
+           int id = map.get(nom);  
+        
+        try{
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            String res="SELECT typeact,detailles, date FROM Activite WHERE club_id="+id ;
+          
+            Statement statement = con.createStatement();
+          
+            ResultSet rs =  statement.executeQuery(res);
+            while(rs.next()){
+                 Activite p = new Activite();
+                 p.setTypeact(rs.getString("typeact"));
+                 p.setDetailles(rs.getString("detailles"));
+                 p.setDate(rs.getString("date"));
+                
+                data.add(p);
+            }
+        } catch (SQLException ex) {
+             Logger.getLogger(ConsulterActiviteController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        activite.setCellValueFactory(new PropertyValueFactory<Activite,String>("typeact"));
+        description.setCellValueFactory(new PropertyValueFactory<Activite,String>("detailles"));
+        date.setCellValueFactory(new PropertyValueFactory<Activite,Date>("date"));
+        tableAct.setItems(data);
+        
+    }
+    
+    private void LoadData(){
+     
+         try{
+            
+            String res="SELECT id,Name FROM Club" ;
+          Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            Statement statement = con.prepareStatement(res);
+            ResultSet rs =  statement.executeQuery(res);
+            while(rs.next()){
+                map.put( rs.getString("Name"),rs.getInt("id"));
+                nom.add(rs.getString("Name"));
+              
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+             System.err.println(ex);;
+         }
+         
+    }
 }
