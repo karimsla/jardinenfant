@@ -27,9 +27,8 @@ public class CategorieService {
           try{
              
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="Insert into Categorie(id,libelle) values (?,?)";
+            String res="Insert into Categorie(libelle) values (?)";
             PreparedStatement pre = con.prepareStatement(res);
-            pre.setInt(1,c.getId());
             pre.setString(2,c.getLibelle());
             pre.executeUpdate();
             
@@ -45,11 +44,8 @@ public class CategorieService {
          try{
             Connection cnx = (Connection) ConnexionBD.getInstance().getCnx();
 
-             String query="Update Categorie SET titre='"+libelle_C
-      
-             
-             
-             +" WHERE id="+id_C;
+             String query="Update Categorie SET titre='"+libelle_C                 
+             +"' WHERE id="+id_C;
            Statement st=cnx.createStatement();
              st=cnx.createStatement();
              st.executeUpdate(query);
@@ -87,7 +83,8 @@ public class CategorieService {
            Statement statement= cnx.createStatement();
            ResultSet rs=statement.executeQuery(req);
            while (rs.next())
-           {Categorie c=new Categorie(rs.getInt(1),rs.getString(2));
+           {Categorie c=new Categorie(rs.getString(2));
+           c.setId(rs.getInt(1));
            lc.add(c);
            }
        } catch (SQLException ex) {

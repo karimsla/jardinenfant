@@ -29,7 +29,7 @@ public class EvenementService {
           try{
              
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="Insert into Evenement(id,titre,date,description,image) values (?,?,?,?,?)";
+            String res="Insert into Evenement(titre,date,description,image) values (?,?,?,?)";
             PreparedStatement pre = con.prepareStatement(res);
             pre.setString(1,e.getTitre());
             pre.setDate(2,e.getDate());
@@ -51,10 +51,10 @@ public class EvenementService {
              String query="Update Evenement SET titre='"+titre_E
       
                +"', date="+date_E
-               +"'description="+description_E
-               +"'image="+image_E
+               +"description='"+description_E
+               +"'image='"+image_E
              
-             +" WHERE id="+id_E;
+             +"' WHERE id="+id_E;
            Statement st=cnx.createStatement();
              st=cnx.createStatement();
              st.executeUpdate(query);
