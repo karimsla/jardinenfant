@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views;
+package views;
 
+import Entities.AbonEnf;
 import Entities.Activite;
 import Entities.Enfant;
 import Entities.Parents;
@@ -45,20 +46,26 @@ public class ConsulterEnfantController implements Initializable {
      @FXML
     private AnchorPane root;
     @FXML
-    private TableView<Enfant> afficher;
+    private TableView<AbonEnf> afficher;
     @FXML
-    private TableColumn<Enfant, String> nom;
+    private TableColumn<AbonEnf, String> nom;
     @FXML
-    private TableColumn<Enfant, String> prenom;
+    private TableColumn<AbonEnf, String> prenom;
     @FXML
     private Button aff;
     
-    public ObservableList<Enfant> data = FXCollections.observableArrayList();
+    public ObservableList<AbonEnf> data = FXCollections.observableArrayList();
     @FXML
-    private TableColumn<Enfant, Date> date;
+    private TableColumn<AbonEnf, Date> date;
     @FXML
     private Button ajou;
-    
+    @FXML
+    private TableColumn<AbonEnf, String> etat;
+    @FXML
+    private TableColumn<AbonEnf, String> type;
+    @FXML
+    private TableColumn<AbonEnf, Date> dateex;
+    String noms="attente";
 
     /**
      * Initializes the controller class.
@@ -70,19 +77,23 @@ public class ConsulterEnfantController implements Initializable {
     
     @FXML
     private void Afficher(){
-
+      
         try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT nom,prenom,datenaiss FROM `enfant" ;
+            String res="SELECT ab.etat,ab.type,ab.date FROM abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'   " ;
           
             Statement statement = con.createStatement();
           
             ResultSet rs =  statement.executeQuery(res);
             while(rs.next()){
-                 Enfant p = new Enfant();
+                 AbonEnf p = new AbonEnf();
                  p.setNom(rs.getString("nom"));
                  p.setPrenom(rs.getString("prenom"));
                   p.setDatenaiss(rs.getDate("datenaiss"));
+                  p.setEtat(rs.getString("etat"));
+                  p.setType(rs.getString("type"));
+                  p.setDate(rs.getDate("date"));
+                  
                  
                
                 
@@ -92,9 +103,12 @@ public class ConsulterEnfantController implements Initializable {
            
          }
         
-        nom.setCellValueFactory(new PropertyValueFactory<Enfant,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<Enfant,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<Enfant,Date>("datenaiss"));
+        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
        
         afficher.setItems(data);
         
@@ -107,7 +121,7 @@ public class ConsulterEnfantController implements Initializable {
     @FXML
     private void redirect(ActionEvent event) throws IOException {
         if(event.getSource() == ajou){
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("AjoutActivite.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("AjouterEnfant.fxml"));
             root.getChildren().setAll(pane);
         }
     }
