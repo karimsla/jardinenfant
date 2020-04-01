@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="674.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Views.Emna.ConsulterListeEvenementsController">
+<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Emna.ConsulterListeEvenementsController">
    <children>
-      <AnchorPane layoutX="37.0" layoutY="131.0" prefHeight="363.0" prefWidth="571.0" style="-fx-background-color: D7D7D7;">
+      <AnchorPane fx:id="root" layoutX="37.0" layoutY="131.0" prefHeight="363.0" prefWidth="571.0" style="-fx-background-color: D7D7D7;">
          <children>
             <TableView fx:id="TV_le" layoutX="122.0" layoutY="35.0" prefHeight="294.0" prefWidth="329.0">
               <columns>
