@@ -65,7 +65,7 @@ public class AjoutEvenementController implements Initializable {
         String description = desc_event.getText();
       
         
-        Evenement E = new Evenement (titre,date,description);
+        Evenement E = new Evenement(titre,dateE,description,"");
         EvenementService ES = new EvenementService();
         ES.Ajouter(E);
          AnchorPane pane = FXMLLoader.load(getClass().getResource("AjoutEvenement.fxml"));
