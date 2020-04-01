@@ -17,6 +17,12 @@ import javafx.fxml.Initializable;
  */
 public class ConsulterEvenementController implements Initializable {
 
+
+    
+    
+  
+    
+    
     /**
      * Initializes the controller class.
      */
