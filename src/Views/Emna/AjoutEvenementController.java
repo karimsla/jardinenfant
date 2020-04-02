@@ -70,8 +70,7 @@ public class AjoutEvenementController implements Initializable {
          AnchorPane pane = FXMLLoader.load(getClass().getResource("AjoutEvenement.fxml"));
             root.getChildren().setAll(pane);
         
-        
-        
+           
        
     }
     
