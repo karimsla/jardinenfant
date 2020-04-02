@@ -7,14 +7,17 @@ package Views;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Entities.Jardin;
 import javafx.fxml.Initializable;
+
 
 /**
  * FXML Controller class
  *
- * @author FERID
+ * @author ASUS
  */
-public class AjouterEnfantController implements Initializable {
+public class EditJardinController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -23,5 +26,9 @@ public class AjouterEnfantController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    void inflateUI(Jardin selectedForEdit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

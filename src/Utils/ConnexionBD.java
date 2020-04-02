@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author karim
  */
 public class ConnexionBD {
-    private String url = "jdbc:mysql://127.0.0.1:3306/jardinenfant";
+    private String url = "jdbc:mysql://127.0.0.1:3306/jardinenfant?autoReconnect=true&serverTimezone=UTC";
     private String login = "root";
     private String pwd = "";
     private Connection cnx;

@@ -58,7 +58,10 @@ public class ChauffeurService {
        }
        return lp;
    }
-    public void supprimerChauffeur(int id)
+   
+
+   
+   public void supprimerChauffeur(int id)
    {
        try {
            String res="Delete from chauffeur where id="+id;
@@ -83,6 +86,8 @@ public class ChauffeurService {
            Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
+  
+
     public Chauffeur find(int id)
     {
          String req="Select * from chauffeur where id="+id;
