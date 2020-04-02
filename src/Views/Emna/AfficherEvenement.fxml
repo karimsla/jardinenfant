@@ -13,14 +13,16 @@
       <AnchorPane fx:id="root" layoutX="18.0" layoutY="115.0" prefHeight="333.0" prefWidth="577.0" style="-fx-background-color: D7D7D7;">
          <children>
             <Button fx:id="supp_btn" layoutX="42.0" layoutY="284.0" mnemonicParsing="false" text="Supprimer" textFill="#cb2cd3" />
-            <ImageView fx:id="IV_event" fitHeight="224.0" fitWidth="200.0" layoutX="24.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-            <TableView fx:id="TV_detE" layoutX="239.0" layoutY="38.0" prefHeight="224.0" prefWidth="328.0">
+            <ImageView fx:id="IV_event" fitHeight="224.0" fitWidth="168.0" layoutX="24.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+            <TableView fx:id="TV_detE" layoutX="205.0" layoutY="38.0" prefHeight="224.0" prefWidth="362.0">
               <columns>
-                <TableColumn fx:id="col_titre" prefWidth="97.0" text="Evenement" />
+                <TableColumn fx:id="col_titre" prefWidth="97.0" text="Titre" />
                 <TableColumn fx:id="col_desc" prefWidth="128.0" text="Description" />
-                  <TableColumn fx:id="col_jardin" prefWidth="102.0" text="Jardin" />
+                  <TableColumn fx:id="col_jardin" prefWidth="60.0" text="Jardin" />
+                  <TableColumn fx:id="col_date" prefWidth="76.0" text="Date" />
               </columns>
             </TableView>
+            <Button fx:id="retour_btn" layoutX="143.0" layoutY="284.0" mnemonicParsing="false" text="Retour" textFill="#cb2cd3" />
          </children>
       </AnchorPane>
       <Label layoutX="182.0" layoutY="51.0" prefHeight="30.0" prefWidth="249.0" text="Détails événement" textFill="#ae129c">
