@@ -148,7 +148,7 @@ public class ConsulterClubController implements Initializable {
         }
     }
 
-    @FXML
+    // @FXML
     private void Modifier(ActionEvent event) {
 
         String club_nom = mod_club.getText();
@@ -170,7 +170,7 @@ public class ConsulterClubController implements Initializable {
         }
 
     }
-
+//
     private void Annuler(ActionEvent event) throws IOException {
         if (event.getSource() == Annuler) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Views/Accueil.fxml"));
