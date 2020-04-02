@@ -6,7 +6,6 @@
 package Views.Emna;
 
 import java.net.URL;
-
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
@@ -15,26 +14,14 @@ import javafx.fxml.Initializable;
  *
  * @author Emna
  */
-public class ConsulterEvenementController implements Initializable {
+public class AfficherEvenementController implements Initializable {
 
-
-    
-    
-  
-    
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-    
+    }    
     
 }
-
-    
-    
-    
-

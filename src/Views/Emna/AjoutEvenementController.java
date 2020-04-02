@@ -41,7 +41,6 @@ public class AjoutEvenementController implements Initializable {
     private TextArea desc_event;
     @FXML
     private Button ajout_bt;
-    
     @FXML
     private ListView list_cat;
     @FXML
