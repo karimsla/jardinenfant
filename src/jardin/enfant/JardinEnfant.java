@@ -61,8 +61,7 @@ public void events(Stage stage,Parent scene)
      */
     public static void main(String[] args) {
         
-         ChauffeurService cs=new ChauffeurService();
-        cs.ajouterPersonne(new Chauffeur(1,"11223342","dorra","33115533","femme",1));
+        launch(args);
         
     }
     

@@ -67,6 +67,8 @@ public class ConsulterActiviteController implements Initializable {
        public ObservableList<String> nom = FXCollections.observableArrayList();
        
         HashMap<String, Integer> map;
+    @FXML
+    private Button Club_btn;
     
      @FXML
     private void Afficher(){
@@ -121,7 +123,7 @@ public class ConsulterActiviteController implements Initializable {
     @FXML
     private void redirect(ActionEvent event) throws IOException {
         if(event.getSource() == btn){
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("AjoutActivite.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/AjoutActivite.fxml"));
             root.getChildren().setAll(pane);
         }
     }
@@ -188,5 +190,14 @@ public class ConsulterActiviteController implements Initializable {
              System.err.println(ex);;
          }
          
+    }
+
+    @FXML
+    private void TakeMeToClub(ActionEvent event) throws IOException {
+        
+          if(event.getSource() == Club_btn){
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("Club/ConsulterClub.fxml"));
+            root.getChildren().setAll(pane);
+    }
     }
 }

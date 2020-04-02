@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #046380;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AjoutActiviteController">
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #046380;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Views.AjoutActiviteController">
    <children>
-      <SubScene height="342.0" layoutX="46.0" layoutY="29.0" width="524.0">
-        <root>
-          <Region />
-        </root>
-      </SubScene>
-      <TextField fx:id="act_label" layoutX="329.0" layoutY="77.0" prefHeight="25.0" prefWidth="206.0" />
-      <Label layoutX="224.0" layoutY="77.0" prefHeight="25.0" prefWidth="99.0" text="Activité:" textFill="#d93079" textOverrun="CLIP">
-         <opaqueInsets>
-            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-         </opaqueInsets>
-      </Label>
-      <Label layoutX="225.0" layoutY="133.0" prefHeight="25.0" prefWidth="84.0" text="Description:" textFill="#ee176d" />
-      <TextArea fx:id="description_label" layoutX="332.0" layoutY="133.0" prefHeight="103.0" prefWidth="200.0" />
-      <Label graphicTextGap="5.0" layoutX="224.0" layoutY="260.0" prefHeight="25.0" prefWidth="99.0" text="Date de l'activité:" textFill="#db2561" />
-      <DatePicker fx:id="date_picker" layoutX="345.0" layoutY="260.0" />
-      <Button fx:id="ajout_btn" layoutX="455.0" layoutY="323.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="34.0" prefWidth="90.0" text="Ajouter" textFill="#000006" />
+      <Pane layoutX="22.0" layoutY="28.0" prefHeight="351.0" prefWidth="557.0" style="-fx-background-color: #FFFF;">
+         <children>
+            <Label layoutX="31.0" layoutY="51.0" text="Activité : " />
+            <Label layoutX="31.0" layoutY="97.0" text="Description : " />
+            <Label layoutX="31.0" layoutY="221.0" text="Date : " />
+            <Label layoutX="316.0" layoutY="52.0" text="Club : " />
+            <TextField fx:id="act_text" layoutX="121.0" layoutY="48.0" prefHeight="25.0" prefWidth="159.0" />
+            <TextArea fx:id="desc_text" layoutX="121.0" layoutY="99.0" prefHeight="102.0" prefWidth="159.0" />
+            <DatePicker fx:id="date_text" layoutX="121.0" layoutY="226.0" prefHeight="25.0" prefWidth="159.0" />
+            <ComboBox fx:id="club_box" layoutX="376.0" layoutY="47.0" prefWidth="150.0" />
+            <Button fx:id="annuler_btn" layoutX="372.0" layoutY="289.0" mnemonicParsing="false" onAction="#Annuler" prefHeight="33.0" prefWidth="69.0" text="Annuler" />
+            <Button fx:id="ajout_btn" layoutX="457.0" layoutY="289.0" mnemonicParsing="false" onAction="#ADD" prefHeight="33.0" prefWidth="69.0" text="Ajouter" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
