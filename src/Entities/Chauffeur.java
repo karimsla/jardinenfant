@@ -39,6 +39,9 @@ public class Chauffeur extends User {
     
     private Jardin jardin;
 
+    public Chauffeur() {
+    }
+
     public Chauffeur(int id, String cin, String nom, String tel, String sexe, int jardin) {
         this.id = id;
         this.cin = cin;
