@@ -93,7 +93,7 @@ public class EvenementService {
            Statement statement= cnx.createStatement();
            ResultSet rs=statement.executeQuery(req);
            while (rs.next())
-           {Evenement e=new Evenement(rs.getString(1),rs.getDate(2),rs.getString(3),rs.getString(4));
+           {Evenement e=new Evenement(rs.getString("titre"),rs.getDate("date"),rs.getString("description"),rs.getString("image"));
            le.add(e);
            }
        } catch (SQLException ex) {

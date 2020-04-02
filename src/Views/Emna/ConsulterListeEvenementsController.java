@@ -10,8 +10,8 @@ import Entities.Evenement;
 import Views.ConsulterActiviteController;
 
 import Entities.Activite;
+import IServices.EvenementService;
 import Utils.ConnexionBD;
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -19,7 +19,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,7 +58,7 @@ public class ConsulterListeEvenementsController implements Initializable {
     private TableColumn<Evenement, String> col_cat;
     @FXML
     private TableColumn<Evenement, Date> col_date;
-    public ObservableList<Activite> data = FXCollections.observableArrayList();
+    public ObservableList<Evenement> data = FXCollections.observableArrayList();
     @FXML
     private Button mod_btn;
     @FXML
@@ -75,35 +77,23 @@ public class ConsulterListeEvenementsController implements Initializable {
 
         
         data.clear();
-        try{
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT titre,categorie, date FROM Evenement" ;
+        EvenementService e=new EvenementService();
+          List<Evenement> ls=new ArrayList<Evenement>();
+      ls=e.afficherAll();
+      System.out.println(ls.get(0).getTitre());
+          data.addAll(ls);
           
-            Statement statement = con.createStatement();
-          
-            ResultSet rs =  statement.executeQuery(res);
-            while(rs.next()){
-                 Evenement e = new Evenement();
-                 e.setTitre(rs.getString("titre"));
-                 e.setCategorie(rs.getLibelle("categorie"));
-                 e.setDate(rs.getDate("date"));
-                
-                data.add(e);
-            }
-        } catch (SQLException ex) {
-             Logger.getLogger(ConsulterActiviteController.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-        titre.setCellValueFactory(new PropertyValueFactory<Evenement,String>("titre"));
-        categorie.setCellValueFactory(new PropertyValueFactory<Evenement,String>("categorie"));
-        date.setCellValueFactory(new PropertyValueFactory<Evenement,Date>("date"));
-        table.setItems(data);
+        col_titre.setCellValueFactory(new PropertyValueFactory<Evenement,String>("titre"));
+        col_cat.setCellValueFactory(new PropertyValueFactory<Evenement,String>("description"));
+        col_date.setCellValueFactory(new PropertyValueFactory<Evenement,Date>("date"));
+        TV_le.setItems(data);
    
     }
       
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Afficher();
     }
     
     @FXML
