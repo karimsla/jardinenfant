@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Sami
  */
+
 public class ChauffeurService {
     
    private Connection cnx;
@@ -29,7 +30,7 @@ public class ChauffeurService {
        cnx=ConnexionBD.getInstance().getCnx();
    }
    
-   public void ajouterPersonne(Chauffeur p)
+   public void ajouterChauffeur(Chauffeur p)
    {
        try {
            String res="Insert into chauffeur (jardin_id,cin,nom,tel,sexe) values (3,'"+p.getCin()+"','"+p.getNom()+"','"+p.getTel()+"','"+p.getSexe()+"')";
@@ -69,7 +70,7 @@ public class ChauffeurService {
        }
    }
    
-    public void modifierPersonne(Chauffeur p)
+    public void modifierChauffeur(Chauffeur p)
    {
        try {
            String res="Update chauffeur Set nom='"+p.getNom()+"',cin='"+p.getCin()+"',sexe='"+p.getSexe()+"',tel='"+p.getTel()+"'"
@@ -82,4 +83,21 @@ public class ChauffeurService {
            Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
+    public Chauffeur find(int id)
+    {
+         String req="Select * from chauffeur where id="+id;
+       Chauffeur c=new Chauffeur();
+         try {
+           Statement statement=cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);
+       
+           rs.next();
+           c=new Chauffeur(rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(2));
+           
+       } catch (SQLException ex) {
+           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return c;
+       
+    }
 }
