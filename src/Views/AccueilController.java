@@ -26,7 +26,7 @@ public class AccueilController implements Initializable {
     private AnchorPane body;
     
     @FXML
-    private Pane accueil,chauffeurs,activites,quitter,evenements,abonnements;
+    private Pane accueil,chauffeurs,activites,quitter,evenements,abonnements,reclamations;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
  
@@ -40,6 +40,7 @@ Listeners();
         load(chauffeurs,"Chauffeurs/Consulter.fxml");
         load(abonnements,"ConsulterEnfant.fxml");
         load(evenements,"Emna/ConsulterListeEvenements.fxml");
+        load(reclamations,"Reclamation/ListeReclamation.fxml");
         
         
         quitter.setOnMouseClicked((event) -> {

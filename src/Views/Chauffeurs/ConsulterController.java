@@ -80,6 +80,13 @@ private final ObservableList<Chauffeur> data =FXCollections.observableArrayList(
              
 listview.setItems(data);
 }
+     
+     
+     
+     
+     
+     
+     
      public void getTable(Chauffeur c)
      {
             trajets.clear();

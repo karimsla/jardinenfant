@@ -40,6 +40,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
+    
+    
+    
+    
       <ImageView fitHeight="151.0" fitWidth="281.0" layoutX="-17.0" layoutY="1.0" preserveRatio="true">
          <image>
             <Image url="@../Assets/logo-4.png" />
@@ -78,6 +82,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
+    
+    
       <AnchorPane fx:id="body" layoutX="199.0" layoutY="43.0" prefHeight="533.0" prefWidth="795.0" />
       <Pane fx:id="evenements" layoutX="7.0" layoutY="436.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
          <children>
@@ -109,5 +115,26 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
+      
+      
+      <Pane fx:id="reclamations" layoutX="7.0" layoutY="451.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="33.0" layoutY="29.0" prefHeight="18.0" prefWidth="103.0" text="Reclamations" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+  
+  
+  
+  
    </children>
 </AnchorPane>

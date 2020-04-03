@@ -20,9 +20,13 @@ import Utils.ConnexionBD;
 public class ServiceReclamation implements IserviceReclamation {
 	 Connection connexion =null; 
 	   List<Reclamation> reclams=new ArrayList<Reclamation>();
+	   
+	   
+	   
 	    public ServiceReclamation() throws SQLException {
+	    	
 	        connexion=ConnexionBD.getInstance().getCnx();
-	 		String req="Select * from chauffeur";
+	 		String req="Select * from Reclamation";
 		       try {
 		           Statement statement=connexion.createStatement();
 		           ResultSet rs=statement.executeQuery(req);
@@ -44,6 +48,7 @@ public class ServiceReclamation implements IserviceReclamation {
 		           
 		           reclams.add(c);
 		           }
+		     
 		       } catch (SQLException ex) {
 		           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
 		       }
@@ -67,7 +72,7 @@ public class ServiceReclamation implements IserviceReclamation {
 		if(connexion==null) {
 			 connexion = ConnexionBD.getInstance().getCnx();
 			}
-			
+	  
 		
 		return reclams.stream().sorted(Comparator.
 				comparing(Reclamation :: getDate, Comparator.nullsLast(Comparator.reverseOrder())))

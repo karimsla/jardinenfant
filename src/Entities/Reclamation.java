@@ -132,6 +132,13 @@ public class Reclamation {
 		this.etat = etat;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Reclamation [id=" + id + ", description=" + description + ", date=" + date + ", titre=" + titre
+				+ ", nom=" + nom + ", numtel=" + numtel + ", mail=" + mail + ", etat=" + etat + "]";
+	}
+
     
     
     
