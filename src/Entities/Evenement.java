@@ -37,6 +37,77 @@ public class Evenement {
     private Jardin jardin;
    
    private  Collection<Participer> participation;
+
+    public Evenement(String titre, Date date, String description, String image) {
+        this.titre = titre;
+        this.date = date;
+        this.description = description;
+        this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public Jardin getJardin() {
+        return jardin;
+    }
+
+    public void setJardin(Jardin jardin) {
+        this.jardin = jardin;
+    }
+
+    public Collection<Participer> getParticipation() {
+        return participation;
+    }
+
+    public void setParticipation(Collection<Participer> participation) {
+        this.participation = participation;
+    }
     
     
 }

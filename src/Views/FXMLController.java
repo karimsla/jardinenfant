@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views;
+package Views;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,9 +27,8 @@ public class FXMLController implements Initializable {
     @FXML
     private Button act_btn;
     @FXML
-    private Button enfant_btn;
-    @FXML
-    private Button btn;
+    private Button club_btn;
+   
 
     /**
      * Initializes the controller class.
@@ -48,14 +47,17 @@ public class FXMLController implements Initializable {
         }
     }
 
-    @FXML
-    private void RedirectToListeEnfant(ActionEvent event) throws IOException {
-        
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/ConsulterEnfants.fxml"));
-            root.getChildren().setAll(pane);
-        
-    }
-
     
+    @FXML
+      private void Club(ActionEvent event) throws IOException {
+        
+         if(event.getSource() == club_btn){
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/viewsClub/ConsulterClub.fxml"));
+            root.getChildren().setAll(pane);
+        }
+    }
+   
+    
+  
     
 }

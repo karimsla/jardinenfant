@@ -19,6 +19,46 @@ public class Trajet {
     private String heure;
    
     private Chauffeur chauffeur;
+
+    public Trajet(int id, String adresse, String heure) {
+        this.id = id;
+        this.adresse = adresse;
+        this.heure = heure;
+    }
+
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getHeure() {
+        return heure;
+    }
+
+    public void setHeure(String heure) {
+        this.heure = heure;
+    }
+
+    public Chauffeur getChauffeur() {
+        return chauffeur;
+    }
+
+    public void setChauffeur(Chauffeur chauffeur) {
+        this.chauffeur = chauffeur;
+    }
+    
     
     
 }

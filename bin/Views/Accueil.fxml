@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #393d72;" stylesheets="@../../../ProjetJava/ProjetJava/src/Metier/Style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AccueilController">
+   <children>
+      <Pane layoutX="181.0" layoutY="43.0" prefHeight="533.0" prefWidth="4.0" style="-fx-background-color: #c71ec3;" />
+      <Pane fx:id="accueil" layoutX="9.0" layoutY="136.0" prefHeight="75.0" prefWidth="163.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="58.0" layoutY="29.0" prefHeight="18.0" prefWidth="54.0" styleClass="sideBtn" stylesheets="@../Assets/style.css" text="Accueil" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane fx:id="chauffeurs" layoutX="7.0" layoutY="211.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="45.0" layoutY="29.0" text="Chauffeurs" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+    
+    
+    
+    
+      <ImageView fitHeight="151.0" fitWidth="281.0" layoutX="-17.0" layoutY="1.0" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/logo-4.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
+      </ImageView>
+      <Pane fx:id="activites" layoutX="6.0" layoutY="286.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="51.0" layoutY="29.0" prefHeight="18.0" prefWidth="67.0" text="Activites" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="quitter" layoutX="35.0" layoutY="536.0" prefHeight="50.0" prefWidth="112.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label alignment="CENTER" layoutX="23.0" layoutY="16.0" prefHeight="18.0" prefWidth="67.0" text="Quitter" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+    
+    
+      <AnchorPane fx:id="body" layoutX="199.0" layoutY="43.0" prefHeight="533.0" prefWidth="795.0" />
+      <Pane fx:id="evenements" layoutX="7.0" layoutY="436.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="37.0" layoutY="29.0" prefHeight="18.0" prefWidth="95.0" text="Evenements" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="abonnements" layoutX="7.0" layoutY="361.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="33.0" layoutY="29.0" prefHeight="18.0" prefWidth="103.0" text="Abonnements" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      
+      
+      <Pane fx:id="reclamations" layoutX="7.0" layoutY="451.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="33.0" layoutY="29.0" prefHeight="18.0" prefWidth="103.0" text="Reclamations" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+  
+  
+  
+  
+   </children>
+</AnchorPane>

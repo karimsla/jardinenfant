@@ -1,0 +1,38 @@
+.btns{
+    -fx-background-color:   #0b7e84;
+}
+.btns:hover{
+    -fx-background-color: #9cc1c1;
+}
+.text-field{
+   -fx-font-size: 18;
+   -fx-background-color: white;
+   -fx-text-fill: black;
+}
+
+.btn{
+    -fx-background-color:transparent;
+    -fx-text-fill:white;
+    -fx-font-size:18px;
+    -fx-border-color:white;
+    -fx-border-radius:20px;
+}
+.btn:hover{
+      -fx-border-color:black; 
+ 
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+
+
+.list-cell:even { /* <=== changed to even */ 
+    -fx-background-color: white;
+}
+
+
+.list-cell:filled:hover {
+    -fx-background-color: #0093ff;
+    -fx-text-fill: white;
+}
