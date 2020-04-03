@@ -39,7 +39,7 @@ Listeners();
         load(activites,"ConsulterActivite.fxml");
         load(chauffeurs,"Chauffeurs/Consulter.fxml");
         load(abonnements,"ConsulterEnfant.fxml");
-       // load(abonnements,"ConsulterEnfant.fxml");
+        load(evenements,"Emna/ConsulterListeEvenements.fxml");
         
         
         quitter.setOnMouseClicked((event) -> {

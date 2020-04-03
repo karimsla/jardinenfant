@@ -51,7 +51,7 @@ public class TrajetService {
            ResultSet rs=statement.executeQuery(req);
            while (rs.next())
            {
-           Trajet c=new Trajet(rs.getInt(1),rs.getString(3),rs.getString(4));
+           Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
           c.setChauffeur(cs.find(id));
            lp.add(c);
            }
