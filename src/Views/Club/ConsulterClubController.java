@@ -81,8 +81,9 @@ public class ConsulterClubController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+   
 
-        Afficher();
+       Afficher();
         // TODO
 
         club_liste.setOnMouseClicked((MouseEvent event) -> {
@@ -148,7 +149,8 @@ public class ConsulterClubController implements Initializable {
         }
     }
 
-    // @FXML
+  
+    @FXML
     private void Modifier(ActionEvent event) {
 
         String club_nom = mod_club.getText();
@@ -156,7 +158,7 @@ public class ConsulterClubController implements Initializable {
         String descp = mod_descr.getText();
         int i = Integer.parseInt(id);
         ClubServices S = new ClubServices();
-        int AS = S.modifier(club_nom, descp, i);
+        int AS = 0;
         if (AS > 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("modification est faite");
@@ -170,7 +172,6 @@ public class ConsulterClubController implements Initializable {
         }
 
     }
-//
     private void Annuler(ActionEvent event) throws IOException {
         if (event.getSource() == Annuler) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Views/Accueil.fxml"));
@@ -188,7 +189,7 @@ public class ConsulterClubController implements Initializable {
     private void DELETE(ActionEvent event) {
          int i = Integer.parseInt(id);
         ClubServices S = new ClubServices();
-        int AS = S.Delete(i);
+        int AS = 0;
         if (AS > 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Suppression est faite");
@@ -200,6 +201,4 @@ public class ConsulterClubController implements Initializable {
             alert.setTitle("erroooooor");
             alert.showAndWait();
         }
-    }
-
-}
+    }}

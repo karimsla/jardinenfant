@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Emna.ConsulterListeEvenementsController">
+<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Emna.ConsulterListeEvenementsController">
    <children>
       <AnchorPane fx:id="root" layoutX="52.0" layoutY="117.0" prefHeight="431.0" prefWidth="571.0" style="-fx-background-color: D7D7D7;">
          <children>
@@ -19,7 +19,6 @@
               </columns>
             </TableView>
             <Button fx:id="aff_btn" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="104.0" text="Afficher" textFill="#bf1b7a" />
-            <Button fx:id="mod_btn" layoutX="131.0" layoutY="380.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="104.0" text="Modifier" textFill="#bf1b7a" />
             <Button fx:id="leAdd_btn" layoutX="356.0" layoutY="11.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="195.0" text="Ajouter" textFill="#bf1b7a" />
          </children>
       </AnchorPane>
