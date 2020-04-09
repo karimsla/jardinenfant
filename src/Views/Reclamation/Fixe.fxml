@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="Views.Reclamation.FixeController">
+   <children>
+      <TextField fx:id="lbltxt" BorderPane.alignment="CENTER" />
+
+      <BorderPane layoutX="29.0" prefHeight="362.0" prefWidth="571.0">
+         <left>
+            <Label text="Votre Reponse" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <TextField fx:id="msg" prefHeight="270.0" prefWidth="225.0" BorderPane.alignment="CENTER" />
+         </center></BorderPane>
+      <Button fx:id="btn_fermer" layoutX="182.0" layoutY="362.0" mnemonicParsing="false" text="Fermer" />
+      <Button fx:id="btn_envoyer" layoutX="94.0" layoutY="362.0" mnemonicParsing="false" text="Envoyer" />
+   </children>
+</AnchorPane>

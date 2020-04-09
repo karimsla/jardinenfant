@@ -58,12 +58,12 @@ public class ServiceReclamation implements IserviceReclamation {
 	   
 	    
 	@Override
-	public Optional<Reclamation> findbyId(int id) {
+	public Reclamation findbyId(int id) {
 		if(connexion==null) {
 		 connexion = ConnexionBD.getInstance().getCnx();
 		}
 		
-		return reclams.stream().filter(x->x.getId()==id).findFirst();
+		return reclams.stream().filter(x->x.getId()==id).findFirst().get();
 	}
 
 	@Override

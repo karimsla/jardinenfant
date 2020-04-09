@@ -14,11 +14,19 @@ import IServices.IserviceReclamation;
 import IServices.ServiceReclamation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+
+
 
 public class ListeReclamationController implements Initializable {
 
@@ -50,7 +58,39 @@ public class ListeReclamationController implements Initializable {
 	
 	    public ObservableList<Reclamation> data = FXCollections.observableArrayList();
 	
-	
+
+
+
+
+	    @FXML
+		public void HandleButton(ActionEvent event,int id){
+	    	try{
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Reclamation/Fixe.fxml"));
+				Parent root1 = (Parent) fxmlLoader.load();
+				FixeController fc=fxmlLoader.getController();
+				fc.setLabelText(id);
+
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root1));
+				stage.show();
+			}catch (Exception e){
+				System.out.println(e);
+			}
+		}
+	@FXML
+	public void HandleDeleteButton(ActionEvent event,int id){
+		try{
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Reclamation/Fixe.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root1));
+			stage.show();
+		}catch (Exception e){
+
+		}
+	}
+
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -104,9 +144,8 @@ public class ListeReclamationController implements Initializable {
 						final Button fixebtn=new Button("Fixer");
 						fixebtn.setOnAction(event->{
 							Reclamation r=getTableView().getItems().get(getIndex());
-							Alert a=new Alert(Alert.AlertType.INFORMATION);
-							a.setContentText("recl"+r.getNom());
-							a.show();
+
+							HandleButton(event,r.getId());
 						});
 
 						setGraphic(fixebtn);
@@ -119,9 +158,7 @@ public class ListeReclamationController implements Initializable {
 		};
 		col_regler.setCellFactory(cellfactory);
 
-		}
-
-
+	}
 
 	private void deleteCol(){
 
@@ -140,9 +177,7 @@ public class ListeReclamationController implements Initializable {
 						final Button fixebtn=new Button("Delete");
 						fixebtn.setOnAction(event->{
 							Reclamation r=getTableView().getItems().get(getIndex());
-							Alert a=new Alert(Alert.AlertType.INFORMATION);
-							a.setContentText("recl"+r.getNom());
-							a.show();
+							HandleButton(event,r.getId());
 						});
 
 						setGraphic(fixebtn);
