@@ -119,8 +119,16 @@ public class ServiceReclamation implements IserviceReclamation {
 	@Override
 	public int delet(Reclamation type) {
 
+		String query="DELETE  from reclamation WHERE id="+type.getId();
+		int rowDeleted=0;
+		try {
+			PreparedStatement statement= connexion.prepareStatement(query);
+			rowDeleted=statement.executeUpdate();
 
-		return 0;
+		} catch (SQLException ex) {
+			Logger.getLogger(ServiceReclamation.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return rowDeleted;
 	}
 
 	@Override

@@ -92,6 +92,7 @@ public class FixeController implements Initializable  {
 
             Transport.send(message);
 
+            r.regelrReclamation(rec);
             System.out.println("Done");
             Stage stage = (Stage) btn_fermer.getScene().getWindow();
             // do what you have to do

@@ -85,9 +85,7 @@ public class ListeReclamationController implements Initializable {
 				Reclamation r=sr.findbyId(id);
 				int n=sr.delet(r);
 
-				Stage stage = (Stage) TV_le.getScene().getWindow();
-				// do what you have to do
-				stage.close();
+				data.clear();
 				this.initialize(null,null);
 			}catch (SQLException e){
 
