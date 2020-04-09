@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import Entities.Reclamation;
 
-public interface IserviceReclamation {
+public interface IserviceReclamation extends CrudGeneric<Reclamation> {
 	
 	
 	
@@ -16,5 +16,6 @@ public interface IserviceReclamation {
 	public List<Reclamation> findnew();
 	
 	public void regelrReclamation(Reclamation reclam);
-	
+
+
 }

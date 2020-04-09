@@ -50,7 +50,7 @@ public class ServiceReclamation implements IserviceReclamation {
 		           }
 		     
 		       } catch (SQLException ex) {
-		           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
+		           Logger.getLogger(ServiceReclamation.class.getName()).log(Level.SEVERE, null, ex);
 		       }
 	    }
 	    
@@ -64,6 +64,63 @@ public class ServiceReclamation implements IserviceReclamation {
 		}
 		
 		return reclams.stream().filter(x->x.getId()==id).findFirst().get();
+	}
+
+	@Override
+	public Reclamation findById(int id) {
+		if(connexion==null) {
+			connexion = ConnexionBD.getInstance().getCnx();
+		}
+
+		return reclams.stream().filter(x->x.getId()==id).findFirst().get();
+	}
+
+	@Override
+	public int create(Reclamation type) {
+
+		String query="DELETE  from Reclamation WHERE id="+type.getId();
+		int rowDeleted=0;
+		try {
+			PreparedStatement statement= connexion.prepareStatement(query);
+			rowDeleted=statement.executeUpdate();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return rowDeleted;
+	}
+
+	@Override
+	public int update(Reclamation type) {
+
+		try{
+
+			if(connexion==null) {
+				connexion = ConnexionBD.getInstance().getCnx();
+			}
+
+			String res="Update Reclamation set" +"etat=? WHERE id = ?;";
+			PreparedStatement pre = connexion.prepareStatement(res);
+
+			pre.setString(1, "fixed");
+			pre.setInt(2, type.getId());
+
+			pre.executeUpdate();
+
+
+		}catch(SQLException ex){
+			System.out.println(ex);
+		}
+
+
+	    	return 0;
+	}
+
+	@Override
+	public int delet(Reclamation type) {
+
+
+		return 0;
 	}
 
 	@Override

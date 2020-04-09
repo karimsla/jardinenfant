@@ -68,6 +68,7 @@ public class ListeReclamationController implements Initializable {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Reclamation/Fixe.fxml"));
 				Parent root1 = (Parent) fxmlLoader.load();
 				FixeController fc=fxmlLoader.getController();
+				//hidden id
 				fc.setLabelText(id);
 
 				Stage stage = new Stage();
@@ -79,15 +80,20 @@ public class ListeReclamationController implements Initializable {
 		}
 	@FXML
 	public void HandleDeleteButton(ActionEvent event,int id){
-		try{
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Reclamation/Fixe.fxml"));
-			Parent root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root1));
-			stage.show();
-		}catch (Exception e){
+	    	try{
+				IserviceReclamation sr=new ServiceReclamation();
+				Reclamation r=sr.findbyId(id);
+				int n=sr.delet(r);
 
-		}
+				Stage stage = (Stage) TV_le.getScene().getWindow();
+				// do what you have to do
+				stage.close();
+				this.initialize(null,null);
+			}catch (SQLException e){
+
+			}
+
+
 	}
 
 
@@ -177,7 +183,7 @@ public class ListeReclamationController implements Initializable {
 						final Button fixebtn=new Button("Delete");
 						fixebtn.setOnAction(event->{
 							Reclamation r=getTableView().getItems().get(getIndex());
-							HandleButton(event,r.getId());
+							HandleDeleteButton(event,r.getId());
 						});
 
 						setGraphic(fixebtn);

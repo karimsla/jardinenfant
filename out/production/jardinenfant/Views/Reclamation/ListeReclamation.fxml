@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Reclamation.ListeReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Reclamation.ListeReclamationController">
    <children>
-      <BorderPane layoutY="27.0" prefHeight="573.0" prefWidth="1004.0">
+      <BorderPane layoutX="19.0" layoutY="38.0" prefHeight="562.0" prefWidth="985.0">
          <center>
-            <TableView fx:id="TV_le" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="TV_le" prefHeight="562.0" prefWidth="978.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="col_nom" prefWidth="75.0" text="Nom" />
                 <TableColumn fx:id="col_mail" prefWidth="75.0" text="Mail" />
                  <TableColumn fx:id="col_numtel" prefWidth="75.0" text="Numtel" />
                 <TableColumn fx:id="col_titre" prefWidth="75.0" text="titre" />
                    <TableColumn fx:id="col_date" prefWidth="75" text="date" />
-                 <TableColumn fx:id="col_desc" prefWidth="356.0" text="description" />
-                  <TableColumn fx:id="col_regler" minWidth="0.0" prefWidth="103.0" text="Regler" />
-                  <TableColumn fx:id="col_supp" prefWidth="75.0" text="Supprimer" />
+                 <TableColumn fx:id="col_desc" prefWidth="260.0" text="description" />
+                  <TableColumn fx:id="col_regler" minWidth="0.0" prefWidth="109.0" text="Regler" />
+                  <TableColumn fx:id="col_supp" prefWidth="165.0" text="Supprimer" />
               </columns>
             </TableView>
          </center>

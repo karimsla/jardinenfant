@@ -6,10 +6,11 @@ import IServices.ServiceReclamation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
+
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.net.URL;
@@ -42,8 +43,12 @@ public class FixeController implements Initializable  {
                ex.printStackTrace();
            }
        });
-     //  btn_fermer.setOnAction();
-       // sendmail();
+      btn_fermer.setOnAction(eve->{
+          Stage stage = (Stage) btn_fermer.getScene().getWindow();
+          // do what you have to do
+          stage.close();
+      });
+
 
     }
 
@@ -61,36 +66,36 @@ public class FixeController implements Initializable  {
 
        Reclamation rec=r.findbyId(Integer.parseInt(lbltxt.getText()));
        String dest=rec.getMail();
-        final String username = "karim-nar@live.fr";
-        final String password = "RYx6913FPsLrQzT0";
+        final String username = "trizouni1@gmail.com";
+        final String password = "tmdpbiphihxcgyqy";
 
         Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp-relay.sendinblue.com\n");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
-        Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
         try {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("JardinEnfant@esprit.tn"));
-            message.setRecipients(
-                    Message.RecipientType.TO,
-                    InternetAddress.parse(dest)
-            );
+            message.setRecipient(Message.RecipientType.TO,new InternetAddress(dest));
             message.setSubject("Réponse de votre réclamation sur la plateforme KinderGaren Guide");
             message.setText(msg.getText());
 
             Transport.send(message);
 
             System.out.println("Done");
+            Stage stage = (Stage) btn_fermer.getScene().getWindow();
+            // do what you have to do
+            stage.close();
 
         } catch (MessagingException e) {
             e.printStackTrace();
