@@ -16,10 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class ListeReclamationController implements Initializable {
 
@@ -70,7 +69,7 @@ public class ListeReclamationController implements Initializable {
 	        IserviceReclamation sr=new ServiceReclamation();
 	        List<Reclamation> lr=new ArrayList<Reclamation>();
 	      lr=sr.findAll();
-	      lr.stream().forEach(x->System.out.println(x.toString()));
+
 	      data.addAll(lr);
 	          
 	      	col_nom.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("nom"));
@@ -79,10 +78,83 @@ public class ListeReclamationController implements Initializable {
 	      	col_titre.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("titre"));
 	        col_date.setCellValueFactory(new PropertyValueFactory<Reclamation,Date>("date"));
 	    	col_desc.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("description"));
-	      //	col_regler.setCellValueFactory(new PropertyValueFactory<>("regler"));
-	      //	col_supp.setCellValueFactory(new PropertyValueFactory<>("supp"));
-	     
+			//col_regler.setCellValueFactory(new PropertyValueFactory<>("fixe"));
+	        //col_supp.setCellValueFactory(new PropertyValueFactory<>("supprimer"));
+	     	fixeCol();
+	     	deleteCol();
+
+
 	        TV_le.setItems(data);
+	}
+
+	private void fixeCol(){
+
+		Callback<TableColumn<Reclamation,Button>, TableCell<Reclamation,Button>> cellfactory=(param)->{
+
+			final TableCell<Reclamation,Button> cell=new TableCell<Reclamation,Button>(){
+
+
+				@Override
+				public void updateItem(Button item, boolean empty){
+					super.updateItem(item,empty);
+					if(empty){
+						setGraphic(null);
+						setText(null);
+					}else{
+						final Button fixebtn=new Button("Fixer");
+						fixebtn.setOnAction(event->{
+							Reclamation r=getTableView().getItems().get(getIndex());
+							Alert a=new Alert(Alert.AlertType.INFORMATION);
+							a.setContentText("recl"+r.getNom());
+							a.show();
+						});
+
+						setGraphic(fixebtn);
+						setText(null);
+					}
+				}
+			};
+
+			return cell;
+		};
+		col_regler.setCellFactory(cellfactory);
+
+		}
+
+
+
+	private void deleteCol(){
+
+		Callback<TableColumn<Reclamation,Button>, TableCell<Reclamation,Button>> cellfactory=(param)->{
+
+			final TableCell<Reclamation,Button> cell=new TableCell<Reclamation,Button>(){
+
+
+				@Override
+				public void updateItem(Button item, boolean empty){
+					super.updateItem(item,empty);
+					if(empty){
+						setGraphic(null);
+						setText(null);
+					}else{
+						final Button fixebtn=new Button("Delete");
+						fixebtn.setOnAction(event->{
+							Reclamation r=getTableView().getItems().get(getIndex());
+							Alert a=new Alert(Alert.AlertType.INFORMATION);
+							a.setContentText("recl"+r.getNom());
+							a.show();
+						});
+
+						setGraphic(fixebtn);
+						setText(null);
+					}
+				}
+			};
+
+			return cell;
+		};
+		col_supp.setCellFactory(cellfactory);
+
 	}
 
 }

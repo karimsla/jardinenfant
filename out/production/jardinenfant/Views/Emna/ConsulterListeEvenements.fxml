@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Emna.ConsulterListeEvenementsController">
+   <children>
+      <AnchorPane fx:id="root" layoutX="52.0" layoutY="117.0" prefHeight="431.0" prefWidth="571.0" style="-fx-background-color: D7D7D7;">
+         <children>
+            <TableView fx:id="TV_le" layoutX="121.0" layoutY="69.0" prefHeight="294.0" prefWidth="329.0">
+              <columns>
+                <TableColumn fx:id="col_titre" prefWidth="119.0" text="Titre" />
+                <TableColumn fx:id="col_cat" prefWidth="94.0" text="Description" />
+                  <TableColumn fx:id="col_date" prefWidth="115.0" text="Date" />
+              </columns>
+            </TableView>
+            <Button fx:id="aff_btn" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="104.0" text="Afficher" textFill="#bf1b7a" />
+            <Button fx:id="mod_btn" layoutX="131.0" layoutY="380.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="104.0" text="Modifier" textFill="#bf1b7a" />
+            <Button fx:id="leAdd_btn" layoutX="356.0" layoutY="11.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="195.0" text="Ajouter" textFill="#bf1b7a" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="192.0" layoutY="36.0" prefHeight="42.0" prefWidth="262.0" text="Liste des événements" textFill="#770e9e">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

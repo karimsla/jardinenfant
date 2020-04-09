@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.control.Button;
+
 import java.sql.Date;
 
 /**
@@ -36,7 +38,33 @@ public class Reclamation {
 
     
     private Parents parent;
+    
+    private Button fixe;
+	private Button supprimer;
 
+	public Parents getParent() {
+		return parent;
+	}
+
+	public void setParent(Parents parent) {
+		this.parent = parent;
+	}
+
+	public Button getFixe() {
+		return fixe;
+	}
+
+	public void setFixe(Button fixe) {
+		this.fixe = fixe;
+	}
+
+	public Button getSupprimer() {
+		return supprimer;
+	}
+
+	public void setSupprimer(Button supprimer) {
+		this.supprimer = supprimer;
+	}
 
 	public int getId() {
 		return id;
@@ -120,7 +148,8 @@ public class Reclamation {
 
 	public Reclamation(int id, String description, Date date,
 			String titre, String nom, String numtel, String mail,
-			String etat) {
+			String etat,
+			Button fixe,Button supprimer){
 		super();
 		this.id = id;
 		this.description = description;
@@ -130,6 +159,23 @@ public class Reclamation {
 		this.numtel = numtel;
 		this.mail = mail;
 		this.etat = etat;
+		this.fixe=fixe;
+		this.supprimer=supprimer;
+	}
+	public Reclamation(int id, String description, Date date,
+					   String titre, String nom, String numtel, String mail,
+					   String etat
+					 ){
+		super();
+		this.id = id;
+		this.description = description;
+		this.date = date;
+		this.titre = titre;
+		this.nom = nom;
+		this.numtel = numtel;
+		this.mail = mail;
+		this.etat = etat;
+
 	}
 
 

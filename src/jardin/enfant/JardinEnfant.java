@@ -27,9 +27,12 @@ import javafx.stage.StageStyle;
  */
 public class JardinEnfant extends Application {
        private double xOffset;
-private double yOffset;  
-public void events(Stage stage,Parent scene)
-{
+       private double yOffset;  
+       
+       
+       
+       public void events(Stage stage,Parent scene)
+       	{
     scene.setOnMousePressed(event -> {
                  if (event.getButton() == MouseButton.PRIMARY) {
 
