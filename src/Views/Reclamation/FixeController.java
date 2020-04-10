@@ -69,6 +69,9 @@ public class FixeController implements Initializable  {
         final String username = "trizouni1@gmail.com";
         final String password = "tmdpbiphihxcgyqy";
 
+        //temporary password
+
+
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
