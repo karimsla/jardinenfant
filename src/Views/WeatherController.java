@@ -7,9 +7,9 @@ package Views;
 
 import com.google.gson.*;
 import com.google.gson.reflect.*;
-import com.teknikindustries.yahooweather.WeatherDisplay;
-import com.teknikindustries.yahooweather.WeatherDoc;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -23,6 +23,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -57,9 +59,22 @@ public class WeatherController implements Initializable {
     @FXML
     private Label main;
 
+    private Image image;
+    @FXML
+    private ImageView imageview;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        FileInputStream input;
+        try {
+            input = new FileInputStream("ressources/images/winter_snow_800.png");
+            Image image = new Image(input);
+            imageview.setImage(image);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WeatherController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String API_Key = "b834cf5d3ea7686a84b07cde283ba7a0";
         String LOCATION = "Moscow";
         String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + LOCATION + "&appid=" + API_Key

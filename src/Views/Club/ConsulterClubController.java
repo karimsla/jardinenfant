@@ -86,6 +86,8 @@ public class ConsulterClubController implements Initializable {
     private TextField nom_text;
     @FXML
     private Button search;
+    @FXML
+    private Button afficher;
 
     /**
      * Initializes the controller class.
@@ -135,7 +137,7 @@ public class ConsulterClubController implements Initializable {
                 C.setId(rs.getInt("id"));
                 C.setName(rs.getString("Name"));
                 C.setDescription(rs.getString("Description"));
-                C.setPhoto(rs.getString("photo"));
+               // C.setPhoto(rs.getString("photo"));
 
                 data.add(C);
             }
@@ -145,7 +147,7 @@ public class ConsulterClubController implements Initializable {
 
         nom_Club.setCellValueFactory(new PropertyValueFactory<Club, String>("Name"));
         Description.setCellValueFactory(new PropertyValueFactory<Club, String>("Description"));
-        Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
+      //  Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
         club_liste.setItems(data);
     }
 
@@ -258,7 +260,7 @@ public class ConsulterClubController implements Initializable {
                 Club p = new Club();
                 p.setName(rs.getString("name"));
                 p.setDescription(rs.getString("description"));
-                p.setPhoto(rs.getString("photo"));
+               // p.setPhoto(rs.get("photo"));
 
                 data.add(p);
             }
@@ -272,6 +274,14 @@ public class ConsulterClubController implements Initializable {
         club_liste.setItems(data);
 
         nom_text.clear();
+    }
+
+    @FXML
+    private void TakeMeToAffichage(ActionEvent event) throws IOException {
+         if (event.getSource() == afficher) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("Affichage.fxml"));
+            root.getChildren().setAll(pane);
+        }
     }
 
 }

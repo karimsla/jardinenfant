@@ -35,6 +35,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -69,6 +70,7 @@ public class AjoutClubController implements Initializable {
     private Pane stage;
     @FXML
     private Button annuler_btn;
+ 
 
     /**
      * Initializes the controller class.
@@ -158,6 +160,8 @@ public class AjoutClubController implements Initializable {
         fileChooser.setTitle("Open Resource File");
         Stage stage = (Stage) image_btn.getScene().getWindow();
         file = fileChooser.showOpenDialog(stage);
+        image_area.setText(file.getName());
+        File f = new File("src\\" + image_area.getText().toString());
 
         if (file != null) {
             image_area.setText(file.getAbsolutePath());
