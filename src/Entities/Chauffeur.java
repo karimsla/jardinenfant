@@ -27,7 +27,7 @@ public class Chauffeur extends User {
     private String tel;
 
     
-    private String sexe;
+    private String sexe; 
 
     
      private Collection<Pointage> $pointage;
@@ -122,6 +122,11 @@ public class Chauffeur extends User {
 
     public void setJardin(Jardin jardin) {
         this.jardin = jardin;
+    }
+
+    @Override
+    public String toString() {
+        return  nom;
     }
 
 }

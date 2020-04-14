@@ -11,18 +11,25 @@ import Entities.Trajet;
 import IServices.ChauffeurService;
 import IServices.EvenementService;
 import IServices.TrajetService;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -31,6 +38,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -39,7 +49,7 @@ import javafx.scene.layout.Pane;
  */
 public class ConsulterController implements Initializable {
 @FXML
-private TextField nom,cin,sexe,tel,adresse,heure,nom_a,cin_a,sexe_a,tel_a; 
+private TextField search,nom,cin,tel,adresse,nom_a,cin_a,tel_a; 
     @FXML
 private ListView<Chauffeur> listview;
     @FXML
@@ -57,7 +67,8 @@ private final ObservableList<Chauffeur> data =FXCollections.observableArrayList(
     public ObservableList<Trajet> trajets = FXCollections.observableArrayList();
     @FXML
     private Pane ajout;
-    
+    @FXML
+    private ComboBox hh,mm,sexe,sexe_a;
     
     /**
      * Initializes the controller class.
@@ -67,8 +78,15 @@ private final ObservableList<Chauffeur> data =FXCollections.observableArrayList(
         // TODO
         getData(data);
         Listeners();
-        
-        
+        for(int i=7;i<=18;i++)
+        hh.getItems().add(i+"");
+        for(int i=0;i<=59;i++)
+        mm.getItems().add(i+"");
+        ObservableList<String> obs=FXCollections.observableArrayList();
+        obs.add("Homme");
+        obs.add("Femme");
+        sexe_a.setItems(obs);
+       sexe.setItems(obs);
     }    
     
      public void getData(ObservableList data) 
@@ -76,13 +94,21 @@ private final ObservableList<Chauffeur> data =FXCollections.observableArrayList(
                 cs=new ChauffeurService();
   List<Chauffeur> ls=cs.afficherAll();
                 data.addAll(ls);
-                
-             
 listview.setItems(data);
 }
+ 
      
-     
-     
+ @FXML
+ public void chercher()
+ {
+     String ch=search.getText();
+      cs=new ChauffeurService();
+      data.clear();
+  List<Chauffeur> ls=cs.afficherAll().stream().filter(p->p.getNom().contains(ch)).collect(Collectors.toList());
+                data.addAll(ls);
+listview.setItems(data);
+       
+ }
      
      
      
@@ -108,11 +134,13 @@ listview.setItems(data);
         c=listview.getSelectionModel().getSelectedItem();
         setField(nom,c.getNom());
         setField(cin,c.getCin());
-        setField(sexe,c.getSexe());
+        
+        sexe.setValue(c.getSexe());
         setField(tel,c.getTel());
         getTable(c);
         
         });
+ 
     }
     
     public void setField(TextField tf,String value)
@@ -129,43 +157,92 @@ listview.setItems(data);
     @FXML
     public void ajouter()
     {ChauffeurService cs=new ChauffeurService();
-    Chauffeur c=new Chauffeur(0, cin_a.getText(), nom_a.getText(), tel_a.getText(), sexe_a.getText(), 0);
-cs.ajouterChauffeur(c);
-data.clear();
-getData(data);
-    }
+   if(saisie(cin_a.getText(),nom_a.getText(),tel_a.getText()))
+   {Chauffeur c=new Chauffeur(0, cin_a.getText(), nom_a.getText(), tel_a.getText(), sexe_a.getSelectionModel().getSelectedItem().toString(), 3);
+    cs.ajouterChauffeur(c);
+    data.clear();
+    getData(data);
+   }
+   }
     @FXML
     public void modifier()
     {
-ChauffeurService cs=new ChauffeurService();
-
+     ChauffeurService cs=new ChauffeurService();
+      if(saisie(cin.getText(),nom.getText(),tel.getText()))
+      {
     Chauffeur c=listview.getSelectionModel().getSelectedItem();
-    c.setNom(nom.getText());
+   c.setNom(nom.getText());
    c.setCin(cin.getText());
-   c.setSexe(sexe.getText());
+   c.setSexe(sexe.getSelectionModel().getSelectedItem().toString());
    c.setTel(tel.getText());
-   
    cs.modifierChauffeur(c);
-        
+      } 
     }
     
     @FXML
     public void supprimer()
     {
         ChauffeurService cs=new ChauffeurService();
-       Chauffeur c= listview.getSelectionModel().getSelectedItem();
+      int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment supprimer ce chauffeur?","Attention",JOptionPane.YES_NO_OPTION);
+ if(dialogResult == JOptionPane.YES_OPTION){
+Chauffeur c= listview.getSelectionModel().getSelectedItem();
        cs.supprimerChauffeur(c.getId());
        data.clear();
        getData(data);
-    }
-    @FXML
+         info.setVisible(false); 
+ }
+}
+    @FXML 
     public void affecter()
     {
         TrajetService ts=new TrajetService();
         Chauffeur c=listview.getSelectionModel().getSelectedItem();
-        Trajet t=new Trajet(0,adresse.getText(),heure.getText());
+        String heure=hh.getSelectionModel().getSelectedItem().toString()+"H"+mm.getSelectionModel().getSelectedItem().toString();
+        Trajet t=new Trajet(0,adresse.getText(),heure);
         ts.ajouterTrajet(t, c.getId());
 adresse.clear();
-heure.clear();
+
     }
+    
+    
+    private boolean Check(String cin,char a,char b,boolean space)
+    {int i=0;
+        while (i<cin.length())
+        {if(!space)
+        {   if (cin.toUpperCase().charAt(i)>b||cin.toUpperCase().charAt(i)<a)
+            return false;
+        }
+        else
+        {   if( cin.charAt(i)!=' ' && (cin.toUpperCase().charAt(i)>b || cin.toUpperCase().charAt(i)<a))
+            return false;
+        } 
+        i++;   
+        }
+        return true;
+    }
+    private boolean saisie(String cin,String nom,String tel)
+    {
+        if (cin.length()!=8||!Check(cin,'0','9',false))
+        {JOptionPane.showMessageDialog(null, "Veuillez Vérifier le cin!");
+            return false;
+        }if (nom.length()==0 || !Check(nom,'A','Z',true))
+        {  JOptionPane.showMessageDialog(null, "Veuillez Vérifier le nom!");
+            return false;
+        }if (tel.length()!=8||!Check(tel,'0','9',false))
+        {JOptionPane.showMessageDialog(null, "Veuillez Vérifier le numéro de téléphone!");
+            return false;
+        }
+        return true;
+    }
+    @FXML
+    public void map() throws IOException 
+    {
+         Parent root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Map.fxml"));
+       
+         Scene scene = new Scene(root);
+       Stage primaryStage=new Stage();
+      primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    
 }
