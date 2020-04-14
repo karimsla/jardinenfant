@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.jardin.PaymentController">
+   <children>
+      <TextField fx:id="client" layoutX="99.0" layoutY="102.0" />
+      <TextField fx:id="mail" layoutX="99.0" layoutY="168.0" />
+      <TextField fx:id="code" layoutX="99.0" layoutY="200.0" />
+      <TextField fx:id="carte" layoutX="99.0" layoutY="268.0" />
+      <TextField fx:id="tel" layoutX="99.0" layoutY="137.0" />
+      <Text layoutX="28.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client" />
+      <Text layoutX="28.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Tel" />
+      <Text layoutX="27.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Text layoutX="24.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code CVV2" />
+      <Text layoutX="22.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Carte" />
+      <Text layoutX="22.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expire" wrappingWidth="44.8359375" />
+      <DatePicker fx:id="expire" layoutX="99.0" layoutY="234.0" />
+      <Text layoutX="290.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant " />
+      <Slider fx:id="montant" layoutX="350.0" layoutY="186.0" prefHeight="14.0" prefWidth="206.0" />
+      <Text layoutX="347.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" />
+      <Text layoutX="394.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200" />
+      <Text layoutX="439.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="300" />
+      <Text layoutX="486.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="400" />
+      <Text layoutX="530.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="500" />
+      <Button fx:id="valider" layoutX="223.0" layoutY="322.0" mnemonicParsing="false" onAction="#payerHandler" text="valider payment" />
+      <ImageView fitHeight="25.0" fitWidth="87.0" layoutX="273.0" layoutY="268.0" opacity="0.26" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Assets/master.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="annuler" layoutX="413.0" layoutY="322.0" mnemonicParsing="false" onAction="#annulerHandler" prefHeight="25.0" prefWidth="101.0" text="annuler" />
+      <Text layoutX="97.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recapitulatif du demande de payment" textAlignment="CENTER" wrappingWidth="439.171875">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

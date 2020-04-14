@@ -1,0 +1,9 @@
+ 
+.sideBtn {
+    
+}
+
+.sideBtn:hover {
+    
+    -fx-background-color:    #c71ec3;
+}
