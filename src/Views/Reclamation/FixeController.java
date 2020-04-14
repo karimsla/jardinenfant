@@ -58,7 +58,7 @@ public class FixeController implements Initializable  {
 
         lbltxt.setText(a);
         lbltxt.setVisible(false);
-
+        //testing
     }
 
     public void sendmail() throws SQLException {
