@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Parent.ListeParentController">
+    <children>
+        <BorderPane layoutX="19.0" layoutY="38.0" prefHeight="562.0" prefWidth="985.0">
+            <center>
+                <TableView fx:id="TbP" prefHeight="562.0" prefWidth="978.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" visible="false" />
+                        <TableColumn fx:id="col_nom" prefWidth="75.0" text="Nom" />
+                        <TableColumn fx:id="col_prenom" prefWidth="75.0" text="Prenom" />
+                        <TableColumn fx:id="col_numtel" prefWidth="75.0" text="Numtel" />
+                        <TableColumn fx:id="col_adresse" prefWidth="75.0" text="Addresse" />
+                        <TableColumn fx:id="col_sexe" prefWidth="75" text="Sexe" />
+                        <TableColumn fx:id="col_nbenf" prefWidth="123.0" text="Nombre D'enfant" />
+                        <TableColumn fx:id="col_supp" prefWidth="89.0" text="Supprimer" />
+                    </columns>
+                </TableView>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

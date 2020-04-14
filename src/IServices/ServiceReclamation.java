@@ -78,16 +78,18 @@ public class ServiceReclamation implements IserviceReclamation {
 	@Override
 	public int create(Reclamation type) {
 
-		String query="DELETE  from Reclamation WHERE id="+type.getId();
-		int rowDeleted=0;
+		String query="INSERT  INto  Reclamation (description,date,titre,nom,numtel,mail,etat) VALUES ("+type.getDescription()+","+type.getDate()+","+type.getTitre()+","+type.getNom()
+
+				+","+type.getNumtel()+","+type.getMail() +","+type.getEtat()+")";
+		int flag=0;
 		try {
 			PreparedStatement statement= connexion.prepareStatement(query);
-			rowDeleted=statement.executeUpdate();
+			flag=statement.executeUpdate();
 
 		} catch (SQLException ex) {
 			Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return rowDeleted;
+		return flag;
 	}
 
 	@Override

@@ -38,4 +38,85 @@ public class Parents extends User {
     
     private  Collection<Reclamation>reclamations;
 
+    public Parents(int id, String nom, String prenom, String numtel,
+                   String adresse, String sexe) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numtel = numtel;
+        this.adresse = adresse;
+        this.sexe = sexe;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getNumtel() {
+        return numtel;
+    }
+
+    public void setNumtel(String numtel) {
+        this.numtel = numtel;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public Collection<Enfant> getEnfants() {
+        return enfants;
+    }
+
+    public void setEnfants(Collection<Enfant> enfants) {
+        this.enfants = enfants;
+    }
+
+    public Collection<Messages> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Collection<Messages> messages) {
+        this.messages = messages;
+    }
+
+    public Collection<Reclamation> getReclamations() {
+        return reclamations;
+    }
+
+    public void setReclamations(Collection<Reclamation> reclamations) {
+        this.reclamations = reclamations;
+    }
 }
