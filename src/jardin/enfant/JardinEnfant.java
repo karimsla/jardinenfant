@@ -46,7 +46,7 @@ public void events(Stage stage,Parent scene)
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-          Parent root = FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml"));
+          Parent root = FXMLLoader.load(getClass().getResource("/views/AdminEnfant.fxml"));
         events(primaryStage,root);
        
          Scene scene = new Scene(root);
@@ -61,8 +61,7 @@ public void events(Stage stage,Parent scene)
      */
     public static void main(String[] args) {
         
-         ChauffeurService cs=new ChauffeurService();
-        cs.ajouterPersonne(new Chauffeur(1,"11223342","dorra","33115533","femme",1));
+        launch(args);
         
     }
     

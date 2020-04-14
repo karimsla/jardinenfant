@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views;
+package views;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,7 +52,7 @@ Listeners();
        p.setOnMouseClicked((event) -> {
         try {
             body.getChildren().clear();
-              FXMLLoader loader=new FXMLLoader(getClass().getResource("/Views/"+name));
+              FXMLLoader loader=new FXMLLoader(getClass().getResource("/views/"+name));
      AnchorPane pane =loader.load(); 
   body.getChildren().setAll(pane); 
 }catch(Exception ee)
