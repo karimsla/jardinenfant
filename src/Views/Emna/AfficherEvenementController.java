@@ -7,8 +7,13 @@ package Views.Emna;
 
 import Entities.Evenement;
 import Entities.Jardin;
+import Utils.ConnexionBD;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -57,6 +63,32 @@ public class AfficherEvenementController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+         try{
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            String res="SELECT titre FROM evenement " ;
+          
+            Statement statement = con.createStatement();
+          
+            ResultSet rs =  statement.executeQuery(res);
+            while(rs.next()){
+                 Evenement p = new Evenement();
+                 p.setTitre(rs.getString("titre"));
+                 
+                  
+                 
+               
+                
+                data.add(p);
+            }
+        } catch (SQLException ex) {
+           
+         }
+        
+        col_titre.setCellValueFactory(new PropertyValueFactory<Evenement,String>("titre"));
+        
+       
+        TV_detE.setItems(data);
   
     }    
     

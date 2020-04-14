@@ -45,7 +45,7 @@ public class AjoutCategorieController implements Initializable {
         // TODO
     }    
     
-    @FXML
+  /**  @FXML
     private void Ajouter(ActionEvent event) throws IOException
     {
       
@@ -59,5 +59,5 @@ public class AjoutCategorieController implements Initializable {
             root.getChildren().setAll(pane);
         
         
-}
+}*/
 }

@@ -16,22 +16,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
  *
  * @author Emna
  */
 public class CategorieService {
-    public void ajouter(Categorie c){
+    
+      private Connection cnx;
+   
+   public CategorieService()
+   {
+       cnx=ConnexionBD.getInstance().getCnx();
+   }
+   
+    
+    
+    public void ajouter(Categorie c,int id){
       
           try{
              
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="Insert into Categorie(libelle) values (?)";
-            PreparedStatement pre = con.prepareStatement(res);
-            pre.setString(2,c.getLibelle());
-            pre.executeUpdate();
-            
+            String req="Insert into Categorie(evenement_id,libelle) values ("+id+",'"+c.getLibelle()+"')";
+            Statement statement=cnx.createStatement();
+            statement.executeUpdate(req);
+            System.out.println("Ajout réussi!");   
             
         }catch(SQLException ex){
             System.out.println(ex);
@@ -39,6 +48,7 @@ public class CategorieService {
     
     }
 
+ /**   
    public void ModifierCategorie(int id_C,String libelle_C){
             
          try{
@@ -57,26 +67,25 @@ public class CategorieService {
             System.out.println(e);
         }    
               
-     }   
+     }   */
 
             public void supprimerCategorie(int id)
    {
        try {
-           Connection cnx = (Connection) ConnexionBD.getInstance().getCnx();
 
-           String res="Delete from Categorie where id="+id;
+           String req="Delete from Categorie where id="+id;
            Statement st=cnx.createStatement();
-           st =cnx.createStatement();
-           st.executeUpdate(res);
+           st.executeUpdate(req);
            System.out.println("Suppression réussie!");
        } catch (SQLException ex) {
            Logger.getLogger(EvenementService.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
+     
           
-     public List<Categorie> afficherAll(){
+     public List<Categorie> afficherEvenementCategorie(int id){
            List<Categorie> lc=new ArrayList<Categorie>();
-           String req="Select * from Categorie";
+           String req="Select * from Categorie where evenement_id="+id;
        try {
            Connection cnx = (Connection) ConnexionBD.getInstance().getCnx();
 

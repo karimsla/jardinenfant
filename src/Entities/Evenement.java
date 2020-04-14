@@ -20,7 +20,7 @@ public class Evenement {
     private String titre;
 
     
-    private Date date;
+    private String date;
 
   
     private String description;
@@ -38,11 +38,23 @@ public class Evenement {
    
    private  Collection<Participer> participation;
 
-    public Evenement(String titre, Date date, String description, String image) {
+    public Evenement(int id, String titre, String date, String description, String image, Categorie categorie) {
+        this.id = id;
         this.titre = titre;
         this.date = date;
         this.description = description;
         this.image = image;
+        this.categorie = categorie;
+    }
+
+    public Evenement(String titre, String date, String description, String image) {
+        this.titre = titre;
+        this.date = date;
+        this.description = description;
+        this.image = image;
+    }
+
+    public Evenement() {
     }
 
     public int getId() {
@@ -61,11 +73,11 @@ public class Evenement {
         this.titre = titre;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -108,6 +120,13 @@ public class Evenement {
     public void setParticipation(Collection<Participer> participation) {
         this.participation = participation;
     }
+
+    @Override
+    public String toString() {
+return titre;    }
+
+
+    
     
     
 }

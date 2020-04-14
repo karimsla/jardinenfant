@@ -20,6 +20,13 @@ public class Categorie {
     
    private Collection<Evenement> evenements;
 
+    public Categorie(int id, String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
+
+  
+
     public int getId() {
         return id;
     }
@@ -46,6 +53,11 @@ public class Categorie {
 
     public Categorie(String libelle) {
         this.libelle = libelle;
+    }
+
+    @Override
+    public String toString() {
+        return "Categorie{" + "id=" + id + ", libelle=" + libelle + ", evenements=" + evenements + '}';
     }
     
    
