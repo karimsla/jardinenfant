@@ -26,10 +26,11 @@ public class ClubServices {
           try{
              
              Connection con = ConnexionBD.getInstance().getCnx();
-            String res="Insert into Club(Name,Description) values (?,?)";
+            String res="Insert into Club(Name,Description,photo) values (?,?,?)";
             PreparedStatement pre = con.prepareStatement(res);
             pre.setString(1,a.getName());
             pre.setString(2,a.getDescription());
+            pre.setString(3,a.getPhoto());
             
             ac= pre.executeUpdate();
             

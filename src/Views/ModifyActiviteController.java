@@ -56,7 +56,7 @@ public class ModifyActiviteController implements Initializable {
     private Button vider_btn;
     @FXML
     private ComboBox<String> Recherche;
-    
+
     public ObservableList data = FXCollections.observableArrayList();
     @FXML
     private Button supp_btn;
@@ -64,10 +64,10 @@ public class ModifyActiviteController implements Initializable {
     private Button annuler_btn;
     @FXML
     private ComboBox<String> club_box;
-    
-     public ObservableList nom = FXCollections.observableArrayList();
-     
-       HashMap<String, Integer> map;
+
+    public ObservableList nom = FXCollections.observableArrayList();
+
+    HashMap<String, Integer> map;
 
     /**
      * Initializes the controller class.
@@ -75,129 +75,163 @@ public class ModifyActiviteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-         map = new HashMap<>();
+
+        map = new HashMap<>();
         LoadData();
-        for(int i=0; i<data.size(); i++){ 
-            Recherche.setValue((String)data.get(i));
+        for (int i = 0; i < data.size(); i++) {
+            Recherche.setValue((String) data.get(i));
         }
         Recherche.setItems(data);
-        
-         for(int i=0; i<nom.size(); i++){ 
-            club_box.setValue((String)nom.get(i));
+
+        for (int i = 0; i < nom.size(); i++) {
+            club_box.setValue((String) nom.get(i));
         }
         club_box.setItems(nom);
-       
-    }    
 
-    @FXML
-    private void Modifier(ActionEvent event) throws IOException , ParseException  {
-        String nom = Recherche.getSelectionModel().getSelectedItem();
-        String club = club_box.getSelectionModel().getSelectedItem();
-        int id = map.get(club);
-       // int id = Integer.parseInt(nom);
-        String activite=act_label.getText();
-        String descp = description_label.getText();
-        String date = date_picker.getText();
-        Activite A = new Activite();
-       // A.setId(id);
-        A.setTypeact(activite);
-        A.setDetailles(descp);
-        A.setDate(date);
-         Club c = new Club();
-        c.setId(id);
-        A.setClub(c);
-        int AS;
-        AS = ActiviteServices.modifier(A);
-        if(AS>0){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("modification est faite");
-            alert.setHeaderText("INFO");
-            alert.showAndWait();
-            
-        }else
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("nop");
-            alert.showAndWait();
-        }
-        
     }
 
     @FXML
-    private void Trouver(ActionEvent event) {
-        
-          String AID = Recherche.getSelectionModel().getSelectedItem();
-       
+    private void Modifier(ActionEvent event) throws IOException, ParseException {
+        String nom = Recherche.getSelectionModel().getSelectedItem();
+        String club = club_box.getSelectionModel().getSelectedItem();
+        int id = map.get(club);
+        // int id = Integer.parseInt(nom);
+        if (club_box.getSelectionModel().getSelectedIndex() != -1) {
+            if (act_label.getText().matches("[a-zA-Z]*")) {
+                if (!act_label.getText().equals("")) {
+                    if (!description_label.getText().equals("")) {
+                        if (!date_picker.getText().equals("")) {
+                            String activite = act_label.getText();
+                            String descp = description_label.getText();
+                            String date = date_picker.getText();
+                            Activite A = new Activite();
+                            // A.setId(id);
+                            A.setTypeact(activite);
+                            A.setDetailles(descp);
+                            A.setDate(date);
+                            Club c = new Club();
+                            c.setId(id);
+                            A.setClub(c);
+                            int AS;
+                            AS = ActiviteServices.modifier(A);
+                            if (AS > 0) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("modification est faite");
+                                alert.setHeaderText("INFO");
+                                alert.showAndWait();
+
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("nop");
+                                alert.showAndWait();
+                            }
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("A FIELD IS MISSING");
+                            alert.setContentText("LA DATE YA MADAME");
+
+                            alert.showAndWait();
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("A FIELD IS MISSING");
+                        alert.setContentText("LA DESCRIPTION YA MADAME");
+                        alert.showAndWait();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("A FIELD IS MISSING");
+                    alert.setContentText("WOH TITRE DE L'ACIVITE");
+                    alert.showAndWait();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("hja okhraa");
+                alert.setContentText("LE TITRE :) :)  ");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("A FIELD IS MISSING");
+            alert.setContentText("L CLUUB IS MISSING");
+            alert.showAndWait();
+        }
+
+    }
+
+    @FXML
+    private void Trouver(ActionEvent event
+    ) {
+
+        String AID = Recherche.getSelectionModel().getSelectedItem();
+
         Activite A = ActiviteServices.findActivite(AID);
-        
-     
-        
+
         act_label.setText(A.getTypeact());
         description_label.setText(A.getDetailles());
         date_picker.setText(A.getDate());
-        int idclub=A.getClub().getId();
+        int idclub = A.getClub().getId();
         Club C = ActiviteServices.findNomClub(idclub);
         String nomClub = C.getName();
         club_box.setValue(nomClub);
     }
 
     @FXML
-    private void Vider(ActionEvent event) {
-        
+    private void Vider(ActionEvent event
+    ) {
+
         act_label.clear();
         description_label.clear();
         date_picker.clear();
     }
-    
-    private void LoadData(){
-     
-         try{
-            
-            String res="SELECT a.typeact , c.id , c.Name   FROM Activite a , Club AS c " ;
-          Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+
+    private void LoadData() {
+
+        try {
+
+            String res = "SELECT a.typeact , c.id , c.Name   FROM Activite a , Club AS c ";
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             Statement statement = con.prepareStatement(res);
-            ResultSet rs =  statement.executeQuery(res);
-            while(rs.next()){
+            ResultSet rs = statement.executeQuery(res);
+            while (rs.next()) {
                 data.add(rs.getString("typeact"));
                 nom.add(rs.getString("Name"));
-                map.put(rs.getString("Name"),rs.getInt("id"));
+                map.put(rs.getString("Name"), rs.getInt("id"));
             }
-            
-        } catch (SQLException ex) {
-             System.err.println(ex);;
-         }
-         
-    }
-    
 
+        } catch (SQLException ex) {
+            System.err.println(ex);;
+        }
+
+    }
 
     @FXML
     private void Supprimer(ActionEvent event) {
-                String nom = Recherche.getSelectionModel().getSelectedItem();
-          int AS;
+        String nom = Recherche.getSelectionModel().getSelectedItem();
+        int AS;
         AS = ActiviteServices.Delete(nom);
-        if(AS>0){
+        if (AS > 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Supprimer");
             alert.setHeaderText("Suppression est faite");
             alert.showAndWait();
-            
-        }else
-        {
+
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("nop not yet");
             alert.showAndWait();
         }
-        
+
     }
 
     @FXML
     private void Retour(ActionEvent event) throws IOException {
-          if(event.getSource() == annuler_btn){
+        if (event.getSource() == annuler_btn) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
-            root.getChildren().setAll(pane);}
-           
+            root.getChildren().setAll(pane);
+        }
+
     }
-    
+
 }

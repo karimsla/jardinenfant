@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.WeatherController">
+   <children>
+      <ImageView fitHeight="391.0" fitWidth="601.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/winter_snow_800.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="Country" layoutX="264.0" layoutY="33.0" prefHeight="37.0" prefWidth="90.0" text="Tunisia" textFill="#162661">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="temperature" layoutX="255.0" layoutY="81.0" prefHeight="46.0" prefWidth="90.0" />
+      <Label fx:id="humidity" layoutX="54.0" layoutY="150.0" prefHeight="17.0" prefWidth="102.0" />
+      <Label layoutX="54.0" layoutY="192.0" prefHeight="17.0" prefWidth="90.0" />
+      <Label fx:id="speed" layoutX="74.0" layoutY="254.0" prefHeight="17.0" prefWidth="102.0" />
+      <Label fx:id="deg" layoutX="367.0" layoutY="76.0" prefHeight="37.0" prefWidth="67.0" />
+      <Label fx:id="main" layoutX="379.0" layoutY="184.0" prefHeight="37.0" prefWidth="102.0" />
+   </children>
+</AnchorPane>

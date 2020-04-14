@@ -53,11 +53,10 @@ public class AjoutActiviteController implements Initializable {
     private Button annuler_btn;
     @FXML
     private Button ajout_btn;
-    
-     public ObservableList<String> data = FXCollections.observableArrayList();
-     
-             HashMap<String, Integer> map;
 
+    public ObservableList<String> data = FXCollections.observableArrayList();
+
+    HashMap<String, Integer> map;
 
     /**
      * Initializes the controller class.
@@ -65,80 +64,115 @@ public class AjoutActiviteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        
+
         map = new HashMap<>();
         LoadData();
 
-       for(int i=0; i<data.size(); i++){ 
-            club_box.setValue((String)data.get(i));
-           
+        for (int i = 0; i < data.size(); i++) {
+            club_box.setValue((String) data.get(i));
+
         }
         club_box.setItems(data);
-    }    
+    }
 
     @FXML
     private void Annuler(ActionEvent event) throws IOException {
-        
-        if(event.getSource() == annuler_btn){
+
+        if (event.getSource() == annuler_btn) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
-            root.getChildren().setAll(pane);}
+            root.getChildren().setAll(pane);
+        }
     }
 
     @FXML
     private void ADD(ActionEvent event) {
-        
-        String club = club_box.getSelectionModel().getSelectedItem();
-        int id = map.get(club); 
-        
-        LocalDate dateA = date_text.getValue();
-        String activite = act_text.getText();
-        String description = desc_text.getText();
-        String date = dateA.toString();
-        
-        Club c = new Club();
-        c.setId(id);
-        Activite A = new Activite();
-        A.setDate(date);
-        A.setTypeact(activite);
-        A.setDetailles(description);
-        A.setClub(c);
-        ActiviteServices AS = new ActiviteServices();
-       int a =  AS.ajouter(A);
-        if(a>0){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ajout est fait");
-            alert.setHeaderText("Ajout réussi ");
-            alert.showAndWait();
-            
-        }else
-        {
+
+        if (club_box.getSelectionModel().getSelectedIndex() != -1) {
+            if (act_text.getText().matches("[a-zA-Z]*")) {
+                if (!act_text.getText().equals("")) {
+                    if (!desc_text.getText().equals("")) {
+                        if (!date_text.getValue().equals("")) {
+
+                            String club = club_box.getSelectionModel().getSelectedItem();
+                            int id = map.get(club);
+
+                            LocalDate dateA = date_text.getValue();
+                            String activite = act_text.getText();
+                            String description = desc_text.getText();
+                            String date = dateA.toString();
+
+                            Club c = new Club();
+                            c.setId(id);
+                            Activite A = new Activite();
+                            A.setDate(date);
+                            A.setTypeact(activite);
+                            A.setDetailles(description);
+                            A.setClub(c);
+                            ActiviteServices AS = new ActiviteServices();
+                            int a = AS.ajouter(A);
+                            if (a > 0) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Ajout est fait");
+                                alert.setHeaderText("Ajout réussi ");
+                                alert.showAndWait();
+
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("n'est pas fait");
+                                alert.showAndWait();
+                            }
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("A FIELD IS MISSING");
+                            alert.setContentText("LA DATE YA MADAME");
+
+                            alert.showAndWait();
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("A FIELD IS MISSING");
+                        alert.setContentText("LA DESCRIPTION YA MADAME");
+                        alert.showAndWait();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("A FIELD IS MISSING");
+                    alert.setContentText("WOH TITRE DE L'ACIVITE");
+                    alert.showAndWait();
+                }
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("OTHERS");
+                alert.setContentText("LE TITRE  CONTIENT DES HAJETS :) :)  ");
+                alert.showAndWait();
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("n'est pas fait");
+            alert.setTitle("A FIELD IS MISSING");
+            alert.setContentText("L CLUUB IS MISSING");
             alert.showAndWait();
         }
     }
-    
-    
-     private void LoadData(){
-     
-         try{
-            
-            String res="SELECT id,Name FROM Club" ;
-          Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+
+    private void LoadData() {
+
+        try {
+
+            String res = "SELECT id,Name FROM Club";
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             Statement statement = con.prepareStatement(res);
-            ResultSet rs =  statement.executeQuery(res);
-            while(rs.next()){
-                map.put(rs.getString("Name"),rs.getInt("id"));
+            ResultSet rs = statement.executeQuery(res);
+            while (rs.next()) {
+                map.put(rs.getString("Name"), rs.getInt("id"));
                 data.add(rs.getString("Name"));
-              
-                
-                
+
             }
-            
+
         } catch (SQLException ex) {
-             System.err.println(ex);;
-         }
-         
+            System.err.println(ex);;
+        }
+
     }
 }
