@@ -1,5 +1,8 @@
 package Views.User;
 
+import IServices.IserviceUser;
+import IServices.ServiceUser;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -8,14 +11,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.util.ResourceBundle;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.fxml.FXMLLoader;;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 
 
 
@@ -38,10 +43,13 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+       btnSignin.setOnAction(event->{
+           handleButtonAction(event);
+       });
     }
 
     @FXML
-    public void handleButtonAction(ActionEvent event){
+    public void handleButtonAction(ActionEvent event) {
 
         if (event.getSource() == btnSignin) {
             //login here
@@ -68,38 +76,37 @@ public class LoginController implements Initializable {
 
 
     private String logIn() {
+
+        IserviceUser su = new ServiceUser();
+
         String status = "Success";
         String email = txtUsername.getText();
         String password = txtPassword.getText();
-        if(email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             setLblError(Color.TOMATO, "Empty credentials");
             status = "Error";
         } else {
             //query
-            String sql = "SELECT * FROM User Where email = ? and password = ?";
-           /* try {
-                preparedStatement = con.prepareStatement(sql);
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, password);
-                resultSet = preparedStatement.executeQuery();
-                if (!resultSet.next()) {
-                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
-                    status = "Error";
-                } else {
-                    setLblError(Color.GREEN, "Login Successful..Redirecting..");
-                }
-            } catch (SQLException ex) {
-                System.err.println(ex.getMessage());
-                status = "Exception";
-            }*/
+
+
+            if (su.Login(email,password).equals("Error")) {
+                setLblError(Color.TOMATO, "Enter Correct Email/Password");
+                status = "Error";
+            } else {
+                setLblError(Color.GREEN, "Login Successful..Redirecting..");
+                status="Success";
+
+            }
+
+            return status;
         }
 
-        return status;
+      return status;
     }
-
-    private void setLblError(Color color, String text) {
+    private void setLblError (Color color, String text){
         lblErrors.setTextFill(color);
         lblErrors.setText(text);
         System.out.println(text);
     }
+
 }

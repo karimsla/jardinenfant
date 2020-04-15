@@ -21,8 +21,69 @@ public class User {
     private String username;
     
     private String email;
-    private boolean enabled;
+
     private String password;
- 
-    
+
+    private String type;
+    private String role;
+
+    public User(int id, String username, String email, String type ,String role) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.type = type;
+        this.role=role;
+    }
+
+    public User() {
+
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Collection<Messages> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Collection<Messages> messages) {
+        this.messages = messages;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

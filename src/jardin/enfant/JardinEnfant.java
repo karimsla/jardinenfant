@@ -27,7 +27,8 @@ import javafx.stage.StageStyle;
  */
 public class JardinEnfant extends Application {
        private double xOffset;
-       private double yOffset;  
+       private double yOffset;
+       public static String authenticated="";
        
        
        
