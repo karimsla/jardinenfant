@@ -49,11 +49,11 @@ public class JardinEnfant extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-          Parent root = FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml"));
+          Parent root = FXMLLoader.load(getClass().getResource("/Views/Parent/ListeParent.fxml"));
         events(primaryStage,root);
        
          Scene scene = new Scene(root);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
 
         primaryStage.setScene(scene);
         primaryStage.show();

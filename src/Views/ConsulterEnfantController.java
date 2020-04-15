@@ -73,7 +73,7 @@ public class ConsulterEnfantController implements Initializable {
 
         try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT nom,prenom,datenaiss FROM `enfant" ;
+            String res="SELECT nom,prenom,datenaiss FROM enfant" ;
           
             Statement statement = con.createStatement();
           

@@ -30,6 +30,9 @@ public class Parents extends User {
     
     private String sexe;
 
+    private int nbenfant;
+
+
       private Collection<Enfant> enfants;
 
     
@@ -46,6 +49,14 @@ public class Parents extends User {
         this.numtel = numtel;
         this.adresse = adresse;
         this.sexe = sexe;
+    }
+
+    public int getNbenfant() {
+        return nbenfant;
+    }
+
+    public void setNbenfant(int nbenfant) {
+        this.nbenfant = nbenfant;
     }
 
     public int getId() {
