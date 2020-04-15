@@ -8,6 +8,7 @@ package Views;
 import com.google.gson.*;
 import com.google.gson.reflect.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,30 +56,29 @@ public class WeatherController implements Initializable {
     @FXML
     private Label Country;
     @FXML
-    private Label deg;
-    @FXML
     private Label main;
 
     private Image image;
     @FXML
     private ImageView imageview;
+    @FXML
+    private Label feels;
+    @FXML
+    private Label max;
+    @FXML
+    private Label min;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        FileInputStream input;
-        try {
-            input = new FileInputStream("ressources/images/winter_snow_800.png");
-            Image image = new Image(input);
-            imageview.setImage(image);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(WeatherController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+       
+        
+        
+       
         String API_Key = "b834cf5d3ea7686a84b07cde283ba7a0";
         String LOCATION = "Moscow";
         String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + LOCATION + "&appid=" + API_Key
-                + "&units-imperial";
+                + "&units-Metric";
         try {
             StringBuilder result = new StringBuilder();
             URL url1 = new URL(urlString);
@@ -104,13 +104,28 @@ public class WeatherController implements Initializable {
             String s = String.valueOf(windMap.get("speed"));
             speed.setText(s);
 
-            String m = String.valueOf(windMap.get("feels_like"));
+            String m = String.valueOf(mainMap.get("weather.description"));
             main.setText(m);
+            
+            String f = String.valueOf(mainMap.get("feels_like"));
+            feels.setText(f);
 
+            
+            String ma = String.valueOf(mainMap.get("temp_max"));
+            max.setText(ma);
+            
+            String mi = String.valueOf(mainMap.get("temp_min"));
+            min.setText(mi);
+            
             System.out.println("Current Temperature: " + mainMap.get("temp"));
             System.out.println("Current Humidity : " + mainMap.get("humidity"));
             System.out.println("Wind Speeds : " + windMap.get("speed"));
-            System.out.println("feels like  : " + mainMap.get("feels_like"));
+            System.out.println("main : " + respMap.get("weather"));
+            
+            
+            System.out.println("feels like max  : " + mainMap.get("temp_max"));
+            System.out.println("feels like  min: " + mainMap.get("temp_min"));
+ 
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(WeatherController.class.getName()).log(Level.SEVERE, null, ex);

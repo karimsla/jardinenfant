@@ -4,25 +4,68 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.WeatherController">
+<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.WeatherController">
    <children>
-      <ImageView fx:id="imageview" fitHeight="391.0" fitWidth="601.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageview" fitHeight="139.0" fitWidth="177.0" layoutX="244.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Desktop/winter_snow_800.jpg" />
+            <Image url="@../ressources/images/weather02-512.png" />
          </image>
       </ImageView>
-      <Label fx:id="Country" layoutX="264.0" layoutY="33.0" prefHeight="37.0" prefWidth="90.0" text="Tunisia" textFill="#162661">
+      <Label fx:id="Country" layoutX="293.0" layoutY="223.0" prefHeight="37.0" prefWidth="90.0" text="Tunisia" textFill="#575454">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="Calibri Light Italic" size="19.0" />
          </font>
       </Label>
-      <Label fx:id="temperature" layoutX="255.0" layoutY="81.0" prefHeight="46.0" prefWidth="90.0" />
-      <Label fx:id="humidity" layoutX="54.0" layoutY="150.0" prefHeight="17.0" prefWidth="102.0" />
-      <Label layoutX="54.0" layoutY="192.0" prefHeight="17.0" prefWidth="90.0" />
-      <Label fx:id="speed" layoutX="74.0" layoutY="254.0" prefHeight="17.0" prefWidth="102.0" />
-      <Label fx:id="deg" layoutX="367.0" layoutY="76.0" prefHeight="37.0" prefWidth="67.0" />
-      <Label fx:id="main" layoutX="379.0" layoutY="184.0" prefHeight="37.0" prefWidth="102.0" />
+      <Label fx:id="temperature" layoutX="27.0" layoutY="205.0" prefHeight="46.0" prefWidth="108.0" text="temp" textFill="#575454">
+         <font>
+            <Font name="Calibri" size="30.0" />
+         </font></Label>
+      <Label fx:id="main" layoutX="290.0" layoutY="177.0" prefHeight="46.0" prefWidth="123.0" />
+      <Pane layoutY="261.0" prefHeight="139.0" prefWidth="601.0" style="-fx-background-color: #2E3335; -fx-background-radius: 0,0,10,10;">
+         <children>
+            <ImageView fitHeight="46.0" fitWidth="49.0" layoutX="45.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ressources/images/Autum_Outline-18-512.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="speed" layoutX="104.0" layoutY="22.0" prefHeight="37.0" prefWidth="67.0" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="52.0" fitWidth="46.0" layoutX="231.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ressources/images/1594775.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="humidity" layoutX="289.0" layoutY="25.0" prefHeight="37.0" prefWidth="102.0" textFill="WHITE" />
+            <Label layoutX="461.0" layoutY="17.0" text="Feels like :" textFill="WHITE" />
+            <Label fx:id="feels" layoutX="533.0" layoutY="14.0" prefHeight="24.0" prefWidth="54.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="461.0" layoutY="56.0" text="Max :" textFill="WHITE" />
+            <Label layoutX="461.0" layoutY="98.0" text="Min :" textFill="WHITE" />
+            <Label fx:id="max" layoutX="525.0" layoutY="46.0" prefHeight="37.0" prefWidth="54.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="min" layoutX="525.0" layoutY="88.0" prefHeight="24.0" prefWidth="54.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="192.0" text="Temperature ° " textFill="#575454">
+         <font>
+            <Font name="Calibri Light" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
