@@ -28,6 +28,9 @@ public class Messages {
 
     private User sender;
 
+    public Messages() {
+    }
+
     public Messages(int id, Date date, String msg, Jardin jardin, Parents parent, User sender) {
         this.id = id;
         this.date = date;

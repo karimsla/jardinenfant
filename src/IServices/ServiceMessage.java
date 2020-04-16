@@ -6,12 +6,14 @@ import Entities.Parents;
 import Entities.User;
 import Utils.ConnexionBD;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class ServiceMessage implements IserviceMessage {
 
@@ -99,6 +101,34 @@ public class ServiceMessage implements IserviceMessage {
 
         return allmes;
 
+
+
+    }
+
+    @Override
+    public void addmess(String msg, int idparent, int idjardin, int idsender) {
+
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String sqldate=dtf.format(now);
+
+            Connection con = ConnexionBD.getInstance().getCnx();
+            String res="Insert into messages(date,msg,jardin_id,parent_id,user_id) values ('"+
+                    sqldate+"','"+
+                    msg+"',"+
+                    idjardin+","+
+                    idparent+","+
+                    idsender+")";
+            PreparedStatement pre = con.prepareStatement(res);
+
+
+             pre.executeUpdate();
+
+
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
 
 
     }

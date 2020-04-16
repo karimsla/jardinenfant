@@ -10,5 +10,6 @@ public interface IserviceMessage  {
 
     public List<Messages> getallmess(int id) throws SQLException;
     public List<Messages> getmessages(int id) throws SQLException;
+    public void addmess(String msg,int idparent,int idjardin, int idsender);
 }
 
