@@ -44,12 +44,16 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
        btnSignin.setOnAction(event->{
-           handleButtonAction(event);
+           try {
+               handleButtonAction(event);
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
        });
     }
 
     @FXML
-    public void handleButtonAction(ActionEvent event) {
+    public void handleButtonAction(ActionEvent event) throws IOException {
 
         if (event.getSource() == btnSignin) {
             //login here
@@ -61,7 +65,7 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/OnBoard.fxml")));
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml")));
                     stage.setScene(scene);
                     stage.show();
 
@@ -75,7 +79,7 @@ public class LoginController implements Initializable {
     }
 
 
-    private String logIn() {
+    private String logIn() throws IOException {
 
         IserviceUser su = new ServiceUser();
 

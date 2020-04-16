@@ -6,6 +6,7 @@
 package jardin.enfant;
 
 import Entities.Chauffeur;
+import Entities.User;
 import IServices.ChauffeurService;
 import java.io.IOException;
 import javafx.application.Application;
@@ -28,7 +29,7 @@ import javafx.stage.StageStyle;
 public class JardinEnfant extends Application {
        private double xOffset;
        private double yOffset;
-       public static String authenticated="";
+       public static User authenticated=new User();
        
        
        

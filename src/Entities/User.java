@@ -43,6 +43,15 @@ public class User {
         return type;
     }
 
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setType(String type) {
         this.type = type;
     }

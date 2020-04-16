@@ -1,137 +1,100 @@
 package IServices;
 
-import Entities.User;
 import Utils.ConnexionBD;
-import jardin.enfant.JardinEnfant;
-import javafx.scene.paint.Color;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 import java.lang.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.net.URL;
 
-
+import static jardin.enfant.JardinEnfant.authenticated;
 
 
 public class ServiceUser implements IserviceUser {
 
-    Connection con =null;
+    Connection con = null;
 
-    public ServiceUser(){
+    static InputStream is = null;
+    static JSONObject jObj = null;
+    static String json = "";
 
-        con= ConnexionBD.getInstance().getCnx();
+    public ServiceUser() {
+
+        con = ConnexionBD.getInstance().getCnx();
 
     }
 
 
+
+
+    private static String streamToString(InputStream inputStream) {
+        String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
+        return text;
+    }
+
+    public static String readJsonFromUrl(String urlparm) throws IOException, JSONException {
+
+        try {
+            URL url = new URL(urlparm);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setInstanceFollowRedirects(false);
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("charset", "utf-8");
+            connection.connect();
+            InputStream inStream = connection.getInputStream();
+
+            json = streamToString(inStream); // input stream to string
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+            return json;
+
+    }
 
 
     @Override
-    public String Login(String username, String password) {
-        String salt=getsalt(username);
+    public String Login(String username, String password) throws IOException {
 
-        if(salt.equals("Error")){
-            return "Error";
-        }else {
+        String json = readJsonFromUrl("http://localhost:8000/Api/login/" + username + "/" + password);
+
+        if (json.compareTo("\"Success\"") == 0) {
+            con = ConnexionBD.getInstance().getCnx();
+            String req = "Select * from fos_user where username='" + username+"'";
+
+            try {
+                Statement statement = con.createStatement();
+                ResultSet rs = statement.executeQuery(req);
+                rs.next();
+
+                authenticated.setId(rs.getInt("id"));
+                authenticated.setEmail(rs.getString("email"));
+                authenticated.setUsername(rs.getString("username"));
+                authenticated.setRole(rs.getString("roles"));
+                authenticated.setType(rs.getString("discr"));
 
 
-
-
-        try{
-            String sql = "SELECT * FROM fos_user Where (email ='"+username+"' or username='"+username+"')  and password ='"+encrypt(password,salt)+"'";
-        Statement statement=con.createStatement();
-
-        ResultSet rs=statement.executeQuery(sql);
-        rs.next();
-        User connected=new User(rs.getInt("id"),
-                 rs.getString("username"),
-                rs.getString("email"),
-                rs.getString("discr"),
-                rs.getString("roles"));
-
-            JardinEnfant.authenticated=username;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
             return "Success";
+        }
 
 
-
-
-
-    } catch (SQLException ex) {
-        Logger.getLogger(ServiceParent.class.getName()).log(Level.SEVERE, null, ex);
         return "Error";
-        }
-
-    }
 
 
-
-
-
-    }
-
-
-    public String encrypt(String password,String salt){
-        String generatedPassword = null;
-        try {
-
-
-
-
-
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            byte[] hash = md.digest(password.getBytes("UTF-8"));
-
-            md.update(salt.getBytes(StandardCharsets.UTF_8));
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < hash.length; i++) {
-                sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
-
-        }
-        catch (NoSuchAlgorithmException | UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-
-
-
-
-
-    }
-
-
-
-    public String getsalt(String username){
-
-
-        String sql = "SELECT salt FROM fos_user Where (email ='"+username+"' or username='"+username+"') ";
-        try{
-            Statement statement=con.createStatement();
-
-            ResultSet rs=statement.executeQuery(sql);
-            rs.next();
-            return rs.getString(1);
-
-
-
-
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceParent.class.getName()).log(Level.SEVERE, null, ex);
-            return "Error";
-
-        }
     }
 }
