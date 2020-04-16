@@ -145,8 +145,8 @@ listview.setItems(data);
     
     public void setField(TextField tf,String value)
     {tf.setText(value);
-        
     }
+    
      @FXML
      public void activer()
      {
@@ -178,6 +178,7 @@ listview.setItems(data);
    cs.modifierChauffeur(c);
       } 
     }
+    
     
     @FXML
     public void supprimer()
