@@ -21,7 +21,8 @@ import java.util.logging.Logger;
  * @author Dorra Kerrou
  */
 public class ClubServices {
-    
+
+   
     private FileInputStream fis ; 
     
     
@@ -52,17 +53,19 @@ public class ClubServices {
   }
      
      
-      public static int modifier(String nom, String desc, Integer id){
+      public static int modifier(Club c){
       
       int ac = 0;
       
         try{
              
              Connection con = ConnexionBD.getInstance().getCnx();
-            String res="Update Club SET Name=? ,Description=? WHERE id="+id;
+            String res="Update Club SET Name=? ,Description=?, photo=? WHERE id=?";
             PreparedStatement pre = con.prepareStatement(res); 
-            pre.setString(1,nom);
-            pre.setString(2,desc);
+             pre.setString(1,c.getName());
+            pre.setString(2,c.getDescription());
+            pre.setString(3,c.getPhoto());
+            pre.setInt(4,c.getId());
            
 
             ac= pre.executeUpdate();
@@ -120,9 +123,11 @@ public class ClubServices {
                 
               
                
+                 
                  A.setName(rs.getString("Name"));
                  A.setDescription(rs.getString("Description"));
                  A.setPhoto(rs.getString("photo"));
+                 A.setId(rs.getInt("id"));
                
               
              }

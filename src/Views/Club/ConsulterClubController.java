@@ -160,8 +160,14 @@ public class ConsulterClubController implements Initializable {
     }
 
     @FXML
-    private void Modifier(ActionEvent event) {
-        if (mod_club.getText().matches("[a-zA-Z]*")) {
+    private void Modifier(ActionEvent event) throws IOException {
+        
+        
+               
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ModifierClub.fxml"));
+            root.getChildren().setAll(pane);
+        
+      /*  if (mod_club.getText().matches("[a-zA-Z]*")) {
             if (!mod_club.getText().equals("")) {
                 if (!mod_descr.getText().equals("")) {
 
@@ -212,9 +218,9 @@ public class ConsulterClubController implements Initializable {
         if (event.getSource() == Annuler) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Views/Accueil.fxml"));
             root.getChildren().setAll(pane);
-        }
+        }*/
     }
-     */
+     
     @FXML
     private void DELETE(ActionEvent event
     ) {

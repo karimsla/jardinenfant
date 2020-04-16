@@ -11,8 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="689.0" style="-fx-background-color: #84869c;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Views.Club.AffichageController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="524.0" prefWidth="689.0" style="-fx-background-color: #84869c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Club.AffichageController">
    <children>
       <ComboBox fx:id="combo" layoutX="236.0" layoutY="20.0" prefHeight="33.0" prefWidth="199.0" />
       <Button fx:id="trouver" layoutX="510.0" layoutY="20.0" mnemonicParsing="false" onAction="#TrouverPourAfficher" prefHeight="33.0" prefWidth="80.0" text="Afficher">
@@ -37,5 +36,6 @@
          </children>
       </Pane>
       <Line endX="578.0" layoutX="115.0" layoutY="465.0" startX="-115.0" stroke="#6f6a5d" strokeWidth="4.0" />
+      <Button fx:id="Back" layoutX="605.0" layoutY="479.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="70.0" text="Back" />
    </children>
 </AnchorPane>

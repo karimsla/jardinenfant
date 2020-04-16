@@ -8,6 +8,7 @@ package Views.Club;
 import IServices.ClubServices;
 import Utils.ConnexionBD;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -26,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -49,6 +52,10 @@ public class AffichageController implements Initializable {
     private ImageView imageview;
     
      private Image image;
+    @FXML
+    private Button Back;
+    @FXML
+    private AnchorPane root;
 
     /**
      * Initializes the controller class.
@@ -103,6 +110,13 @@ public class AffichageController implements Initializable {
         imageview.setImage(image);
         
         
+    }
+
+    @FXML
+    private void Back(ActionEvent event) throws IOException {
+        
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterClub.fxml"));
+            root.getChildren().setAll(pane);
     }
       
     
