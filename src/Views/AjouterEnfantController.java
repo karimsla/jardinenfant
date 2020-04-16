@@ -8,6 +8,7 @@ package views;
 import Entities.AbonEnf;
 import IServices.EnfantService;
 import Utils.ConnexionBD;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -19,15 +20,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -54,16 +61,43 @@ public class AjouterEnfantController implements Initializable {
     private TableColumn<AbonEnf, Date> dateex;
     String noms="attente";
     public ObservableList<AbonEnf> data = FXCollections.observableArrayList();
+    public ObservableList<AbonEnf> recherc = FXCollections.observableArrayList();
     @FXML
     private Button ajou;
     @FXML
     private Button supp;
     String id="";
+    @FXML
+    private TextField txt_re;
+    @FXML
+    private ComboBox<String> cmb_rec;
+    @FXML
+    private Button btn_rc;
+    @FXML
+    private Button rtn;
+    int as=0;
+    int al=0;
+    @FXML
+    private TextField compt;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cmb_rec.getItems().addAll("nom","prenom","etat","type");
+        try{
+            Connection cone = (Connection) ConnexionBD.getInstance().getCnx();
+            String rese="SELECT Count(*) AS cou FROM  abonnement WHERE etat LIKE '%"+noms+"%' " ;
+          
+            Statement statement = cone.createStatement();
+          
+            ResultSet rse =  statement.executeQuery(rese);
+            while(rse.next()){
+                compt.setText(rse.getString("cou"));
+                
+            }}
+            catch(SQLException e){}
+       
        try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en,abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'AND en.id=ab.enfant_id " ;
@@ -118,12 +152,103 @@ public class AjouterEnfantController implements Initializable {
            
         }
     }
+    
+    
+     @FXML
+   
+    private void rechercher(ActionEvent event) {
+        recherc.clear();
+       
+         if(txt_re.getText().equals("")){
+                Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("veuillez écrire quelque chose !");
+          ale.showAndWait();
+            }
+            else{
+                if (cmb_rec.getSelectionModel().getSelectedItem()==null){
+                    Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("veuillez choisir un mode !");
+          ale.showAndWait();
+          
+                    
+                }
+                else{
+         
+           for (int i=0;i<data.size();i++){
+               if (cmb_rec.getSelectionModel().getSelectedItem().equals("nom")){
+            if (data.get(i).getNom().contains(txt_re.getText())){
+                
+                recherc.add(data.get(i));
+               
+                
+            }}
+                if (cmb_rec.getSelectionModel().getSelectedItem().equals("prenom")){
+            if (data.get(i).getPrenom().contains(txt_re.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("etat")){
+            if (data.get(i).getEtat().contains(txt_re.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("type")){
+            if (data.get(i).getType().contains(txt_re.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+               
+        }
+         
+        
+        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
+       
+        afficher.setItems(recherc);
+        
+        
+        
+        
+        
+        
+        
+        
+                }}
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     @FXML
     private void modif(ActionEvent event) {
         EnfantService en= new EnfantService();
+        try{
         int mo=Integer.parseInt(id);
-      int al=en.modifier(mo);
+         al=en.modifier(mo);}
+        catch(Exception e){}
       if (al>0){
           Alert ale= new Alert(Alert.AlertType.INFORMATION);
           ale.setTitle("INFORMATION");
@@ -172,7 +297,7 @@ public class AjouterEnfantController implements Initializable {
       else {
            Alert aler= new Alert(Alert.AlertType.ERROR);
             aler.setTitle("erreur !");
-            aler.setHeaderText("Erreur");
+            aler.setHeaderText("Veuillez selectionner une personne!");
             aler.showAndWait();
           
       }
@@ -184,8 +309,10 @@ public class AjouterEnfantController implements Initializable {
     private void supprime(ActionEvent event) {
         
         EnfantService ens= new EnfantService();
+        try{
         int mos=Integer.parseInt(id);
-       int as= ens.supprimer(mos);
+        as= ens.supprimer(mos);}
+         catch (Exception e){}
        if (as>0){
           Alert ale= new Alert(Alert.AlertType.INFORMATION);
           ale.setTitle("INFORMATION");
@@ -231,6 +358,24 @@ public class AjouterEnfantController implements Initializable {
         afficher.setItems(data);
         
       }
+       else{
+            Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Selectionnez une personne !");
+          ale.showAndWait();
+       }
     }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+     
+          if(event.getSource() == rtn){
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterEnfant.fxml"));
+            root.getChildren().setAll(pane);
+        }
+    }
+    
+
+   
     
 }

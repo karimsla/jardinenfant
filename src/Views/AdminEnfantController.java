@@ -23,9 +23,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -54,15 +56,27 @@ public class AdminEnfantController implements Initializable {
     @FXML
     private TableColumn<AdmEnf, String> parent;
     public ObservableList<AdmEnf> data = FXCollections.observableArrayList();
+    public ObservableList<AdmEnf> recherc = FXCollections.observableArrayList();
     @FXML
     private Button btn_supp;
     String id="";
+    int as=0;
+    @FXML
+    private TextField txt_r;
+    @FXML
+    private ComboBox<String> cmb_r;
+    @FXML
+    private Button btn_r;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cmb_r.getItems().addAll("nom","prenom","parent");
+        
+        
+        
          try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             String res="SELECT en.nom,en.prenom,en.datenaiss,en.sexe,en.id,ab.nom,ab.prenom FROM enfant en,parent AS ab WHERE en.parent_id=ab.id " ;
@@ -121,14 +135,22 @@ public class AdminEnfantController implements Initializable {
 
     @FXML
     private void supprimer(ActionEvent event) {
+       
          EnfantService ens= new EnfantService();
+         try{
         int mos=Integer.parseInt(id);
-       int as= ens.supprimerAdm(mos);
+          as= ens.supprimerAdm(mos);
+         }
+         catch (Exception e){}
+        
+      
        if (as>0){
           Alert ale= new Alert(Alert.AlertType.INFORMATION);
           ale.setTitle("INFORMATION");
           ale.setHeaderText("suppression faite !");
           ale.showAndWait();
+          
+          
           data.clear();
           try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
@@ -166,10 +188,81 @@ public class AdminEnfantController implements Initializable {
           
       }
         
+       
+        else{
+            Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Selectionnez une personne !");
+          ale.showAndWait();
+       
+       
+       }
         
+        
+        
+        
+          
+    }
+
+    @FXML
+    private void rechercher(ActionEvent event) {
+        
+         recherc.clear();
+            if(txt_r.getText().equals("")){
+                Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("veuillez écrire quelque chose !");
+          ale.showAndWait();
+            }
+            else{
+                if (cmb_r.getSelectionModel().getSelectedItem()==null){
+                    Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("veuillez choisir un mode !");
+          ale.showAndWait();
+          
+                    
+                }
+                else {
+           for (int i=0;i<data.size();i++){
+               if (cmb_r.getSelectionModel().getSelectedItem().equals("nom")){
+            if (data.get(i).getNom().contains(txt_r.getText())){
+                
+                recherc.add(data.get(i));
+               
+                
+            }}
+                if (cmb_r.getSelectionModel().getSelectedItem().equals("prenom")){
+            if (data.get(i).getPrenom().contains(txt_r.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+           
+                 if (cmb_r.getSelectionModel().getSelectedItem().equals("parent")){
+            if (data.get(i).getJardin().contains(txt_r.getText())){
+                recherc.add(data.get(i));
+               
+            }
+            }}
+               
+        
+         
+        
+        nom.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("nom"));
+        prenom.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("prenom"));
+        date.setCellValueFactory(new PropertyValueFactory<AdmEnf,Date>("datenaiss"));
+        sexe.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("sexe"));
+         parent.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("jardin"));
+       
+        enfcons.setItems(recherc);
+                }
+            }
+        
+    }
     }
     
     
-    }    
+    
     
 
