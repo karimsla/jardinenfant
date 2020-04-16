@@ -50,7 +50,7 @@ WebEngine webEngine;
         // TODO
     webEngine=webView.getEngine();
         data="this is working";
-          final URL urlGoogleMaps = getClass().getResource("/Assets/Mapbox.html");
+          final URL urlGoogleMaps = getClass().getResource("/Assets/index.html");
  
           webEngine.load(urlGoogleMaps.toExternalForm());
 
@@ -78,9 +78,8 @@ for(Trajet t : lt)
     }
     
 
-
 for(int i=0;i<mp.size();i++)
-     webEngine.executeScript("updateMarker('"+mp.get(i).getLat()+"','"+mp.get(i).getLan()+"')");
+     webEngine.executeScript("setMarker('"+mp.get(i).getLat()+"','"+mp.get(i).getLan()+"','"+mp.get(i).getNom()+"','"+mp.get(i).getHeure()+"')");
                  
 }
 
