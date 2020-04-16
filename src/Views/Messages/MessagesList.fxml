@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane fx:id="rootPane" prefHeight="662.0" prefWidth="724.0" stylesheets="@../../Assets/Chat.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Messages.MessagesListController">
+<AnchorPane fx:id="rootPane" prefHeight="662.0" prefWidth="909.0" stylesheets="@../../Assets/Chat.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Messages.MessagesListController">
     <children>
         <AnchorPane fx:id="svgPane" layoutY="30.0" prefHeight="570.0" prefWidth="611.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
         <AnchorPane fx:id="titleBar" layoutX="-34.0" prefHeight="30.0" prefWidth="645.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-23.0">
@@ -49,15 +49,15 @@
 
 
 
-        <AnchorPane fx:id="chatPane" layoutX="187.0" layoutY="27.0" prefHeight="573.0" prefWidth="427.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <AnchorPane fx:id="chatPane" layoutX="187.0" layoutY="27.0" prefHeight="632.0" prefWidth="611.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
             <children>
-                <TextArea fx:id="txtMsg" accessibleRole="PARENT" layoutX="29.0" layoutY="556.0" prefHeight="30.0" prefWidth="337.0" promptText="Ecrire votre message" wrapText="true" />
-                <ScrollPane fx:id="scrollPane" accessibleRole="PARENT" hbarPolicy="NEVER" layoutX="14.0" layoutY="14.0" prefHeight="453.0" prefWidth="399.0" vvalue="1.0">
+                <TextArea fx:id="txtMsg" accessibleRole="PARENT" layoutX="60.0" layoutY="556.0" prefHeight="30.0" prefWidth="399.0" promptText="Ecrire votre message" wrapText="true" />
+                <ScrollPane fx:id="scrollPane" accessibleRole="PARENT" hbarPolicy="NEVER" layoutX="14.0" layoutY="14.0" prefHeight="506.0" prefWidth="583.0" vvalue="1.0">
                     <content>
-                        <VBox fx:id="chatBox" alignment="TOP_RIGHT" prefHeight="451.0" prefWidth="398.0" />
+                        <VBox fx:id="chatBox" alignment="TOP_RIGHT" prefHeight="451.0" prefWidth="581.0" />
                     </content>
                 </ScrollPane>
-                <Button fx:id="btnSend" accessibleRole="PARENT" layoutX="379.0" layoutY="556.0" mnemonicParsing="false" onAction="#sendAction" prefHeight="30.0" prefWidth="34.0" />
+                <Button fx:id="btnSend" accessibleRole="PARENT" layoutX="459.0" layoutY="556.0" mnemonicParsing="false" onAction="#sendAction" prefHeight="30.0" prefWidth="34.0" />
                 <TextFlow fx:id="emojiList" layoutX="91.0" layoutY="397.0" prefHeight="91.0" prefWidth="260.0" visible="false">
 
                 </TextFlow>

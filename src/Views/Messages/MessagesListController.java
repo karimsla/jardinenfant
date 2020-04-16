@@ -203,7 +203,7 @@ public class MessagesListController implements Initializable {
             text.getStyleClass().add("message");
             TextFlow tempFlow = new TextFlow();
             if (!authenticated.getUsername().equals(m.getSender().getUsername())) {
-                Text txtName = new Text(m.getSender().getUsername() + "\n");
+                Text txtName = new Text(m.getParent().getNom() +" "+m.getParent().getPrenom()+ "\n");
                 txtName.getStyleClass().add("txtName");
                 tempFlow.getChildren().add(txtName);
             }
