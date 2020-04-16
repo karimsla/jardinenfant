@@ -26,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import static jardin.enfant.JardinEnfant.authenticated;
 
 
 public class ListeReclamationController implements Initializable {
@@ -99,6 +100,7 @@ public class ListeReclamationController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		 try {
+			 System.out.println(authenticated.getUsername());
 			initTable();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -1,5 +1,6 @@
 package IServices;
 
+import Entities.User;
 import Utils.ConnexionBD;
 
 
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Scanner;
 import java.lang.*;
 import org.json.JSONException;
@@ -96,5 +98,72 @@ public class ServiceUser implements IserviceUser {
         return "Error";
 
 
+    }
+
+    @Override
+    public int jardinid(int respid) {
+
+        con = ConnexionBD.getInstance().getCnx();
+        String req = "Select jardin_id from responsable where id=" + respid;
+        int id=0;
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            rs.next();
+
+            id=rs.getInt(1);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return id;
+    }
+
+    @Override
+    public User findById(int id) {
+        con = ConnexionBD.getInstance().getCnx();
+        User us=new User();
+        String req = "Select * from fos_user where id='" + id+"'";
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            rs.next();
+
+            us.setId(rs.getInt("id"));
+            us.setEmail(rs.getString("email"));
+            us.setUsername(rs.getString("username"));
+            us.setRole(rs.getString("roles"));
+            us.setType(rs.getString("discr"));
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return us;
+    }
+
+    @Override
+    public int create(User type) {
+        return 0;
+    }
+
+    @Override
+    public int update(User type) {
+        return 0;
+    }
+
+    @Override
+    public int delet(User type) {
+        return 0;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return null;
     }
 }
