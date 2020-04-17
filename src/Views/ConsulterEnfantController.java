@@ -43,6 +43,7 @@ import java.net.URL;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
@@ -284,8 +285,73 @@ public class ConsulterEnfantController implements Initializable {
        
 	}
 
+    
+
     @FXML
-    private void rechercher(ActionEvent event) {
+    private void supprimer(ActionEvent event) {
+        
+        EnfantService ens= new EnfantService();
+        try{
+        int mos=Integer.parseInt(id);
+        as= ens.supprimer(mos);}
+       catch (Exception e){}
+       if (as>0){
+          Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("suppression faite !");
+          ale.showAndWait();
+          data.clear();
+          
+          try{
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND ab.etat LIKE '%"+names+"%'" ;
+          
+            Statement statement = con.createStatement();
+          
+            ResultSet rs =  statement.executeQuery(res);
+            while(rs.next()){
+                 AbonEnf p = new AbonEnf();
+                 p.setNom(rs.getString("nom"));
+                 p.setPrenom(rs.getString("prenom"));
+                  p.setDatenaiss(rs.getDate("datenaiss"));
+                  p.setEtat(rs.getString("etat"));
+                  p.setType(rs.getString("type"));
+                  p.setDate(rs.getDate("date"));
+                  p.setId(rs.getInt("id"));
+                  p.setNumtel(rs.getString("numtel"));
+                  
+                 
+               
+                
+                data.add(p);
+            }
+        } catch (SQLException ex) {
+           
+         }
+        
+        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
+        tel.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("numtel"));
+       
+        afficher.setItems(data);
+       }
+       else{
+           Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Selectionnez une personne !");
+          ale.showAndWait();
+       }
+       
+      }
+
+    @FXML
+    private void rechercher(KeyEvent event) {
+        
+        
         data.clear();
          try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
@@ -315,7 +381,7 @@ public class ConsulterEnfantController implements Initializable {
          }
          recherc.clear();
          
-          if(txt_rech.getText().equals("")){
+          if(txt_rech.getText().equals(null)){
                 Alert ale= new Alert(Alert.AlertType.ERROR);
           ale.setTitle("INFORMATION");
           ale.setHeaderText("veuillez écrire quelque chose !");
@@ -384,68 +450,13 @@ public class ConsulterEnfantController implements Initializable {
                 }
         
                 }
+    
     }
 
-    @FXML
-    private void supprimer(ActionEvent event) {
-        
-        EnfantService ens= new EnfantService();
-        try{
-        int mos=Integer.parseInt(id);
-        as= ens.supprimer(mos);}
-       catch (Exception e){}
-       if (as>0){
-          Alert ale= new Alert(Alert.AlertType.INFORMATION);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("suppression faite !");
-          ale.showAndWait();
-          data.clear();
-          
-          try{
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND ab.etat LIKE '%"+names+"%'" ;
-          
-            Statement statement = con.createStatement();
-          
-            ResultSet rs =  statement.executeQuery(res);
-            while(rs.next()){
-                 AbonEnf p = new AbonEnf();
-                 p.setNom(rs.getString("nom"));
-                 p.setPrenom(rs.getString("prenom"));
-                  p.setDatenaiss(rs.getDate("datenaiss"));
-                  p.setEtat(rs.getString("etat"));
-                  p.setType(rs.getString("type"));
-                  p.setDate(rs.getDate("date"));
-                  p.setId(rs.getInt("id"));
-                  p.setNumtel(rs.getString("numtel"));
-                  
-                 
-               
-                
-                data.add(p);
-            }
-        } catch (SQLException ex) {
-           
-         }
-        
-        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
-        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
-        tel.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("numtel"));
-       
-        afficher.setItems(data);
-       }
-       else{
-           Alert ale= new Alert(Alert.AlertType.ERROR);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("Selectionnez une personne !");
-          ale.showAndWait();
-       }
-       
-      }
+    
+
+    
+   
     
         
         

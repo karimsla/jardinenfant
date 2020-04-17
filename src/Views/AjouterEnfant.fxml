@@ -23,9 +23,8 @@
       <Button fx:id="ajou" layoutX="245.0" layoutY="391.0" mnemonicParsing="false" onAction="#modif" prefHeight="26.0" prefWidth="79.0" text="Ajouter" />
       <Button fx:id="supp" layoutX="387.0" layoutY="391.0" mnemonicParsing="false" onAction="#supprime" prefHeight="26.0" prefWidth="94.0" text="Supprimer" />
       <Text fill="WHITE" layoutX="50.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recherche:" />
-      <TextField fx:id="txt_re" layoutX="136.0" layoutY="26.0" />
+      <TextField fx:id="txt_re" layoutX="136.0" layoutY="26.0" onKeyPressed="#rechercher" />
       <ComboBox fx:id="cmb_rec" layoutX="359.0" layoutY="26.0" prefWidth="150.0" promptText="Choix" />
-      <Button fx:id="btn_rc" layoutX="540.0" layoutY="26.0" mnemonicParsing="false" onAction="#rechercher" text="Rechercher" />
       <Button fx:id="rtn" layoutX="561.0" layoutY="391.0" mnemonicParsing="false" onAction="#retour" prefHeight="26.0" prefWidth="75.0" text="Retour" />
       <Text fill="WHITE" layoutX="654.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre demandes" />
       <TextField fx:id="compt" alignment="CENTER" disable="true" layoutX="687.0" layoutY="25.0" opacity="0.69" prefHeight="26.0" prefWidth="48.0" />

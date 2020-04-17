@@ -31,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -154,84 +155,7 @@ public class AjouterEnfantController implements Initializable {
     }
     
     
-     @FXML
    
-    private void rechercher(ActionEvent event) {
-        recherc.clear();
-       
-         if(txt_re.getText().equals("")){
-                Alert ale= new Alert(Alert.AlertType.ERROR);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("veuillez écrire quelque chose !");
-          ale.showAndWait();
-            }
-            else{
-                if (cmb_rec.getSelectionModel().getSelectedItem()==null){
-                    Alert ale= new Alert(Alert.AlertType.ERROR);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("veuillez choisir un mode !");
-          ale.showAndWait();
-          
-                    
-                }
-                else{
-         
-           for (int i=0;i<data.size();i++){
-               if (cmb_rec.getSelectionModel().getSelectedItem().equals("nom")){
-            if (data.get(i).getNom().contains(txt_re.getText())){
-                
-                recherc.add(data.get(i));
-               
-                
-            }}
-                if (cmb_rec.getSelectionModel().getSelectedItem().equals("prenom")){
-            if (data.get(i).getPrenom().contains(txt_re.getText())){
-                recherc.add(data.get(i));
-               
-                
-            }}
-                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("etat")){
-            if (data.get(i).getEtat().contains(txt_re.getText())){
-                recherc.add(data.get(i));
-               
-                
-            }}
-                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("type")){
-            if (data.get(i).getType().contains(txt_re.getText())){
-                recherc.add(data.get(i));
-               
-                
-            }}
-               
-        }
-         
-        
-        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
-        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
-       
-        afficher.setItems(recherc);
-        
-        
-        
-        
-        
-        
-        
-        
-                }}
-        
-        
-        
-        
-        
-        
-        
-        
-    }
     
     
     
@@ -374,6 +298,79 @@ public class AjouterEnfantController implements Initializable {
             root.getChildren().setAll(pane);
         }
     }
+
+    @FXML
+    private void rechercher(KeyEvent event) {
+         recherc.clear();
+       
+         if(txt_re.getText().equals(null)){
+                Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("veuillez écrire quelque chose !");
+          ale.showAndWait();
+            }
+            else{
+                if (cmb_rec.getSelectionModel().getSelectedItem()==null){
+                    Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("veuillez choisir un mode !");
+          ale.showAndWait();
+          
+                    
+                }
+                else{
+         
+           for (int i=0;i<data.size();i++){
+               if (cmb_rec.getSelectionModel().getSelectedItem().equals("nom")){
+            if (data.get(i).getNom().contains(txt_re.getText())){
+                
+                recherc.add(data.get(i));
+               
+                
+            }}
+                if (cmb_rec.getSelectionModel().getSelectedItem().equals("prenom")){
+            if (data.get(i).getPrenom().contains(txt_re.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("etat")){
+            if (data.get(i).getEtat().contains(txt_re.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("type")){
+            if (data.get(i).getType().contains(txt_re.getText())){
+                recherc.add(data.get(i));
+               
+                
+            }}
+               
+        }
+         
+        
+        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
+       
+        afficher.setItems(recherc);
+        
+        
+        
+        
+        
+        
+        
+        
+                }}
+        
+    }
+
+   
     
 
    
