@@ -46,6 +46,8 @@ public class MessagesListController implements Initializable {
         private AnchorPane titleBar;
 
         @FXML
+        private TextArea idparent;
+        @FXML
         private AnchorPane detailPane;
 
         @FXML
@@ -124,7 +126,17 @@ public class MessagesListController implements Initializable {
 
 
 
-    public void sendAction(){
+    public void sendAction() throws SQLException {
+
+        String msg=txtMsg.getText();
+
+        String id=idparent.getText();
+
+        sm.addmess(msg,Integer.parseInt(id),su.jardinid(authenticated.getId()),authenticated.getId());
+
+        txtMsg.clear();
+        update(Integer.parseInt(id));
+
 
     }
 
@@ -193,6 +205,7 @@ public class MessagesListController implements Initializable {
 
     public boolean update(int id) throws SQLException {
         List<Messages> mmesslist=sm.getmessages(id);
+
         chatBox.getChildren().clear();
         for(Messages m :mmesslist) {
 
@@ -248,7 +261,7 @@ public class MessagesListController implements Initializable {
             Platform.runLater(() -> chatBox.getChildren().addAll(hbox));
         }
 
-
+            idparent.setText(String.valueOf(id));
 
 
         return true;
