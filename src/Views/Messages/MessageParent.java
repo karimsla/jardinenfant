@@ -1,5 +1,7 @@
+
 package Views.Messages;
 
+import Entities.Jardin;
 import Entities.Messages;
 import Entities.User;
 import IServices.IserviceMessage;
@@ -33,53 +35,54 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static jardin.enfant.JardinEnfant.authenticated;
+import static java.lang.Integer.parseInt;
 
-public class MessagesListController implements Initializable {
+public class MessageParent implements Initializable {
 
 
-        private double xOffset;
-        private double yOffset;
+    private double xOffset;
+    private double yOffset;
 
-        @FXML
-        private AnchorPane rootPane;
-        @FXML
-        private AnchorPane titleBar;
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private AnchorPane titleBar;
 
-        @FXML
-        private TextArea idparent;
-        @FXML
-        private AnchorPane detailPane;
+    @FXML
+    private TextArea idjardin;
+    @FXML
+    private AnchorPane detailPane;
 
-        @FXML
-        private AnchorPane chatPane;
+    @FXML
+    private AnchorPane chatPane;
 
-        @FXML
-        private TextArea txtMsg;
+    @FXML
+    private TextArea txtMsg;
 
-        @FXML
-        private VBox chatBox;
+    @FXML
+    private VBox chatBox;
 
-        @FXML
-        private Button btnSend;
+    @FXML
+    private Button btnSend;
 
-        @FXML
-        private ScrollPane scrollPane;
+    @FXML
+    private ScrollPane scrollPane;
 
-        @FXML
-        private TextFlow emojiList;
+    @FXML
+    private TextFlow emojiList;
 
-        @FXML
-        private Button btnEmoji;
-        @FXML
-        private JFXDrawer drawerPane;
+    @FXML
+    private Button btnEmoji;
+    @FXML
+    private JFXDrawer drawerPane;
 
-        @FXML
-        private ScrollPane clientListScroll;
+    @FXML
+    private ScrollPane clientListScroll;
 
-        @FXML
-        private VBox clientListBox;
-        @FXML
-        private Button btnClose;
+    @FXML
+    private VBox clientListBox;
+    @FXML
+    private Button btnClose;
 
 
     IserviceMessage sm=new ServiceMessage();
@@ -89,16 +92,7 @@ public class MessagesListController implements Initializable {
 
 
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
-      /*  try {
-            chatObserver=new ChatObserverImpl(this);
-            controller= ServerConnector.getServerConnector().getController();
-            controller.addChatObserver(chatObserver);
-//            controller.updateClientList();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        }*/
+
 
         System.out.println();
         titleBar.setOnMousePressed(event -> {
@@ -112,11 +106,11 @@ public class MessagesListController implements Initializable {
         });
 
         try {
-            List<Messages>allmess=sm.getallmess(su.jardinid(authenticated.getId()));
+            List<Jardin> alljar=sm.minemess(authenticated.getId());
          /*   for(Messages m: allmess){
                 update(m.getSender().getUsername(),m.getMsg());
             }*/
-            updateUI(allmess);
+            updateUI(alljar);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,15 +122,20 @@ public class MessagesListController implements Initializable {
 
     public void sendAction() throws SQLException {
 
+
         String msg=txtMsg.getText();
+        if(!msg.isBlank()||!msg.isEmpty()){
+            int id=authenticated.getId();
 
-        String id=idparent.getText();
-        int idjardin=su.jardinid(authenticated.getId());
+            String idjj=idjardin.getText();
 
-        sm.addmess(msg,Integer.parseInt(id),idjardin,authenticated.getId());
+            int idjar=Integer.parseInt(idjj);
+            sm.addmess(msg,id,idjar,authenticated.getId());
 
-        txtMsg.clear();
-        update(Integer.parseInt(id),idjardin);
+            txtMsg.clear();
+            update(idjar);
+        }
+
 
 
     }
@@ -146,10 +145,12 @@ public class MessagesListController implements Initializable {
     }
 
 
-    public boolean updateUI(List<Messages> messageList)  {
+    public boolean updateUI(List<Jardin> jardinList)  {
+        //jardin list as params
+
         Platform.runLater(() -> clientListBox.getChildren().clear());
-        for(Messages mess : messageList){
-           // if(mess.get.equals(authenticated.getUsername())) continue;
+        for(Jardin jar : jardinList){
+            // if(mess.get.equals(authenticated.getUsername())) continue;
 //            containerPane.getStyleClass().add("online-user-container");
             HBox container=new HBox() ;
             container.setAlignment(Pos.CENTER_LEFT);
@@ -171,13 +172,13 @@ public class MessagesListController implements Initializable {
 
             VBox userDetailContainer=new VBox();
             userDetailContainer.setPrefWidth(clientListBox.getPrefWidth()/1.7);
-            Label lblUsername=new Label(mess.getParent().getNom()+" "+mess.getParent().getPrenom());
+            Label lblUsername=new Label(jar.getName());
             lblUsername.getStyleClass().add("online-label");
             userDetailContainer.getChildren().add(lblUsername);
             User us=null;
             try {
-              //  us=controller.get(client);
-                Label lblName=new Label(mess.getMsg());
+                //  us=controller.get(client);
+                Label lblName=new Label(jar.getAdresse());
                 lblName.getStyleClass().add("online-label-details");
                 userDetailContainer.getChildren().add(lblName);
 
@@ -191,7 +192,7 @@ public class MessagesListController implements Initializable {
             settings.setTextAlignment(TextAlignment.CENTER);
             settings.setOnAction(e->{
                 try {
-                    update(mess.getParent().getId(),mess.getJardin().getId());
+                    update(jar.getId());
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -204,8 +205,8 @@ public class MessagesListController implements Initializable {
         return true;
     }
 
-    public boolean update(int id,int idjardin) throws SQLException {
-        List<Messages> mmesslist=sm.getmessages(id,idjardin);
+    public boolean update(int idjar) throws SQLException {
+        List<Messages> mmesslist=sm.getmessages(authenticated.getId(),idjar);
 
         chatBox.getChildren().clear();
         for(Messages m :mmesslist) {
@@ -217,7 +218,7 @@ public class MessagesListController implements Initializable {
             text.getStyleClass().add("message");
             TextFlow tempFlow = new TextFlow();
             if (!authenticated.getUsername().equals(m.getSender().getUsername())) {
-                Text txtName = new Text(m.getParent().getNom() +" "+m.getParent().getPrenom()+ "\n");
+                Text txtName = new Text(m.getJardin().getName()+ "\n");
                 txtName.getStyleClass().add("txtName");
                 tempFlow.getChildren().add(txtName);
             }
@@ -262,7 +263,7 @@ public class MessagesListController implements Initializable {
             Platform.runLater(() -> chatBox.getChildren().addAll(hbox));
         }
 
-            idparent.setText(String.valueOf(id));
+        idjardin.setText(String.valueOf(idjar));
 
 
         return true;

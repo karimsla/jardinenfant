@@ -65,7 +65,7 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml")));
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Messages/MessageParent.fxml")));
                     stage.setScene(scene);
                     stage.show();
 

@@ -23,6 +23,9 @@ public class ServiceMessage implements IserviceMessage {
 
     }
 
+
+
+
     public List<Messages> getallmess(int id) throws SQLException {
         CrudJardinEnfant sj=new CrudJardinEnfantImpl();
         IserviceParent sp=new ServiceParent();
@@ -65,11 +68,11 @@ public class ServiceMessage implements IserviceMessage {
     }
 
 
-    public List<Messages> getmessages(int id) throws SQLException {
+    public List<Messages> getmessages(int id,int idjardin) throws SQLException {
         CrudJardinEnfant sj=new CrudJardinEnfantImpl();
         IserviceParent sp=new ServiceParent();
         IserviceUser su=new ServiceUser();
-        String req="SELECT m.* from parent as p , messages as m where m.parent_id=p.id AND m.parent_id="+id;
+        String req="SELECT m.* from  messages as m where m.parent_id="+id+" AND m.jardin_id="+idjardin;
         con = ConnexionBD.getInstance().getCnx();
         List<Messages> allmes=new ArrayList<Messages>() ;
 
@@ -131,6 +134,43 @@ public class ServiceMessage implements IserviceMessage {
         }
 
 
+    }
+
+    @Override
+    public List<Jardin> minemess(int id) throws SQLException {
+        String req="SELECT j.* from jardin as j LEFT JOIN abonnement as a on a.jardin_id=j.id LEFT JOIN enfant as e on e.id=a.enfant_id where e.parent_id="+id;
+        CrudJardinEnfant sj=new CrudJardinEnfantImpl();
+        IserviceParent sp=new ServiceParent();
+        IserviceUser su=new ServiceUser();
+
+        con = ConnexionBD.getInstance().getCnx();
+        List<Jardin> alljar=new ArrayList<Jardin>() ;
+
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            while(rs.next()){
+
+                Jardin m=new Jardin(rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float)rs.getDouble("tarif"),
+                        rs.getString("Adresse"),
+                        rs.getString("Etat") );
+
+                alljar.add(m);
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return alljar;
     }
 
 
