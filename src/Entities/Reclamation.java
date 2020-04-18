@@ -163,8 +163,8 @@ public class Reclamation {
 		this.supprimer=supprimer;
 	}
 	public Reclamation(int id, String description, Date date,
-					   String titre, String nom, String numtel, String mail,
-					   String etat
+					   String titre, String nom, String numtel, String mail
+
 					 ){
 		super();
 		this.id = id;
@@ -174,7 +174,7 @@ public class Reclamation {
 		this.nom = nom;
 		this.numtel = numtel;
 		this.mail = mail;
-		this.etat = etat;
+
 
 	}
 

@@ -66,6 +66,7 @@ public class FixeController implements Initializable  {
 
        Reclamation rec=r.findbyId(Integer.parseInt(lbltxt.getText()));
        String dest=rec.getMail();
+
         final String username = "trizouni1@gmail.com";
         final String password = "tmdpbiphihxcgyqy";
 
