@@ -36,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -104,8 +105,8 @@ listview.setItems(data);
      String ch=search.getText();
       cs=new ChauffeurService();
       data.clear();
-  List<Chauffeur> ls=cs.afficherAll().stream().filter(p->p.getNom().contains(ch)).collect(Collectors.toList());
-                data.addAll(ls);
+  List<Chauffeur> ls=cs.afficherAll().stream().filter(p->p.getNom().toUpperCase().contains(ch.toUpperCase())).collect(Collectors.toList());
+  data.addAll(ls);
 listview.setItems(data);
        
  }
@@ -126,6 +127,7 @@ listview.setItems(data);
         tv.setItems(trajets);
      }
     public void Listeners(){
+      TrajetService ts=new TrajetService();
         listview.setOnMouseClicked((event) -> {
             info.setVisible(true);
             msg.setVisible(false);
@@ -140,6 +142,19 @@ listview.setItems(data);
         getTable(c);
         
         });
+        tv.setOnMouseClicked(((event) -> {
+      int dialogResult;
+            if (event.getButton()==MouseButton.SECONDARY)
+            { dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment supprimer ce chauffeur?","Attention",JOptionPane.YES_NO_OPTION);
+             if(dialogResult == JOptionPane.YES_OPTION){ 
+            Trajet c= tv.getSelectionModel().getSelectedItem();
+       ts.supprimerTrajet(c.getId());
+        Chauffeur ch=listview.getSelectionModel().getSelectedItem();
+    getTable(ch);    
+       
+            }
+            }
+        }));
  
     }
     

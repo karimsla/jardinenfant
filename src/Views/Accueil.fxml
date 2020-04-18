@@ -6,14 +6,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #393d72;" stylesheets="@../../../ProjetJava/ProjetJava/src/Metier/Style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AccueilController">
    <children>
       <Pane layoutX="181.0" layoutY="43.0" prefHeight="533.0" prefWidth="4.0" style="-fx-background-color: #c71ec3;" />
-      <Pane fx:id="accueil" layoutX="9.0" layoutY="136.0" prefHeight="75.0" prefWidth="163.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+      <Pane fx:id="accueil" layoutX="-10.0" layoutY="160.0" prefHeight="36.0" prefWidth="188.0" style="-fx-background-color: black;" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
          <children>
-            <Label layoutX="58.0" layoutY="29.0" prefHeight="18.0" prefWidth="54.0" styleClass="sideBtn" stylesheets="@../Assets/style.css" text="Accueil" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="67.0" layoutY="9.0" prefHeight="18.0" prefWidth="54.0" styleClass="sideBtn" stylesheets="@../Assets/style.css" text="Accueil" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Sans Demibold" size="14.0" />
                </font>
@@ -21,13 +26,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Pane>
-      <Pane fx:id="chauffeurs" layoutX="7.0" layoutY="211.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         </children></Pane>
+      <Pane fx:id="chauffeurs" layoutX="-10.0" layoutY="308.0" prefHeight="36.0" prefWidth="188.0" style="-fx-background-color: black;" styleClass="sideBtn" stylesheets="@../Assets/style.css">
          <children>
-            <Label layoutX="45.0" layoutY="29.0" text="Chauffeurs" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="54.0" layoutY="9.0" text="Chauffeurs" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Sans Demibold" size="14.0" />
                </font>
@@ -52,21 +54,6 @@
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
       </ImageView>
-      <Pane fx:id="activites" layoutX="6.0" layoutY="286.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
-         <children>
-            <Label layoutX="51.0" layoutY="29.0" prefHeight="18.0" prefWidth="67.0" text="Activites" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Lucida Sans Demibold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Pane>
       <Pane fx:id="quitter" layoutX="35.0" layoutY="536.0" prefHeight="50.0" prefWidth="112.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
          <children>
             <Label alignment="CENTER" layoutX="23.0" layoutY="16.0" prefHeight="18.0" prefWidth="67.0" text="Quitter" textAlignment="CENTER" textFill="WHITE">
@@ -84,10 +71,13 @@
       </Pane>
     
     
-      <AnchorPane fx:id="body" layoutX="199.0" layoutY="43.0" prefHeight="533.0" prefWidth="795.0" />
-      <Pane fx:id="evenements" layoutX="7.0" layoutY="436.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+      <AnchorPane fx:id="body" layoutX="199.0" layoutY="43.0" prefHeight="533.0" prefWidth="795.0">
          <children>
-            <Label layoutX="37.0" layoutY="29.0" prefHeight="18.0" prefWidth="95.0" text="Evenements" textAlignment="CENTER" textFill="WHITE">
+            <Pane layoutX="329.0" layoutY="-223.0" prefHeight="461.0" prefWidth="253.0" rotate="-37.2" style="-fx-background-radius: 70; -fx-background-color: #c71ec3;" />
+         </children></AnchorPane>
+      <Pane fx:id="evenements" layoutX="-10.0" layoutY="234.0" prefHeight="36.0" prefWidth="188.0" style="-fx-background-color: black;" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="47.0" layoutY="9.0" prefHeight="18.0" prefWidth="95.0" text="Evenements" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Sans Demibold" size="14.0" />
                </font>
@@ -100,9 +90,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane fx:id="abonnements" layoutX="7.0" layoutY="361.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+      <Pane fx:id="abonnements" layoutX="-10.0" layoutY="271.0" prefHeight="36.0" prefWidth="188.0" style="-fx-background-color: black;" styleClass="sideBtn" stylesheets="@../Assets/style.css">
          <children>
-            <Label layoutX="33.0" layoutY="29.0" prefHeight="18.0" prefWidth="103.0" text="Abonnements" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="43.0" layoutY="9.0" prefHeight="18.0" prefWidth="103.0" text="Abonnements" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Sans Demibold" size="14.0" />
                </font>
@@ -117,9 +107,9 @@
       </Pane>
       
       
-      <Pane fx:id="reclamations" layoutX="7.0" layoutY="451.0" prefHeight="75.0" prefWidth="169.0" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+      <Pane fx:id="reclamations" layoutX="-8.0" layoutY="373.0" prefHeight="36.0" prefWidth="186.0" style="-fx-background-color: black;" styleClass="sideBtn" stylesheets="@../Assets/style.css">
          <children>
-            <Label layoutX="33.0" layoutY="29.0" prefHeight="18.0" prefWidth="103.0" text="Reclamations" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="42.0" layoutY="9.0" prefHeight="18.0" prefWidth="103.0" text="Reclamations" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Sans Demibold" size="14.0" />
                </font>
@@ -132,6 +122,31 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
+      <Pane fx:id="activites" layoutX="-10.0" layoutY="197.0" prefHeight="36.0" prefWidth="188.0" style="-fx-background-color: black;" styleClass="sideBtn" stylesheets="@../Assets/style.css">
+         <children>
+            <Label layoutX="61.0" layoutY="9.0" prefHeight="18.0" prefWidth="67.0" text="Activites" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Label layoutX="11.0" layoutY="352.0" text="Messagerie">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
   
   
   

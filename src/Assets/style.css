@@ -4,6 +4,13 @@
 }
 
 .sideBtn:hover {
-    
-    -fx-background-color:    #c71ec3;
+        -fx-effect: dropshadow(three-pass-box, rgba(199, 30, 195,0.8), 10, 0, 0, 0);
+
+    -fx-background-color:   white;
+-fx-background-radius: 30;
+}
+
+.box{
+-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+
 }

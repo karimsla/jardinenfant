@@ -46,7 +46,7 @@ public void events(Stage stage,Parent scene)
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-          Parent root = FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml"));
+          Parent root = FXMLLoader.load(getClass().getResource("/Views/Responsable.fxml"));
         events(primaryStage,root);
        
          Scene scene = new Scene(root);
