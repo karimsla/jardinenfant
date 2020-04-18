@@ -42,8 +42,9 @@ public class ServiceReclamation implements IserviceReclamation {
 		        		   rs.getString("titre"),
 		        		   rs.getString("nom"),
 		        		   rs.getString("numtel"),
-		        		   rs.getString("mail"),
-		        		   rs.getString("etat"));
+		        		   rs.getString("mail"));
+		        		 //  rs.getString("etat"));
+
 		           
 		           
 		           reclams.add(c);
