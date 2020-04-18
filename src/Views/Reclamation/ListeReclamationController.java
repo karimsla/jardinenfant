@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Entities.Evenement;
+import Entities.Parents;
 import Entities.Reclamation;
 import IServices.EvenementService;
 import IServices.IserviceReclamation;
 import IServices.ServiceReclamation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +58,18 @@ public class ListeReclamationController implements Initializable {
 
 	    @FXML
 	    private TableColumn<Reclamation, Button> col_supp;
-	
+
+		@FXML
+		private TextField searchfield;
+
+		@FXML
+		private Button allbtn;
+		@FXML
+		private Button searchbtn;
+		@FXML
+		private Button newbtn;
+
+
 	    public ObservableList<Reclamation> data = FXCollections.observableArrayList();
 	
 
@@ -114,10 +127,28 @@ public class ListeReclamationController implements Initializable {
 		
 	        IserviceReclamation sr=new ServiceReclamation();
 	        List<Reclamation> lr=new ArrayList<Reclamation>();
-	      lr=sr.findAll();
+	      lr=sr.findAllNew();
 
 	      data.addAll(lr);
-	          
+
+	        allbtn.setOnAction(e->{
+				  try {
+					  findall();
+				  } catch (SQLException ex) {
+					  ex.printStackTrace();
+				  }
+			  });
+			searchbtn.setOnAction(e->{
+				HandleSearchbtn();
+			});
+			newbtn.setOnAction(e->{
+				try {
+					findNew();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			});
+
 	      	col_nom.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("nom"));
 	      	col_mail.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("mail"));
 	      	col_numtel.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("numtel"));
@@ -128,6 +159,7 @@ public class ListeReclamationController implements Initializable {
 	        //col_supp.setCellValueFactory(new PropertyValueFactory<>("supprimer"));
 	     	fixeCol();
 	     	deleteCol();
+
 
 
 	        TV_le.setItems(data);
@@ -198,4 +230,40 @@ public class ListeReclamationController implements Initializable {
 
 	}
 
+	private void HandleSearchbtn(){
+		FilteredList<Reclamation> ls = new FilteredList<>(data, b->true);
+		String search = searchfield.getText();
+		ls.setPredicate(x->x.getNom().compareToIgnoreCase(search)==0||x.getNom().contains(search)||
+				x.getMail().compareToIgnoreCase(search)==0||x.getMail().contains(search)||
+				x.getDescription().compareToIgnoreCase(search)==0||x.getDescription().contains(search)||
+				x.getTitre().compareToIgnoreCase(search)==0||x.getTitre().contains(search)||
+				x.getNumtel().compareToIgnoreCase(search)==0||x.getNumtel().contains(search) );
+		//  data.clear();
+		// data.addAll(ls);
+		TV_le.setItems(ls);
+
+	}
+
+	private void findall() throws SQLException {
+		IserviceReclamation sr=new ServiceReclamation();
+		List<Reclamation> lr=new ArrayList<Reclamation>();
+		lr=sr.findAll();
+		data.clear();
+		data.addAll(lr);
+		TV_le.setItems(data);
+
+
+	}
+
+
+	private void findNew() throws SQLException {
+		IserviceReclamation sr=new ServiceReclamation();
+		List<Reclamation> lr=new ArrayList<Reclamation>();
+		lr=sr.findAllNew();
+		data.clear();
+		data.addAll(lr);
+		TV_le.setItems(data);
+
+
+	}
 }

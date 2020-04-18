@@ -17,5 +17,7 @@ public interface IserviceReclamation extends CrudGeneric<Reclamation> {
 	
 	public void regelrReclamation(Reclamation reclam);
 
+	public List<Reclamation> findAllNew();
+
 
 }

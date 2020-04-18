@@ -55,7 +55,20 @@ public class ServiceReclamation implements IserviceReclamation {
 		       }
 	    }
 	    
-	 
+
+
+
+	    public List<Reclamation> findAllNew(){
+			if(connexion==null) {
+				connexion = ConnexionBD.getInstance().getCnx();
+			}
+
+
+			return reclams.stream().filter(x->x.getEtat().compareTo("en attente")==0).sorted(Comparator.
+					comparing(Reclamation :: getDate, Comparator.nullsLast(Comparator.reverseOrder())))
+					.collect(Collectors.toList());
+
+		}
 	   
 	    
 	@Override
@@ -168,11 +181,11 @@ public class ServiceReclamation implements IserviceReclamation {
 		 connexion = ConnexionBD.getInstance().getCnx();
 		}
 	 
-            String res="Update Reclamation set" +"etat=? WHERE id = ?;";
+            String res="Update Reclamation set etat='réglé' WHERE id = ?;";
             PreparedStatement pre = connexion.prepareStatement(res);
             
-            pre.setString(1, reclam.getEtat());
-            pre.setInt(2, reclam.getId());
+
+            pre.setInt(1, reclam.getId());
 
             pre.executeUpdate();
             
