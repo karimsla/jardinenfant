@@ -41,7 +41,25 @@ public class TrajetService {
       System.out.println(ex); }
    }
    
-   
+   public List<Trajet> afficherTrajet(){
+          List<Trajet> lp=new ArrayList<Trajet>();
+           ChauffeurService cs=new ChauffeurService();
+           String req="Select * from trajet";
+       try {
+           Statement statement=cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);
+           while (rs.next())
+           {
+           Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
+          c.setChauffeur(cs.find(rs.getInt(2)));
+           lp.add(c);
+           }
+       } catch (SQLException ex) 
+       {
+           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return lp;
+   }
    public List<Trajet> afficherTrajetChauffeur(int id){
            List<Trajet> lp=new ArrayList<Trajet>();
            ChauffeurService cs=new ChauffeurService();
