@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="460.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Enfant.ParentEnfantController">
+   <children>
+      <TableView fx:id="afficher" layoutX="126.0" layoutY="111.0" prefHeight="279.0" prefWidth="568.0">
+         <columns>
+            <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="prenom" prefWidth="89.60003662109375" text="Prenom" />
+            <TableColumn fx:id="date" prefWidth="117.5999755859375" text="Date Naissance" />
+            <TableColumn fx:id="etat" prefWidth="92.800048828125" text="Etat" />
+            <TableColumn fx:id="type" prefWidth="93.60000610351562" text="Type" />
+            <TableColumn fx:id="dateex" prefWidth="92.0" text="Date Expiration" />
+         </columns>
+      </TableView>
+      <Button fx:id="aff" layoutX="24.0" layoutY="176.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="26.0" prefWidth="92.0" text="Afficher" />
+      <Button fx:id="ajou" layoutX="24.0" layoutY="228.0" mnemonicParsing="false" onAction="#redirect" prefHeight="26.0" prefWidth="92.0" text="Ajouter" />
+      <ComboBox fx:id="list_rec" layoutX="340.0" layoutY="44.0" prefWidth="150.0" promptText="Choix" />
+      <TextField fx:id="txt_rech" layoutX="126.0" layoutY="44.0" onKeyTyped="#rechercher" />
+      <Button fx:id="supp" layoutX="24.0" layoutY="403.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="26.0" prefWidth="92.0" text="Supprimer" />
+      <TextField fx:id="count" alignment="CENTER" disable="true" layoutX="701.0" layoutY="44.0" opacity="0.93" prefHeight="26.0" prefWidth="57.0" />
+      <Text fill="WHITE" layoutX="273.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Abonnement:" />
+      <Button fx:id="modifier" layoutX="648.0" layoutY="403.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="105.0" text="Modifier" />
+      <ComboBox fx:id="modi" layoutX="426.0" layoutY="403.0" prefWidth="150.0" promptText="Choix" />
+   </children>
+</AnchorPane>
