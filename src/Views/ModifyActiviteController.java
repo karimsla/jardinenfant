@@ -233,5 +233,5 @@ public class ModifyActiviteController implements Initializable {
         }
 
     }
-
+//Date d=Date.valueOf(dateToConvert);
 }
