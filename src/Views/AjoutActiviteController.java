@@ -31,6 +31,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -85,7 +86,7 @@ public class AjoutActiviteController implements Initializable {
     }
 
     @FXML
-    private void ADD(ActionEvent event) {
+    private void ADD(ActionEvent event) throws IOException {
 
         if (club_box.getSelectionModel().getSelectedIndex() != -1) {
             if (act_text.getText().matches("[a-zA-Z]*")) {
@@ -111,10 +112,9 @@ public class AjoutActiviteController implements Initializable {
                             ActiviteServices AS = new ActiviteServices();
                             int a = AS.ajouter(A);
                             if (a > 0) {
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Ajout est fait");
-                                alert.setHeaderText("Ajout réussi ");
-                                alert.showAndWait();
+                                JOptionPane.showMessageDialog(null, "Ajout est fait");
+                                AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
+                                root.getChildren().setAll(pane);
 
                             } else {
                                 Alert alert = new Alert(Alert.AlertType.ERROR);

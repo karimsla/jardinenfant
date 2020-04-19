@@ -76,16 +76,26 @@ public class ModifierClubController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        LoadData();
+      
+        //LoadData();
 
-        for (int i = 0; i < data.size(); i++) {
+       /* for (int i = 0; i < data.size(); i++) {
             combo.setValue((String) data.get(i));
         }
         combo.setItems(data);
+        */
+        
+         File f;
+        f = new File(image_label.getText());
+        image = new Image(f.toURI().toString());
+
+        imageview.setImage(image);
+        
+        
 
     }
 
-    private void LoadData() {
+   /* private void LoadData() {
 
         try {
 
@@ -103,7 +113,7 @@ public class ModifierClubController implements Initializable {
         }
 
     }
-
+    */
     @FXML
     private void Modifier(ActionEvent event) throws IOException {
         
@@ -156,7 +166,7 @@ public class ModifierClubController implements Initializable {
 
     @FXML
     private void Trouver(ActionEvent event) {
-
+/*
         String AID = combo.getSelectionModel().getSelectedItem();
 
         Entities.Club c = ClubServices.findClub(AID);
@@ -174,6 +184,7 @@ public class ModifierClubController implements Initializable {
         image = new Image(f.toURI().toString());
 
         imageview.setImage(image);
+*/
 
     }
 
@@ -204,4 +215,13 @@ public class ModifierClubController implements Initializable {
         }
     }
 
+    
+    public void GetData(String nom, String Description, String photo){
+        club_text.setText(nom);
+        descr_text.setText(Description);
+        image_label.setText(photo);
+        
+    
+        
+    }
 }

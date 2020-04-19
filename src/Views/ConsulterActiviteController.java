@@ -149,7 +149,7 @@ public class ConsulterActiviteController implements Initializable {
 }
 
     @FXML
-    private void Detail(ActionEvent event) {
+    private void Detail() {
         data.clear();
          String nom = club_box.getSelectionModel().getSelectedItem();
            int id = map.get(nom);  
@@ -236,7 +236,7 @@ public class ConsulterActiviteController implements Initializable {
     }
 
     @FXML
-    private void Search(ActionEvent event) {
+    private void Search() {
          data.clear();
          String nom = search_txt.getText();
            
@@ -265,7 +265,7 @@ public class ConsulterActiviteController implements Initializable {
         tableAct.setItems(data);
         
         
-        search_txt.clear();
+    
          
     }
 

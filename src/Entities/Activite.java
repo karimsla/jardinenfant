@@ -6,6 +6,7 @@
 package Entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -149,6 +150,10 @@ public class Activite {
     @Override
     public String toString() {
         return "Activite{" + "id=" + id + ", typeact=" + typeact + ", detailles=" + detailles + ", photo=" + photo + ", Date=" + Date + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", dateCreation=" + dateCreation + ", club=" + club + ", participation=" + participation + '}';
+    }
+
+    public void setDate(LocalDate date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

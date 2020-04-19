@@ -10,6 +10,8 @@ import Entities.Club;
 import IServices.ClubServices;
 import Utils.ConnexionBD;
 import Views.ConsulterActiviteController;
+import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -31,6 +33,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -89,6 +93,10 @@ public class ConsulterClubController implements Initializable {
     @FXML
     private Button afficher;
 
+    private String nom;
+    private String description;
+    private String url;
+
     /**
      * Initializes the controller class.
      */
@@ -114,6 +122,9 @@ public class ConsulterClubController implements Initializable {
         if (club_liste.getSelectionModel().getSelectedItem() != null) {
             Club selectedOne = club_liste.getSelectionModel().getSelectedItem();
             id = Integer.toString(selectedOne.getId());
+            nom = selectedOne.getName();
+            description = selectedOne.getDescription();
+            url = selectedOne.getPhoto();
 
             mod_club.setText(selectedOne.getName());
             mod_descr.setText(selectedOne.getDescription());
@@ -137,7 +148,7 @@ public class ConsulterClubController implements Initializable {
                 C.setId(rs.getInt("id"));
                 C.setName(rs.getString("Name"));
                 C.setDescription(rs.getString("Description"));
-               // C.setPhoto(rs.getString("photo"));
+                // C.setPhoto(rs.getString("photo"));
 
                 data.add(C);
             }
@@ -147,7 +158,7 @@ public class ConsulterClubController implements Initializable {
 
         nom_Club.setCellValueFactory(new PropertyValueFactory<Club, String>("Name"));
         Description.setCellValueFactory(new PropertyValueFactory<Club, String>("Description"));
-      //  Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
+        //  Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
         club_liste.setItems(data);
     }
 
@@ -161,13 +172,28 @@ public class ConsulterClubController implements Initializable {
 
     @FXML
     private void Modifier(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierClub.fxml"));
+
+        Parent root = (Parent) loader.load();
+
+        ModifierClubController mc = loader.getController();
         
-        
-               
+       
+
+        mc.GetData(nom, description, url);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        /*    
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ModifierClub.fxml"));
             root.getChildren().setAll(pane);
         
-      /*  if (mod_club.getText().matches("[a-zA-Z]*")) {
+      
+        
+        
+        
+        if (mod_club.getText().matches("[a-zA-Z]*")) {
             if (!mod_club.getText().equals("")) {
                 if (!mod_descr.getText().equals("")) {
 
@@ -220,7 +246,7 @@ public class ConsulterClubController implements Initializable {
             root.getChildren().setAll(pane);
         }*/
     }
-     
+
     @FXML
     private void DELETE(ActionEvent event
     ) {
@@ -250,7 +276,7 @@ public class ConsulterClubController implements Initializable {
     }
 
     @FXML
-    private void Search(ActionEvent event) {
+    private void Search() {
 
         data.clear();
         String nom = nom_text.getText();
@@ -266,7 +292,7 @@ public class ConsulterClubController implements Initializable {
                 Club p = new Club();
                 p.setName(rs.getString("name"));
                 p.setDescription(rs.getString("description"));
-               // p.setPhoto(rs.get("photo"));
+                // p.setPhoto(rs.get("photo"));
 
                 data.add(p);
             }
@@ -279,12 +305,11 @@ public class ConsulterClubController implements Initializable {
         Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
         club_liste.setItems(data);
 
-        nom_text.clear();
     }
 
     @FXML
     private void TakeMeToAffichage(ActionEvent event) throws IOException {
-         if (event.getSource() == afficher) {
+        if (event.getSource() == afficher) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Affichage.fxml"));
             root.getChildren().setAll(pane);
         }
