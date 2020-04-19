@@ -7,14 +7,9 @@ package Views.Club;
 
 import Entities.Club;
 import IServices.ClubServices;
-import Utils.ConnexionBD;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -61,8 +57,8 @@ public class ModifierClubController implements Initializable {
     public ObservableList data = FXCollections.observableArrayList();
 
     private Image image;
-    
-      private File file;
+
+    private File file;
     private FileChooser fileChooser;
     @FXML
     private Label id;
@@ -76,127 +72,75 @@ public class ModifierClubController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-      
-        //LoadData();
 
-       /* for (int i = 0; i < data.size(); i++) {
-            combo.setValue((String) data.get(i));
-        }
-        combo.setItems(data);
-        */
-        
-         File f;
+        File f;
         f = new File(image_label.getText());
         image = new Image(f.toURI().toString());
 
         imageview.setImage(image);
-        
-        
 
     }
 
-   /* private void LoadData() {
-
-        try {
-
-            String res = "SELECT Name FROM  Club ";
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            Statement statement = con.prepareStatement(res);
-            ResultSet rs = statement.executeQuery(res);
-            while (rs.next()) {
-                data.add(rs.getString("Name"));
-
-            }
-
-        } catch (SQLException ex) {
-            System.err.println(ex);
-        }
-
-    }
-    */
     @FXML
     private void Modifier(ActionEvent event) throws IOException {
-        
-         if (!club_text.getText().equals("")) {
-                if (!descr_text.getText().equals("")) {
 
-        String name = club_text.getText();
-        String descp = descr_text.getText();
-        String images = image_label.getText();
-        String ide = id.getText();
+        if (!club_text.getText().equals("")) {
+            if (!descr_text.getText().equals("")) {
 
-        Integer id_club = Integer.parseInt(ide);
-        Club A = new Club();
+                String name = club_text.getText();
+                String descp = descr_text.getText();
+                String images = image_label.getText();
+                String ide = id.getText();
 
-        A.setId(id_club);
-        A.setName(name);
-        A.setDescription(descp);
-        A.setPhoto(images);
+                Integer id_club = Integer.parseInt(ide);
+                Club A = new Club();
 
-        int AS;
-        AS = ClubServices.modifier(A);
-        if (AS > 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("modification est faite");
-            alert.setHeaderText("INFO");
-            alert.showAndWait();
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterClub.fxml"));
-            root.getChildren().setAll(pane);
+                A.setId(id_club);
+                A.setName(name);
+                A.setDescription(descp);
+                A.setPhoto(images);
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("nop");
-            alert.showAndWait();
-        }
-        
-        } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("A FIELD IS MISSING");
-                    alert.setContentText("LA DESCRIPTION WEEY ");
-                    alert.initStyle(StageStyle.UTILITY);
-                    alert.showAndWait();
-                }
+                int AS;
+                AS = ClubServices.modifier(A);
+                if (AS > 0) {
+                    JOptionPane.showMessageDialog(null, "Modification est faite");
+                
+                AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterClub.fxml"));
+                root.getChildren().setAll(pane);
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("A FIELD IS MISSING");
-                alert.setContentText("LE TITRE :) :)  ");
+                alert.setTitle("la modification a échoué");
                 alert.showAndWait();
             }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setTitle("un champ est vide");
+            alert.setContentText("LA DESCRIPTION WEEY ");
+            alert.initStyle(StageStyle.UTILITY);
+            alert.showAndWait();
+        }
     }
 
-    @FXML
-    private void Trouver(ActionEvent event) {
-/*
-        String AID = combo.getSelectionModel().getSelectedItem();
-
-        Entities.Club c = ClubServices.findClub(AID);
-
-        club_text.setText(c.getName());
-        descr_text.setText(c.getDescription());
-        
-        image_label.setText(c.getPhoto());
-
-        String ids = String.valueOf(c.getId());
-        id.setText(ids);
-
-        File f;
-        f = new File(c.getPhoto());
-        image = new Image(f.toURI().toString());
-
-        imageview.setImage(image);
-*/
-
+    
+        else {
+                Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("un champ est vide");
+        alert.setContentText("LE TITRE :) :)  ");
+        alert.showAndWait();
     }
+}
 
-    @FXML
-    private void Annuler(ActionEvent event) throws IOException {
+@FXML
+        private void Annuler(ActionEvent event) throws IOException {
         
         AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterClub.fxml"));
             root.getChildren().setAll(pane);
     }
 
     @FXML
-    private void UploadImage(ActionEvent event) {
+        private void UploadImage(ActionEvent event) {
         
         fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
@@ -216,10 +160,12 @@ public class ModifierClubController implements Initializable {
     }
 
     
-    public void GetData(String nom, String Description, String photo){
+    public void GetData(String nom, String Description, String photo, Image image){
         club_text.setText(nom);
         descr_text.setText(Description);
         image_label.setText(photo);
+        imageview.setImage(image);
+        
         
     
         

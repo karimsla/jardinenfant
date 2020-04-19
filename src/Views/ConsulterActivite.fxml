@@ -17,7 +17,7 @@
       <Button fx:id="modifier_btn" layoutX="558.0" layoutY="206.0" mnemonicParsing="false" onAction="#redirect2" prefHeight="25.0" prefWidth="125.0" text="Modifier" />
       <Button fx:id="btn" layoutX="557.0" layoutY="172.0" mnemonicParsing="false" onAction="#redirect" prefHeight="25.0" prefWidth="125.0" text="Ajouter" />
       <ComboBox fx:id="club_box" layoutX="172.0" layoutY="23.0" prefWidth="150.0" />
-      <Button fx:id="det_btn" layoutX="336.0" layoutY="23.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Afficher" />
+      <Button fx:id="det_btn" layoutX="336.0" layoutY="23.0" mnemonicParsing="false" onAction="#Detail" prefHeight="25.0" prefWidth="61.0" text="Afficher" />
       <Label layoutX="63.0" layoutY="27.0" text="Choisir le Club : " textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -33,7 +33,12 @@
               </columns>
             </TableView>
             <Line endX="-96.0" endY="460.0" layoutX="645.0" layoutY="1.0" startX="-96.0" startY="1.1213226318359375" stroke="#6f6a5d" strokeWidth="3.0" />
-            <TextField fx:id="search_txt" layoutX="376.0" layoutY="14.0" onKeyPressed="#Search" prefHeight="17.0" prefWidth="149.0" />
+            <TextField fx:id="search_txt" layoutX="359.0" layoutY="23.0" onKeyPressed="#Search" prefHeight="25.0" prefWidth="166.0" />
+            <Label layoutX="267.0" layoutY="23.0" prefHeight="25.0" prefWidth="85.0" text="Rechercher : " textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Line endX="440.0" endY="1.0" layoutX="109.0" layoutY="62.0" startX="-109.0" startY="1.0" stroke="#6f6a5d" strokeWidth="3.0" />

@@ -5,26 +5,16 @@
  */
 package Views.Club;
 
-import Entities.Activite;
 import Entities.Club;
-import IServices.ActiviteServices;
 import IServices.ClubServices;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -32,13 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -81,19 +69,7 @@ public class AjoutClubController implements Initializable {
 
     }
 
-    public boolean validname(String name) {
-        if (name.length() == 0) {
-            return false;
-        }
-
-        for (int i = 0; i < name.length(); i++) {
-            char c = name.charAt(i);
-            if (!(((c >= 'a' && c <= 'z')) || ((c >= 'A' && c <= 'Z')) || (c == ' '))) {
-                return false;
-            }
-        }
-        return true;
-    }
+    
 
     @FXML
     private void Ajouter(ActionEvent event) {
@@ -105,7 +81,6 @@ public class AjoutClubController implements Initializable {
                     if (!image_area.getText().equals("")) {
 
                         String club_nom = club_text.getText();
-
                         String description = description_text.getText();
                         String image = image_area.getText();
 
@@ -117,37 +92,34 @@ public class AjoutClubController implements Initializable {
                         ClubServices AS = new ClubServices();
                         int a = AS.ajouter(c);
                         if (a > 0) {
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Ajout est fait");
-                            alert.setContentText("Ajout done ");
-                            alert.showAndWait();
+                           JOptionPane.showMessageDialog(null, "Ajout est fait");}
 
                         } else {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("WROONG");
-                            alert.setContentText("NOP didn't ajouta ");
+                            alert.setContentText("smthng went wrong ");
                             alert.showAndWait();
                         }
 
-                    }
+                    
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("A FIELD IS MISSING");
-                    alert.setContentText("LA DESCRIPTION WEEY ");
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("un champ est vide");
+                    alert.setContentText("LA DESCRIPTION  ");
                     alert.initStyle(StageStyle.UTILITY);
                     alert.showAndWait();
                 }
 
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("A FIELD IS MISSING");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("un champ est vide");
                 alert.setContentText("LE TITRE :) :)  ");
                 alert.showAndWait();
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
 
-            alert.setTitle("hja okhraa");
+            alert.setTitle("les lettres");
             alert.setContentText("LE TITRE :) :)  ");
             alert.showAndWait();
         }

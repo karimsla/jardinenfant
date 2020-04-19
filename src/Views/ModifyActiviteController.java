@@ -12,14 +12,14 @@ import Utils.ConnexionBD;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,12 +28,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -49,12 +49,11 @@ public class ModifyActiviteController implements Initializable {
     @FXML
     private TextArea description_label;
     @FXML
-    private TextField date_picker;
+    private DatePicker date_picker;
     @FXML
     private Button mod_btn;
     @FXML
     private Button vider_btn;
-    @FXML
     private ComboBox<String> Recherche;
 
     public ObservableList data = FXCollections.observableArrayList();
@@ -78,10 +77,10 @@ public class ModifyActiviteController implements Initializable {
 
         map = new HashMap<>();
         LoadData();
-        for (int i = 0; i < data.size(); i++) {
+        /*  for (int i = 0; i < data.size(); i++) {
             Recherche.setValue((String) data.get(i));
         }
-        Recherche.setItems(data);
+        Recherche.setItems(data);*/
 
         for (int i = 0; i < nom.size(); i++) {
             club_box.setValue((String) nom.get(i));
@@ -100,81 +99,65 @@ public class ModifyActiviteController implements Initializable {
             if (act_label.getText().matches("[a-zA-Z]*")) {
                 if (!act_label.getText().equals("")) {
                     if (!description_label.getText().equals("")) {
-                        if (!date_picker.getText().equals("")) {
-                            String activite = act_label.getText();
-                            String descp = description_label.getText();
-                            String date = date_picker.getText();
-                            Activite A = new Activite();
-                            // A.setId(id);
-                            A.setTypeact(activite);
-                            A.setDetailles(descp);
-                            A.setDate(date);
-                            Club c = new Club();
-                            c.setId(id);
-                            A.setClub(c);
-                            int AS;
-                            AS = ActiviteServices.modifier(A);
-                            if (AS > 0) {
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("modification est faite");
-                                alert.setHeaderText("INFO");
-                                alert.showAndWait();
+                        if (!date_picker.getValue().equals("")) {
+                            if (date_picker.getValue().compareTo(LocalDate.now()) >= 0) {
 
+                                String activite = act_label.getText();
+                                String descp = description_label.getText();
+                                LocalDate date = date_picker.getValue();
+                                Activite A = new Activite();
+                                // A.setId(id);
+                                A.setTypeact(activite);
+                                A.setDetailles(descp);
+                                A.setDate(date);
+                                Club c = new Club();
+                                c.setId(id);
+                                A.setClub(c);
+                                int AS;
+                                AS = ActiviteServices.modifier(A);
+                                if (AS > 0) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("modification est faite");
+                                    alert.setHeaderText("INFO");
+                                    alert.showAndWait();
+                                    AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
+                                    root.getChildren().setAll(pane);
+
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("nop");
+                                    alert.showAndWait();
+                                }
                             } else {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("nop");
-                                alert.showAndWait();
+                                JOptionPane.showMessageDialog(null, "Vérifier date");
                             }
                         } else {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("A FIELD IS MISSING");
-                            alert.setContentText("LA DATE YA MADAME");
-
-                            alert.showAndWait();
+                            JOptionPane.showMessageDialog(null, " vérifier la date");
                         }
+
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("A FIELD IS MISSING");
-                        alert.setContentText("LA DESCRIPTION YA MADAME");
+                        alert.setContentText("il manque LA DESCRIPTION ");
                         alert.showAndWait();
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("A FIELD IS MISSING");
+                    alert.setTitle("un champ est vide");
                     alert.setContentText("WOH TITRE DE L'ACIVITE");
                     alert.showAndWait();
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-
-                alert.setTitle("hja okhraa");
-                alert.setContentText("LE TITRE :) :)  ");
-                alert.showAndWait();
+                JOptionPane.showMessageDialog(null, "que des lettres");
             }
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("A FIELD IS MISSING");
-            alert.setContentText("L CLUUB IS MISSING");
+            alert.setTitle("un champ est vide");
+            alert.setContentText("L CLUUB manque");
             alert.showAndWait();
         }
 
-    }
-
-    @FXML
-    private void Trouver(ActionEvent event
-    ) {
-
-        String AID = Recherche.getSelectionModel().getSelectedItem();
-
-        Activite A = ActiviteServices.findActivite(AID);
-
-        act_label.setText(A.getTypeact());
-        description_label.setText(A.getDetailles());
-        date_picker.setText(A.getDate());
-        int idclub = A.getClub().getId();
-        Club C = ActiviteServices.findNomClub(idclub);
-        String nomClub = C.getName();
-        club_box.setValue(nomClub);
     }
 
     @FXML
@@ -183,7 +166,7 @@ public class ModifyActiviteController implements Initializable {
 
         act_label.clear();
         description_label.clear();
-        date_picker.clear();
+        date_picker.setValue(null);
     }
 
     private void LoadData() {
@@ -207,8 +190,8 @@ public class ModifyActiviteController implements Initializable {
     }
 
     @FXML
-    private void Supprimer(ActionEvent event) {
-        String nom = Recherche.getSelectionModel().getSelectedItem();
+    private void Supprimer(ActionEvent event) throws IOException {
+        String nom = act_label.getText();
         int AS;
         AS = ActiviteServices.Delete(nom);
         if (AS > 0) {
@@ -216,6 +199,8 @@ public class ModifyActiviteController implements Initializable {
             alert.setTitle("Supprimer");
             alert.setHeaderText("Suppression est faite");
             alert.showAndWait();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
+            root.getChildren().setAll(pane);
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -231,6 +216,13 @@ public class ModifyActiviteController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
             root.getChildren().setAll(pane);
         }
+
+    }
+
+    public void GetData(String nom, String Description, LocalDate date) {
+        act_label.setText(nom);
+        description_label.setText(Description);
+        date_picker.setValue(date);
 
     }
 //Date d=Date.valueOf(dateToConvert);

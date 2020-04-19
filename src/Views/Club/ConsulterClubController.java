@@ -96,6 +96,9 @@ public class ConsulterClubController implements Initializable {
     private String nom;
     private String description;
     private String url;
+    
+    
+    private Image image;
 
     /**
      * Initializes the controller class.
@@ -114,6 +117,8 @@ public class ConsulterClubController implements Initializable {
 
             }
         });
+        
+        
 
     }
 
@@ -125,6 +130,7 @@ public class ConsulterClubController implements Initializable {
             nom = selectedOne.getName();
             description = selectedOne.getDescription();
             url = selectedOne.getPhoto();
+            
 
             mod_club.setText(selectedOne.getName());
             mod_descr.setText(selectedOne.getDescription());
@@ -179,73 +185,20 @@ public class ConsulterClubController implements Initializable {
 
         ModifierClubController mc = loader.getController();
         
-       
+        
+      
 
-        mc.GetData(nom, description, url);
+        mc.GetData(nom, description, url,image);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        /*    
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("ModifierClub.fxml"));
-            root.getChildren().setAll(pane);
-        
-      
-        
-        
-        
-        if (mod_club.getText().matches("[a-zA-Z]*")) {
-            if (!mod_club.getText().equals("")) {
-                if (!mod_descr.getText().equals("")) {
-
-                    String club_nom = mod_club.getText();
-
-                    String descp = mod_descr.getText();
-                    int i = Integer.parseInt(id);
-                    ClubServices S = new ClubServices();
-                    int AS = S.modifier(club_nom, descp, i);
-                    if (AS > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("modification est faite");
-                        alert.setHeaderText("INFO");
-                        alert.showAndWait();
-                        Afficher();
-                        mod_club.clear();
-                        mod_descr.clear();
-
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("nop");
-                        alert.showAndWait();
-                    }
-
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("A FIELD IS MISSING");
-                    alert.setContentText("LA DESCRIPTION WEEY ");
-                    alert.initStyle(StageStyle.UTILITY);
-                    alert.showAndWait();
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("A FIELD IS MISSING");
-                alert.setContentText("LE TITRE :) :)  ");
-                alert.showAndWait();
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-
-            alert.setTitle("OTHERS");
-            alert.setContentText("LE TITRE  CONTIENT DES HAJETS :) :)  ");
-            alert.showAndWait();
-        }
     }
-
     /*  private void Annuler(ActionEvent event) throws IOException {
         if (event.getSource() == Annuler) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Views/Accueil.fxml"));
             root.getChildren().setAll(pane);
         }*/
-    }
+    
 
     @FXML
     private void DELETE(ActionEvent event

@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import static java.time.LocalDate.now;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -58,6 +60,9 @@ public class AjoutActiviteController implements Initializable {
     public ObservableList<String> data = FXCollections.observableArrayList();
 
     HashMap<String, Integer> map;
+    
+    
+  
 
     /**
      * Initializes the controller class.
@@ -74,6 +79,8 @@ public class AjoutActiviteController implements Initializable {
 
         }
         club_box.setItems(data);
+        
+       
     }
 
     @FXML
@@ -93,65 +100,67 @@ public class AjoutActiviteController implements Initializable {
                 if (!act_text.getText().equals("")) {
                     if (!desc_text.getText().equals("")) {
                         if (!date_text.getValue().equals("")) {
+                            if (date_text.getValue().compareTo(LocalDate.now())>=0){
+                            
+                                String club = club_box.getSelectionModel().getSelectedItem();
+                                int id = map.get(club);
+                                
+                                LocalDate dateA = date_text.getValue();
+                                String activite = act_text.getText();
+                                String description = desc_text.getText();
+                                String date = dateA.toString();
+                                
+                                Club c = new Club();
+                                c.setId(id);
+                                Activite A = new Activite();
+                                A.setDate(date);
+                                A.setTypeact(activite);
+                                A.setDetailles(description);
+                                A.setClub(c);
+                                ActiviteServices AS = new ActiviteServices();
+                                int a = AS.ajouter(A);
+                                if (a > 0) {
+                                    JOptionPane.showMessageDialog(null, "Ajout est fait");
+                                    AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
+                                    root.getChildren().setAll(pane);
+                                    
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                                    alert.setTitle("Erreur");
+                                    alert.showAndWait();
+                                }
+                            }else {
+                            JOptionPane.showMessageDialog(null, "Vérifier date");
 
-                            String club = club_box.getSelectionModel().getSelectedItem();
-                            int id = map.get(club);
-
-                            LocalDate dateA = date_text.getValue();
-                            String activite = act_text.getText();
-                            String description = desc_text.getText();
-                            String date = dateA.toString();
-
-                            Club c = new Club();
-                            c.setId(id);
-                            Activite A = new Activite();
-                            A.setDate(date);
-                            A.setTypeact(activite);
-                            A.setDetailles(description);
-                            A.setClub(c);
-                            ActiviteServices AS = new ActiviteServices();
-                            int a = AS.ajouter(A);
-                            if (a > 0) {
-                                JOptionPane.showMessageDialog(null, "Ajout est fait");
-                                AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterActivite.fxml"));
-                                root.getChildren().setAll(pane);
-
-                            } else {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("n'est pas fait");
-                                alert.showAndWait();
-                            }
+                            
+                        }
                         } else {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("A FIELD IS MISSING");
-                            alert.setContentText("LA DATE YA MADAME");
+                           JOptionPane.showMessageDialog(null, "Merci d'ajouer une date");
 
-                            alert.showAndWait();
+                            
                         }
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("A FIELD IS MISSING");
-                        alert.setContentText("LA DESCRIPTION YA MADAME");
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("un champ est vide");
+                        alert.setContentText("il manque LA DESCRIPTION ");
                         alert.showAndWait();
                     }
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("A FIELD IS MISSING");
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("un champ est vide");
                     alert.setContentText("WOH TITRE DE L'ACIVITE");
                     alert.showAndWait();
                 }
 
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
 
-                alert.setTitle("OTHERS");
-                alert.setContentText("LE TITRE  CONTIENT DES HAJETS :) :)  ");
-                alert.showAndWait();
+
+                JOptionPane.showMessageDialog(null, "que des lettres");
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("A FIELD IS MISSING");
-            alert.setContentText("L CLUUB IS MISSING");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("un champ est vide");
+            alert.setContentText("CLUB manque");
             alert.showAndWait();
         }
     }
