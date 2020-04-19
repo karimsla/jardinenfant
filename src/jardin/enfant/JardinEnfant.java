@@ -27,34 +27,31 @@ import javafx.stage.StageStyle;
  * @author karim
  */
 public class JardinEnfant extends Application {
-       private double xOffset;
-       private double yOffset;
-       public static User authenticated=new User();
-       
-       
-       
-       public void events(Stage stage,Parent scene)
-       	{
-    scene.setOnMousePressed(event -> {
-                 if (event.getButton() == MouseButton.PRIMARY) {
+    private double xOffset;
+    private double yOffset;
+    public static User authenticated=new User();
+    public void events(Stage stage,Parent scene)
+    {
+        scene.setOnMousePressed(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
 
-            xOffset = event.getX();
-            yOffset = event.getY();
-                 }        });        
+                xOffset = event.getX();
+                yOffset = event.getY();
+            }        });
 
- scene.setOnMouseDragged(event -> {
-                 if (event.getButton() == MouseButton.PRIMARY) {
-            stage.setX(event.getScreenX()- xOffset);
-            stage.setY(event.getScreenY()- yOffset);
-                 }        });
-}
-    
+        scene.setOnMouseDragged(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                stage.setX(event.getScreenX()- xOffset);
+                stage.setY(event.getScreenY()- yOffset);
+            }        });
+    }
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-          Parent root = FXMLLoader.load(getClass().getResource("/Views/User/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Responsable.fxml"));
         events(primaryStage,root);
-       
-         Scene scene = new Scene(root);
+
+        Scene scene = new Scene(root);
         //primaryStage.initStyle(StageStyle.UNDECORATED);
 
         primaryStage.setScene(scene);
@@ -65,9 +62,9 @@ public class JardinEnfant extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         launch(args);
-        
+
     }
-    
+
 }

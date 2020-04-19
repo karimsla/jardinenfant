@@ -1,97 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Chauffeurs.ConsulterController">
+<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="915.0" style="-fx-background-color: #ededed;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Chauffeurs.ConsulterController">
    <children>
-      <ListView fx:id="listview" layoutX="14.0" prefHeight="533.0" prefWidth="208.0" />
-      <AnchorPane fx:id="info" layoutX="242.0" layoutY="47.0" prefHeight="487.0" prefWidth="539.0" style="-fx-border-color: #c71ec3; -fx-border-radius: 20px; -fx-border-width: 4;" visible="false">
+      <ListView fx:id="listview" layoutX="14.0" layoutY="46.0" prefHeight="440.0" prefWidth="208.0" />
+      <AnchorPane fx:id="info" layoutX="228.0" layoutY="40.0" prefHeight="456.0" prefWidth="673.0" visible="false">
          <children>
-            <TextField fx:id="nom" layoutX="106.0" layoutY="123.0" />
-            <TextField fx:id="cin" layoutX="106.0" layoutY="74.0" />
-            <TextField fx:id="tel" layoutX="106.0" layoutY="222.0" />
-            <TextField fx:id="sexe" layoutX="106.0" layoutY="173.0" />
-            <Label layoutX="167.0" layoutY="51.0" text="CIN" textAlignment="CENTER" textFill="WHITE">
+            <TextField fx:id="nom" layoutX="87.0" layoutY="158.0" />
+            <TextField fx:id="cin" layoutX="87.0" layoutY="109.0" />
+            <TextField fx:id="tel" layoutX="87.0" layoutY="257.0" />
+            <Label layoutX="148.0" layoutY="86.0" text="CIN" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="135.0" layoutY="104.0" text="Nom et prenom" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="116.0" layoutY="139.0" text="Nom et prenom" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="158.0" layoutY="202.0" text="Num tel" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="139.0" layoutY="237.0" text="Num tel" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="164.0" layoutY="153.0" text="Sexe" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="145.0" layoutY="188.0" text="Sexe" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="modifier" layoutX="371.0" layoutY="112.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="92.0" text="Modifier" />
-            <Button fx:id="supprimer" layoutX="371.0" layoutY="170.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="92.0" text="Supprimer" />
-            <Label layoutX="257.0" layoutY="3.0" prefHeight="27.0" prefWidth="43.0" text="Profil" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TableView fx:id="tv" layoutX="32.0" layoutY="311.0" prefHeight="166.0" prefWidth="149.0">
-              <columns>
-                <TableColumn fx:id="col_a" prefWidth="75.0" text="Adresse" />
-                <TableColumn fx:id="col_h" prefWidth="75.0" text="Heure" />
-              </columns>
-            </TableView>
-            <Label layoutX="40.0" layoutY="277.0" prefHeight="27.0" prefWidth="133.0" text="Liste des trajets" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="363.0" layoutY="294.0" prefHeight="27.0" prefWidth="142.0" text="Ajouter un trajet" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="adresse" layoutX="360.0" layoutY="348.0" />
-            <TextField fx:id="heure" layoutX="360.0" layoutY="400.0" />
-            <Button fx:id="affecter" layoutX="388.0" layoutY="435.0" mnemonicParsing="false" onAction="#affecter" prefHeight="25.0" prefWidth="92.0" text="Affecter" />
-            <Label layoutX="413.0" layoutY="329.0" text="Adresse" textFill="WHITE" />
-            <Label layoutX="418.0" layoutY="380.0" text="Heure" textFill="WHITE" />
+            <Button fx:id="modifier" layoutX="53.0" layoutY="301.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="92.0" text="Modifier" />
+            <Button fx:id="supprimer" layoutX="172.0" layoutY="301.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="92.0" text="Supprimer" />
+            <ComboBox fx:id="sexe" layoutX="87.0" layoutY="209.0" prefHeight="25.0" prefWidth="149.0" />
+            <Pane layoutX="443.0" layoutY="34.0" prefHeight="410.0" prefWidth="200.0" style="-fx-background-color: #d6d6d6;" styleClass="box" stylesheets="@../../Assets/style.css">
+               <children>
+                  <Label layoutX="32.0" layoutY="26.0" prefHeight="27.0" prefWidth="142.0" text="Ajouter un trajet">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="78.0" layoutY="53.0" text="Adresse" />
+                  <TextField fx:id="adresse" layoutX="23.0" layoutY="75.0" />
+                  <Label layoutX="83.0" layoutY="108.0" text="Heure" />
+                  <ComboBox fx:id="hh" layoutX="20.0" layoutY="130.0" prefHeight="25.0" prefWidth="65.0" promptText="Heu" />
+                  <Label layoutX="94.0" layoutY="134.0" text="H" />
+                  <ComboBox fx:id="mm" layoutX="113.0" layoutY="130.0" prefHeight="25.0" prefWidth="65.0" promptText="Min" />
+                  <Button fx:id="affecter" layoutX="54.0" layoutY="166.0" mnemonicParsing="false" onAction="#affecter" prefHeight="25.0" prefWidth="92.0" text="Affecter" />
+                  <TableView fx:id="tv" layoutX="28.0" layoutY="220.0" prefHeight="166.0" prefWidth="149.0">
+                    <columns>
+                      <TableColumn fx:id="col_a" prefWidth="75.0" text="Adresse" />
+                      <TableColumn fx:id="col_h" prefWidth="75.0" text="Heure" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
-      <Button fx:id="ajouter" layoutX="242.0" layoutY="14.0" mnemonicParsing="false" onAction="#activer" prefHeight="25.0" prefWidth="92.0" text="Ajouter" />
-      <Label fx:id="msg" layoutX="429.0" layoutY="257.0" text="Selectionner un chauffeur !" textFill="WHITE">
+      <Button fx:id="ajouter" layoutX="709.0" layoutY="14.0" mnemonicParsing="false" onAction="#activer" prefHeight="25.0" prefWidth="92.0" text="Ajouter" />
+      <Label fx:id="msg" layoutX="429.0" layoutY="257.0" text="Selectionner un chauffeur !">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Pane fx:id="ajout" layoutX="324.0" layoutY="86.0" prefHeight="363.0" prefWidth="408.0" style="-fx-border-radius: 20; -fx-border-color: #c71ec3; -fx-border-width: 4;" visible="false">
+      <Pane fx:id="ajout" layoutX="324.0" layoutY="86.0" prefHeight="363.0" prefWidth="408.0" style="-fx-background-color: #d6d6d6;" styleClass="box" stylesheets="@../../Assets/style.css" visible="false">
          <children>
-            <Label layoutX="140.0" layoutY="32.0" text="Ajouter un chauffeur" textFill="WHITE">
+            <Label layoutX="140.0" layoutY="32.0" text="Ajouter un chauffeur">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="190.0" layoutY="74.0" text="CIN" textFill="WHITE" />
-            <Label layoutX="190.0" layoutY="128.0" text="Nom" textFill="WHITE" />
-            <Label layoutX="190.0" layoutY="180.0" text="Sexe" textFill="WHITE" />
-            <Label layoutX="190.0" layoutY="230.0" text="Tel" textFill="WHITE" />
+            <Label layoutX="190.0" layoutY="74.0" text="CIN" />
+            <Label layoutX="190.0" layoutY="128.0" text="Nom" />
+            <Label layoutX="190.0" layoutY="180.0" text="Sexe" />
+            <Label layoutX="190.0" layoutY="230.0" text="Tel" />
             <TextField fx:id="cin_a" layoutX="129.0" layoutY="98.0" />
             <TextField fx:id="nom_a" layoutX="129.0" layoutY="149.0" />
-            <TextField fx:id="sexe_a" layoutX="130.0" layoutY="200.0" />
             <TextField fx:id="tel_a" layoutX="130.0" layoutY="251.0" />
             <Button layoutX="158.0" layoutY="302.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="92.0" text="Ajouter" />
+            <ComboBox fx:id="sexe_a" layoutX="131.0" layoutY="203.0" prefHeight="25.0" prefWidth="149.0" />
          </children>
       </Pane>
+      <TextField fx:id="search" layoutX="14.0" layoutY="21.0" onKeyTyped="#chercher" prefHeight="25.0" prefWidth="208.0" promptText="Chercher ..." />
+      <Button fx:id="mapp" layoutX="809.0" layoutY="14.0" mnemonicParsing="false" onAction="#map" prefHeight="25.0" prefWidth="92.0" text="Map" />
    </children>
 </AnchorPane>

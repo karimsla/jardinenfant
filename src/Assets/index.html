@@ -1,0 +1,63 @@
+<html><body>
+  <div id="mapdiv"></div>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+  map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+    
+    epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+    projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+   
+    var lonLat = new OpenLayers.LonLat( 10.18 ,36.89077286 ).transform(epsg4326, projectTo);
+          
+    
+    var zoom=14;
+    map.setCenter (lonLat, zoom);
+    
+    var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+   
+  function setMarker(lat,lon,desc,heure)
+  {
+
+  // Define markers as "features" of the vector layer:
+    var feature = new OpenLayers.Feature.Vector(
+            new OpenLayers.Geometry.Point( lon, lat ).transform(epsg4326, projectTo),
+            {description:desc,heure:heure} 
+            
+        );    
+    vectorLayer.addFeatures(feature);
+    
+    
+    map.addLayer(vectorLayer);
+ 
+    
+    //Add a selector control to the vectorLayer with popup functions
+    var controls = {
+      selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
+    };
+
+    function createPopup(feature) {
+      feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+          feature.geometry.getBounds().getCenterLonLat(),
+          null,
+          '<div class="markerContent"><center><b>'+feature.attributes.description+'</b></center></div><p>Heure : '+feature.attributes.heure+'</p></div>',
+          null,
+          true,
+          function() { controls['selector'].unselectAll(); }
+      );
+      //feature.popup.closeOnMove = true;
+      map.addPopup(feature.popup);
+    }
+
+    function destroyPopup(feature) {
+      feature.popup.destroy();
+      feature.popup = null;
+    }
+    
+    map.addControl(controls['selector']);
+    controls['selector'].activate();
+    
+  }
+  </script>
+</body></html>
+</html>
