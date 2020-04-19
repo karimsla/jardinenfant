@@ -84,6 +84,6 @@
          </children>
       </Pane>
       <TextField fx:id="search" layoutX="14.0" layoutY="21.0" onKeyTyped="#chercher" prefHeight="25.0" prefWidth="208.0" promptText="Chercher ..." />
-      <Button fx:id="mapp" layoutX="809.0" layoutY="14.0" mnemonicParsing="false" onAction="#map" prefHeight="25.0" prefWidth="92.0" text="Map" />
+      <Button fx:id="mapp" layoutX="809.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Map" />
    </children>
 </AnchorPane>

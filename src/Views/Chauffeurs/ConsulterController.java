@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -88,13 +89,7 @@ private final ObservableList<Chauffeur> data =FXCollections.observableArrayList(
         obs.add("Femme");
         sexe_a.setItems(obs);
        sexe.setItems(obs);
-       mapp.setOnAction(e->{
-           try {
-               map(e);
-           } catch (IOException ex) {
-               ex.printStackTrace();
-           }
-       });
+
     }    
     
      public void getData(ObservableList data) 
@@ -133,7 +128,23 @@ listview.setItems(data);
         col_h.setCellValueFactory(new PropertyValueFactory<Trajet,String>("heure"));
         tv.setItems(trajets);
      }
+
+
+
     public void Listeners(){
+        mapp.setOnMouseClicked((event)-> {
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Map.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Scene scene = new Scene(root);
+            Stage primaryStage=new Stage();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        });
       TrajetService ts=new TrajetService();
         listview.setOnMouseClicked((event) -> {
             info.setVisible(true);
@@ -257,22 +268,7 @@ adresse.clear();
         }
         return true;
     }
-    @FXML
-    public void map(ActionEvent e) throws IOException {
-       /* Parent root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Map.fxml"));
 
-        Scene scene = new Scene(root);
-        Stage primaryStage=new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
-        Node node = (Node) e.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        //stage.setMaximized(true);
-        stage.close();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Map.fxml")));
-        stage.setScene(scene);
-        stage.show();
-    }
 
     
 }
