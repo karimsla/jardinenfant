@@ -31,7 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import com.teknikindustries.bulksms.SMS;
+//import com.teknikindustries.bulksms.SMS;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -254,7 +254,7 @@ public class ConsulterEnfantController implements Initializable {
       }
    
     }
-
+/*
     @FXML
     private void sms(ActionEvent event) {
         
@@ -273,7 +273,7 @@ public class ConsulterEnfantController implements Initializable {
 			}
         
        
-	}
+	}*/
 
     
 

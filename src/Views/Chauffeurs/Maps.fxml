@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-<?import javafx.scene.web.WebView?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Views.Chauffeurs.MapController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Chauffeurs.MapController">
     <children>
-        <WebView fx:id="webView" layoutY="36.0" prefHeight="514.0" ></WebView>
+   
 
         <Button layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#update" text="Refresh" />
+      <WebView fx:id="webView" layoutX="26.0" layoutY="34.0" prefHeight="349.0" prefWidth="552.0" />
     </children>
 
 </AnchorPane>

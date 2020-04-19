@@ -239,7 +239,7 @@ public class RechercheJardinEnfantController implements Initializable {
                     .getResource("/tn/esprit/jardinEnfant/gui/EditJardin.fxml"));
             Parent parent = loader.load();
             EditJardinController controller = (EditJardinController) loader.getController();
-            controller.inflateUI(selectedForEdit);
+          //  controller.inflateUI(selectedForEdit);
            esi.delet(selectedForEdit);
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("edit Space");

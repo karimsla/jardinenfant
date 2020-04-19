@@ -132,19 +132,7 @@ listview.setItems(data);
 
 
     public void Listeners(){
-        mapp.setOnMouseClicked((event)-> {
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Map.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            Scene scene = new Scene(root);
-            Stage primaryStage=new Stage();
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        });
       TrajetService ts=new TrajetService();
         listview.setOnMouseClicked((event) -> {
             info.setVisible(true);
@@ -269,6 +257,17 @@ adresse.clear();
         return true;
     }
 
+    @FXML
+    public void map() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Maps.fxml"));
+
+
+        Scene scene = new Scene(root);
+        Stage primaryStage=new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
 
     
 }
