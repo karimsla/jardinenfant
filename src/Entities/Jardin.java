@@ -211,8 +211,20 @@ public class Jardin {
 	}
 
 
-	public Jardin(int id, String name, String description,
-			String numtel, float tarif, String adresse, String etat) {
+	public Jardin(String name, String description,
+				  String numtel, float tarif, String adresse, String etat) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.numtel = numtel;
+		this.tarif = tarif;
+		this.adresse = adresse;
+		this.etat = etat;
+	}
+
+	public Jardin(int id,String name, String description,
+				  String numtel, float tarif, String adresse, String etat) {
 		super();
 		this.id = id;
 		this.name = name;

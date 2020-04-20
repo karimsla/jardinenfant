@@ -21,6 +21,44 @@ public class Paiement {
     private float montant;
 
    
-    private Jardin jardin;
-    
+    private int jardin;
+
+    public Paiement( Date date, float montant, int jardin) {
+
+        this.date = date;
+        this.montant = montant;
+        this.jardin = jardin;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public float getMontant() {
+        return montant;
+    }
+
+    public void setMontant(float montant) {
+        this.montant = montant;
+    }
+
+    public int getJardin() {
+        return jardin;
+    }
+
+    public void setJardin(int jardin) {
+        this.jardin = jardin;
+    }
 }
