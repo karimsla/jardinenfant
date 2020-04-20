@@ -19,7 +19,7 @@ public class Payment {
     private Date date; 
     private Double montant;
     public int prov;
-    //a modifier 
+    
     private JardinEnfant jardinEnfants;
 
     public Payment(Date date, Double montant) {

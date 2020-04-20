@@ -34,25 +34,26 @@ import javafx.scene.control.TextField;
  */
 public class PaymentController implements Initializable {
 
-    @FXML
-    private TextField client;
+  @FXML
+    private TextField jardin;
+ 
     @FXML
     private TextField mail;
     @FXML
     private TextField code;
     @FXML
     private TextField carte;
+    
     @FXML
-    private TextField tel;
-    @FXML
+    
     private DatePicker expire;
     @FXML
-    private Slider montant;
-    @FXML
+    
     private Button valider;
     @FXML
     private Button annuler;
              Connection connection=null;
+  
     
     public PaymentController() {
         connection=ConnexionBD.getInstance().getCnx();
@@ -78,8 +79,8 @@ Date date = new Date(System.currentTimeMillis());
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 
         Payment payment = new Payment();
-        if(client.getText().isEmpty()||carte.getText().length()!=13||!mail.getText().contains("@")||
-                tel.getText().length()!=8||code.getText().length()!=3){
+        if(jardin.getText().isEmpty()||carte.getText().length()!=13||!mail.getText().contains("@")||
+               code.getText().length()!=3){
             alert.setTitle("error");
                         alert.setContentText("verifier champs" );
                         alert.show();
@@ -88,6 +89,7 @@ Date date = new Date(System.currentTimeMillis());
         {
            payment.setMontant(250.0);
            payment.setDate(date);
+           
            //payment.setProv(jardin.getId());
            int x= crud.create(payment);
            if(x!=0){
@@ -109,8 +111,7 @@ Date date = new Date(System.currentTimeMillis());
     @FXML
     private void annulerHandler(ActionEvent event) {
         expire.getEditor().clear();
-        tel.clear();
-        client.clear();
+        jardin.clear();
         carte.clear();
         code.clear();
         mail.clear();

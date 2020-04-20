@@ -65,6 +65,8 @@ public class RechercheJardinEnfantController2 implements Initializable {
     private MenuItem edit;
     @FXML
     private MenuItem delet;
+     @FXML
+    private TableColumn<JardinEnfant, String> id;
     @FXML
     private TableColumn<JardinEnfant, Double> tarif;
     @FXML
@@ -76,7 +78,7 @@ public class RechercheJardinEnfantController2 implements Initializable {
     @FXML
     private TableColumn<JardinEnfant, String> etat;
     @FXML
-    private TableColumn<JardinEnfant, String> nom;
+    private TableColumn<JardinEnfant, String> colnom;
      Connection connection=null;
     
     public RechercheJardinEnfantController2() {
@@ -88,6 +90,7 @@ public class RechercheJardinEnfantController2 implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       
         initCol();
         try {
             loadData();
@@ -113,12 +116,14 @@ public class RechercheJardinEnfantController2 implements Initializable {
 
     ///pour faire l'inisialisation des attribue 
     private void initCol() {
+         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         tarif.setCellValueFactory(new PropertyValueFactory<>("Tarif"));
         description.setCellValueFactory(new PropertyValueFactory<>("Description"));
         adresse.setCellValueFactory(new PropertyValueFactory<>("Adresse"));
-        numtel.setCellValueFactory(new PropertyValueFactory<>("numtel"));
+        numtel.setCellValueFactory(new PropertyValueFactory<>("numTel"));
         etat.setCellValueFactory(new PropertyValueFactory<>("Etat"));
-        nom.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        colnom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        
         
         
         

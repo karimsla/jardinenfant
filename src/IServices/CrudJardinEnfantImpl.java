@@ -259,6 +259,7 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
             ResultSet resultSet= statement.executeQuery(query);
             while(resultSet.next()){
                 allJardinEnfant.add(new JardinEnfant(
+                        resultSet.getInt("id"),
                         resultSet.getString("Name"),
                         resultSet.getString("Description"),
                         resultSet.getString("numtel"),
