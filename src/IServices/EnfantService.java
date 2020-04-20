@@ -5,10 +5,14 @@
  */
 package IServices;
 
+import Entities.Abonnement;
+import Entities.Jardin;
 import Utils.ConnexionBD;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -103,5 +107,19 @@ public class EnfantService {
         }
       return ac;
   }
+      
+      public void ajouterAbonnement(int jid,int jenf,String date,String type,String etat,String montant)
+   {
+       
+      
+        try {
+            Connection cnx = ConnexionBD.getInstance().getCnx();
+           String res="Insert into abonnement (jardin_id,enfant_id,date,type,etat,montant) values ('"+jid+"','"+jenf+"','"+date+"','"+type+"','"+etat+"','"+montant+"')";
+            Statement statement=cnx.createStatement();
+           statement.executeUpdate(res);
+           System.out.println("ajout réussie!");
+       } catch (SQLException ex) {
+      System.out.println(ex); }
+   }
     
 }
