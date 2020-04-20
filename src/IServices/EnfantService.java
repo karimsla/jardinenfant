@@ -121,5 +121,21 @@ public class EnfantService {
        } catch (SQLException ex) {
       System.out.println(ex); }
    }
+      
+      public void ajouterEnfant(int pid,String nom,String prenom,String date,String sexe)
+   {
+       
+      
+        try {
+            Connection cnx = ConnexionBD.getInstance().getCnx();
+           String res="Insert into enfant (parent_id,nom,prenom,datenaiss,sexe) values ('"+pid+"','"+nom+"','"+prenom+"','"+date+"','"+sexe+"')";
+            Statement statement=cnx.createStatement();
+           statement.executeUpdate(res);
+           System.out.println("ajout réussie!");
+       } catch (SQLException ex) {
+      System.out.println(ex); }
+   }
+      
+      
     
 }
