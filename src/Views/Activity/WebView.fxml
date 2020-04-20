@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Views.Activity.WebViewController">
+   <children>
+      <BorderPane prefHeight="425.0" prefWidth="689.0">
+         <top>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #84869c;" BorderPane.alignment="CENTER">
+               <children>
+                  <WebView fx:id="webView" layoutY="123.0" prefHeight="303.0" prefWidth="689.0" />
+                  <AnchorPane focusTraversable="true" prefHeight="122.0" prefWidth="689.0">
+                     <children>
+                        <Button fx:id="Culturel" layoutX="99.0" layoutY="28.0" mnemonicParsing="false" onAction="#ct" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: #FFFF00;" text="Culturel">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <MenuBar layoutY="98.0" prefHeight="25.0" prefWidth="689.0">
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                        <Button fx:id="Bricolage" layoutX="237.0" layoutY="29.0" mnemonicParsing="false" onAction="#br" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #0000FF;" text="Bricolage">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="Dessin" layoutX="375.0" layoutY="28.0" mnemonicParsing="false" onAction="#ds" prefHeight="37.0" prefWidth="98.0" style="-fx-background-color: #FA5858;" text="Dessin">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="Lecture" layoutX="506.0" layoutY="29.0" mnemonicParsing="false" onAction="#lec" prefHeight="36.0" prefWidth="99.0" style="-fx-background-color: #FF8000;" text="Lecture ">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
