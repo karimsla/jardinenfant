@@ -6,13 +6,14 @@
 package IServices;
 
 import Entities.Abonnement;
+import Entities.AdmEnf;
+import Entities.Enfant;
 import Entities.Jardin;
 import Utils.ConnexionBD;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -86,7 +87,35 @@ public class EnfantService {
     }
 
 
+    public List<AdmEnf> findall(){
+        List<AdmEnf> data=new ArrayList<AdmEnf>() ;
 
+     try{
+        Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+        String res="SELECT en.nom,en.prenom,en.datenaiss,en.sexe,en.id,ab.nom,ab.prenom FROM enfant en,parent AS ab WHERE en.parent_id=ab.id " ;
+
+        Statement statement = con.createStatement();
+        //
+        ResultSet rs =  statement.executeQuery(res);
+        while(rs.next()){
+            AdmEnf p = new AdmEnf();
+            p.setNom(rs.getString("nom"));
+            p.setPrenom(rs.getString("prenom"));
+            p.setDate(rs.getDate("datenaiss"));
+            p.setSexe(rs.getString("sexe"));
+            p.setJardin(rs.getString("ab.nom")+" "+rs.getString("ab.prenom"));
+            p.setId(rs.getInt("id"));
+
+
+
+
+            data.add(p);
+        }
+    } catch (SQLException ex) {
+
+    }
+     return data;
+}
 
     public static int modifiertype(Integer id,String ty){
         int ac = 0;

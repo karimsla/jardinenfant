@@ -5,9 +5,22 @@
  */
 package Views.Jardin;
 
+import Entities.AdmEnf;
+import Entities.Chauffeur;
+import Entities.Enfant;
 import Entities.Jardin;
 import IServices.CrudJardinEnfantImpl;
+import IServices.EnfantService;
+import IServices.TrajetService;
 import Utils.ConnexionBD;
+import Views.Enfant.AdminEnfantController;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +31,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +62,11 @@ public class RechercheJardinEnfantController2 implements Initializable {
 
     @FXML
     private TextField recherche;
+    @FXML
+    private Button pdf;
+
+    @FXML
+    private TableView<AdmEnf> enftb;
     @FXML
     private TableView<Jardin> jardin;
     @FXML
@@ -74,6 +99,12 @@ public class RechercheJardinEnfantController2 implements Initializable {
     private TableColumn<Jardin, String> etat;
     @FXML
     private TableColumn<Jardin, String> colnom;
+    @FXML
+    private TableColumn<AdmEnf, String> enfnom;
+    @FXML
+    private TableColumn<AdmEnf, String> enfprenom;
+    @FXML
+    private TableColumn<AdmEnf, String> enfparent;
      Connection connection=null;
     
     public RechercheJardinEnfantController2() {
@@ -85,7 +116,7 @@ public class RechercheJardinEnfantController2 implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+
         initCol();
         try {
             loadData();
@@ -93,6 +124,64 @@ public class RechercheJardinEnfantController2 implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(RechercheJardinEnfantController2.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+            jardin.setOnMouseClicked((event) -> {
+                ObservableList<AdmEnf> data = FXCollections.observableArrayList();
+                Jardin selectedOne = jardin.getSelectionModel().getSelectedItem();
+
+                int  id=selectedOne.getId();
+try{
+
+                    String res="SELECT en.nom,en.prenom,p.nom as pnom ,p.Prenom as ppnom FROM parent AS p ,enfant en JOIN abonnement ab ON en.id=ab.enfant_id  WHERE  p.id=en.parent_id AND ab.jardin_id="+id ;
+
+                    Statement statement = connection.createStatement();
+                    //
+                    ResultSet rs =  statement.executeQuery(res);
+                    while(rs.next()){
+                        AdmEnf p = new AdmEnf();
+                        p.setNom(rs.getString("nom"));
+                        p.setPrenom(rs.getString("prenom"));
+
+                        p.setJardin(rs.getString("pnom")+" "+rs.getString("ppnom"));
+
+
+
+
+
+                        data.add(p);
+                    }
+                } catch (SQLException ex) {
+
+                }
+                enfnom.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("nom"));
+                enfprenom.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("prenom"));
+                enfparent.setCellValueFactory(new PropertyValueFactory<AdmEnf,String>("jardin"));
+
+
+                enftb.setItems(data);
+                enftb.setVisible(true);
+
+
+
+
+
+
+
+
+
+            });
+
+
+        pdf.setOnAction(eve ->{
+            generate(eve);
+
+
+        } );
+
+
+
+            // TODO
+
     }    
   private void loadData() throws SQLException {
         List<Jardin> prov = new ArrayList<>();
@@ -132,6 +221,11 @@ public class RechercheJardinEnfantController2 implements Initializable {
         jardin.setItems(list);
         
     }
+
+
+
+
+
 
     @FXML
     private void fnAdresse(ActionEvent event) throws SQLException {
@@ -249,8 +343,89 @@ public class RechercheJardinEnfantController2 implements Initializable {
                         alert.show();
         }
             }
-    
-    
+
+
+
+
+    @FXML
+    private void generate(ActionEvent event) {
+        String path="";
+
+
+
+         ObservableList<AdmEnf> ld = FXCollections.observableArrayList();
+
+        EnfantService se=new EnfantService();
+        ld.addAll(se.findall());
+
+
+
+        try {
+
+            path="C:\\Users\\karim\\Downloads\\";
+
+
+
+            Document doc=new Document();
+            PdfWriter.getInstance(doc, new FileOutputStream(path+"enfant.pdf"));
+            doc.open();
+            Paragraph para = new Paragraph("LISTE DES ENFANTS:");
+            doc.add(para);
+            Paragraph paras = new Paragraph(" ");
+            doc.add(paras);
+            Paragraph parass = new Paragraph(" ");
+            doc.add(parass);
+
+            PdfPTable th1=new PdfPTable(5);
+            PdfPCell c1=new PdfPCell(new Phrase("Nom"));
+            th1.addCell(c1);
+            PdfPCell c2=new PdfPCell(new Phrase("Prenom"));
+            th1.addCell(c2);
+            PdfPCell c3=new PdfPCell(new Phrase("Sexe"));
+            th1.addCell(c3);
+            PdfPCell c4=new PdfPCell(new Phrase("Parent"));
+            th1.addCell(c4);
+
+            PdfPCell c5=new PdfPCell(new Phrase("Date Naissance"));
+            th1.addCell(c5);
+            th1.setHeaderRows(1);
+            for (int i=0;i<ld.size();i++){
+                String na=ld.get(i).getNom();
+                String pr=ld.get(i).getPrenom();
+                String sx=ld.get(i).getSexe();
+                String pa=ld.get(i).getJardin();
+                Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String s = formatter.format(ld.get(i).getDate());
+
+
+
+                th1.addCell(na);
+                th1.addCell(pr);
+                th1.addCell(sx);
+                th1.addCell(pa);
+                th1.addCell(s);
+
+
+
+
+
+            }
+
+            doc.add(th1);
+
+            doc.close();
+
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminEnfantController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(AdminEnfantController.class.getName()).log(Level.SEVERE, null, ex);
+
+
+        }
+
+
+    }
     
 
     
