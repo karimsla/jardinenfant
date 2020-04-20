@@ -34,6 +34,7 @@ AnchorPane body;
         load(abonnements,"ConsulterEnfant.fxml");
         load(evenements,"Emna/ConsulterListeEvenements.fxml");
         load(messages,"Reclamation/ListeReclamation.fxml");
+        load(tuteurs,"Tuteur/Tuteur.fxml");
         
     }    
     
@@ -47,7 +48,7 @@ AnchorPane body;
   body.getChildren().setAll(pane); 
 }catch(Exception ee)
 {
-    ee.getMessage();
+
 }         
     });
 }
