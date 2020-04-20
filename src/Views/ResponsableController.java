@@ -29,11 +29,11 @@ AnchorPane body;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        load(club,"ConsulterActivite.fxml");
+        load(club,"Club/ConsulterClub.fxml");
         load(chauffeurs,"Chauffeurs/Consulter.fxml");
-        load(abonnements,"ConsulterEnfant.fxml");
+        load(abonnements,"Enfant/ConsulterEnfant.fxml");
         load(evenements,"Emna/ConsulterListeEvenements.fxml");
-        load(messages,"Reclamation/ListeReclamation.fxml");
+        load(messages,"Messages/MessagesList.fxml");
         
     }    
     

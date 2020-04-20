@@ -103,7 +103,7 @@ public class ConsulterActiviteController implements Initializable {
                 Activite p = new Activite();
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
-                p.setDate(rs.getString("date"));
+                p.setDate(rs.getDate("date"));
 
                 data.add(p);
             }
@@ -177,7 +177,7 @@ public class ConsulterActiviteController implements Initializable {
             //id = Integer.toString(selectedOne.getId());
             nom_t = selectedOne.getTypeact();
             description_t = selectedOne.getDetailles();
-            date_t = LocalDate.parse(selectedOne.getDate());
+            date_t =selectedOne.getDate().toLocalDate();
 
         }
     }
@@ -199,7 +199,7 @@ public class ConsulterActiviteController implements Initializable {
                 Activite p = new Activite();
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
-                p.setDate(rs.getString("date"));
+                p.setDate(rs.getDate("date"));
 
                 data.add(p);
             }
@@ -281,7 +281,7 @@ public class ConsulterActiviteController implements Initializable {
                 Activite p = new Activite();
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
-                p.setDate(rs.getString("date"));
+                p.setDate(rs.getDate("date"));
 
                 data.add(p);
             }

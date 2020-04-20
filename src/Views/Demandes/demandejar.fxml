@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="690.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Demandes.Demandes">
+
+
+        <children>
+            <StackPane layoutX="26.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="938.0">
+                <children>
+                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <children>
+                            <Text layoutX="350.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des demandes " textAlignment="CENTER" wrappingWidth="237.02099609375">
+                                <font>
+                                    <Font size="21.0" />
+                                </font>
+                            </Text>
+                            <TextField fx:id="recherche" layoutX="68.0" layoutY="60.0" />
+                            <TableView fx:id="lidemandes" layoutX="68.0" layoutY="139.0" prefHeight="374.0" prefWidth="660.0">
+                                <columns>
+                                    <TableColumn fx:id="colnom" prefWidth="75.0" text="Nom" />
+                                    <TableColumn fx:id="adresse" prefWidth="75.0" text="Adresse" />
+                                    <TableColumn fx:id="description" prefWidth="74.0" text="Description" />
+                                    <TableColumn fx:id="numtel" prefWidth="104.0" text="Numero Tel" />
+                                    <TableColumn fx:id="col_regler" minWidth="0.0" prefWidth="104.0" text="Accepter" />
+                                    <TableColumn fx:id="col_supp" prefWidth="106.0" text="Supprimer" />
+                                    <TableColumn fx:id="id" prefWidth="75.0" text="id" visible="false" />
+
+
+
+
+
+                                </columns>
+
+                            </TableView>
+                  <Button fx:id="searchbtn" layoutX="275.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Rechercher" />
+
+                        </children>
+                    </AnchorPane>
+                </children>
+            </StackPane>
+
+        </children>
+
+
+
+</AnchorPane>

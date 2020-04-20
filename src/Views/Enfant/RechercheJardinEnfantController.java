@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 import Entities.Jardin;
 import IServices.CrudJardinEnfantImpl;
-import Views.EditJardinController;
+import Views.Jardin.EditJardinController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

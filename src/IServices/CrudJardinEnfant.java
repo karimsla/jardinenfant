@@ -19,6 +19,8 @@ public interface CrudJardinEnfant extends CrudGeneric<Jardin> {
         public List <Jardin> findByEtat(String etat);
         public List <Jardin> findByTarif(Double tarif);
                 public List <Jardin> findByAdresse(String adresse);
+        public List <Jardin> findByEnAttente();
+        public int updateStat(int id);
 
 
     

@@ -182,6 +182,34 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
     }
 
     @Override
+    public List<Jardin> findByEnAttente() {
+        List<Jardin> allJardin = new ArrayList<>();
+        String query="select * from jardin where Etat='En ATTENTE'";
+        try{
+            Statement statement= connexion.createStatement();
+            ResultSet rs= statement.executeQuery(query);
+            while(rs.next()){
+                allJardin.add(new Jardin(
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
+                        rs.getString("etat"))
+
+                );
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return allJardin;
+    }
+
+
+    @Override
     public Jardin findById(int id) {
  Jardin Jardin = null;
         String query="select * from jardin where id='"+id+"'";
@@ -293,6 +321,24 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
             Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return allJardin;
+    }
+
+    public int updateStat(int id){
+        int update=0;
+        String query="UPDATE jardin  SET Etat='ACCEPTE' where id="+id;
+        try {
+
+            PreparedStatement statement= connexion.prepareStatement(query);
+
+
+
+            update=statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return update;
+
     }
 
     

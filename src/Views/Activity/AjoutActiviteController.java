@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import static java.time.LocalDate.now;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -105,15 +106,15 @@ public class AjoutActiviteController implements Initializable {
                                 String club = club_box.getSelectionModel().getSelectedItem();
                                 int id = map.get(club);
                                 
-                                LocalDate dateA = date_text.getValue();
+                                LocalDate date = date_text.getValue();
                                 String activite = act_text.getText();
                                 String description = desc_text.getText();
-                                String date = dateA.toString();
+                                //String date = dateA.toString();
                                 
                                 Club c = new Club();
                                 c.setId(id);
                                 Activite A = new Activite();
-                                A.setDate(date);
+                                A.setDate(java.sql.Date.valueOf(date));
                                 A.setTypeact(activite);
                                 A.setDetailles(description);
                                 A.setClub(c);
