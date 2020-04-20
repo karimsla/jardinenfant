@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.lowagie:itext:1.4.8" type="repository">
+    <properties maven-id="com.lowagie:itext:1.4.8" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/itext-1.4.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/itext-1.4.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

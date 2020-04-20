@@ -58,10 +58,10 @@ public class FXMLController implements Initializable {
     @FXML
     private void listener()  {
 
-        load(Ljardin,"Accueil.fxml");
-        load(demandes,"ConsulterActivite.fxml");
+        load(Ljardin,"Jardin/rechercheJardinEnfant2.fxml");
+        load(demandes,"Demandes/demandejar.fxml");
         load(reclams,"Reclamation/ListeReclamation.fxml");
-        load(Lpar,"ConsulterEnfant.fxml");
+        load(Lpar,"Parent/ListeParent.fxml");
         load(pay,"Reclamation/ListeReclamation.fxml");
 
 

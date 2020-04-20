@@ -5,26 +5,27 @@
  */
 package IServices;
 
+import Entities.Jardin;
+import Utils.ConnexionBD;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Entities.Jardin;
-import Utils.ConnexionBD;
-
+;
 
 /**
  *
  * @author ASUS
  */
-public class CrudJardinEnfantImpl implements CrudJardinEnfant{
+public class CrudJardinEnfantImpl implements CrudJardinEnfant {
     
     Connection connexion =null; 
 
     public CrudJardinEnfantImpl() throws SQLException {
-        connexion=ConnexionBD.getInstance().getCnx();
+        connexion= ConnexionBD.getInstance().getCnx();
     }
     
  
@@ -37,24 +38,24 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
          
 
                 
-                String req="SELECT * FROM jardin WHERE Name='"+nom+"'";
+                String req="SELECT * FROM jardin WHERE Name LIKE '%"+nom+"%'";
             Statement stm=connexion.createStatement();
             ResultSet rs=stm.executeQuery(req);
                 
                 
-               
+
+
+
            while(rs.next()){
-        	   Jardin j= new Jardin(
-        			   
-        			   
-                   rs.getInt(2),
-                   rs.getString("name"),
-                   rs.getString("description"),
-                   rs.getString("numtel"),
-                   rs.getFloat("tarif"),
-                   rs.getString("adresse"),
-                   rs.getString("etat"));
-                     
+              Jardin j= new Jardin(
+                      rs.getInt("id"),
+                   rs.getString("Name"),
+                   rs.getString("Description"),
+                       rs.getString("numtel"),
+                      (float) rs.getDouble("Tarif"),
+                     rs.getString("Adresse"),
+
+                      rs.getString("etat"));
   allJardin.add(j);
                 
            }
@@ -71,45 +72,51 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
 
     @Override
     public List<Jardin> findByNum(String numTel) {
- List<Jardin> allJardin = new ArrayList<>();
-        String query="select * from jardin where numtel='"+numTel+"'";
-        try{
-            Statement statement= connexion.createStatement();
-            ResultSet rs= statement.executeQuery(query);
-            while(rs.next()){
+
+        List<Jardin> allJardin = new ArrayList<>();
+        String query = "select * from jardin where numtem LIKE '%" + numTel + "%'";
+
+        try {
+            Statement statement = connexion.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                 /*int id, String name, String description,
+			String numtel, float tarif, String adresse, String etat*/
                 allJardin.add(new Jardin(
-                		 rs.getInt(2),
-                         rs.getString("name"),
-                         rs.getString("description"),
-                         rs.getString("numtel"),
-                         rs.getFloat("tarif"),
-                         rs.getString("adresse"),
-                         rs.getString("etat") ));
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
+                        rs.getString("etat")));
+
             }
-            
         } catch (SQLException ex) {
             Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return allJardin;
-        }
+        return  allJardin;
+    }
 
-    @Override
+
+        @Override
     public List<Jardin> findByEtat(String etat) {
- List<Jardin> allJardin = new ArrayList<>();
-        String query="select * from jardin where Etat='"+etat+"'";
+
+            List<Jardin> allJardin = new ArrayList<>();
+        String query="select * from jardin where Etat LIKE'%"+etat+"%'";
         try{
             Statement statement= connexion.createStatement();
             ResultSet rs= statement.executeQuery(query);
             while(rs.next()){
                 allJardin.add(new Jardin(
-         			   
-         			   
-                        rs.getInt(2),
-                        rs.getString("name"),
-                        rs.getString("description"),
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
                         rs.getString("numtel"),
-                        rs.getFloat("tarif"),
-                        rs.getString("adresse"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
                         rs.getString("etat"))
                 
                 );
@@ -120,9 +127,6 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
         }
         return allJardin;
     }
-    
-    
-    
     @Override
     public List<Jardin> findByTarif(Double tarif) {
      List<Jardin> allJardin = new ArrayList<>();
@@ -132,13 +136,14 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
             ResultSet rs= statement.executeQuery(query);
             while(rs.next()){
                 allJardin.add(new Jardin(
-                		 rs.getInt(2),
-                         rs.getString("name"),
-                         rs.getString("description"),
-                         rs.getString("numtel"),
-                         rs.getFloat("tarif"),
-                         rs.getString("adresse"),
-                         rs.getString("etat"))
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
+                        rs.getString("etat"))
                 
                 );
             }
@@ -152,19 +157,20 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
     @Override
     public List<Jardin> findByAdresse(String adresse) {
      List<Jardin> allJardin = new ArrayList<>();
-        String query="select * from jardin where Adresse='"+adresse+"'";
+        String query="select * from jardin where Adresse LIKE '%"+adresse+"%'";
         try{
             Statement statement= connexion.createStatement();
             ResultSet rs= statement.executeQuery(query);
             while(rs.next()){
                 allJardin.add(new Jardin(
-                		 rs.getInt(2),
-                         rs.getString("name"),
-                         rs.getString("description"),
-                         rs.getString("numtel"),
-                         rs.getFloat("tarif"),
-                         rs.getString("adresse"),
-                         rs.getString("etat"))
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
+                        rs.getString("etat"))
                 
                 );
             }
@@ -176,6 +182,34 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
     }
 
     @Override
+    public List<Jardin> findByEnAttente() {
+        List<Jardin> allJardin = new ArrayList<>();
+        String query="select * from jardin where Etat='En ATTENTE'";
+        try{
+            Statement statement= connexion.createStatement();
+            ResultSet rs= statement.executeQuery(query);
+            while(rs.next()){
+                allJardin.add(new Jardin(
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
+                        rs.getString("etat"))
+
+                );
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return allJardin;
+    }
+
+
+    @Override
     public Jardin findById(int id) {
  Jardin Jardin = null;
         String query="select * from jardin where id='"+id+"'";
@@ -184,16 +218,14 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
             ResultSet rs= statement.executeQuery(query);
             rs.next();
                 Jardin=new Jardin(
-                		 rs.getInt("id"),
-                         rs.getString("name"),
-                         rs.getString("description"),
-                         rs.getString("numtel"),
-                         rs.getFloat("tarif"),
-                         rs.getString("adresse"),
-                         rs.getString("etat")
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
 
-                
-                );
+                        rs.getString("etat"));
             } catch (SQLException ex) {
             Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -251,15 +283,15 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
     }
 
     @Override
-    public int delet(Jardin type) {
-        String query="DELET  from jardin WHERE id="+type.getId();
+    public int delet(Jardin jardin) {
+        String query="DELETE FROM jardin WHERE id="+jardin.getId();
         int rowDeleted=0;
         try {
             PreparedStatement statement= connexion.prepareStatement(query);
           rowDeleted=statement.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return rowDeleted;
     }
@@ -273,13 +305,14 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
             ResultSet rs= statement.executeQuery(query);
             while(rs.next()){
                 allJardin.add(new Jardin(
-               		 rs.getInt(2),
-                     rs.getString("name"),
-                     rs.getString("description"),
-                     rs.getString("numtel"),
-                     rs.getFloat("tarif"),
-                     rs.getString("adresse"),
-                     rs.getString("etat"))
+                        rs.getInt("id"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getString("numtel"),
+                        (float) rs.getDouble("Tarif"),
+                        rs.getString("Adresse"),
+
+                        rs.getString("etat"))
                 
                 );
             }
@@ -289,5 +322,24 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant{
         }
         return allJardin;
     }
+
+    public int updateStat(int id){
+        int update=0;
+        String query="UPDATE jardin  SET Etat='ACCEPTE' where id="+id;
+        try {
+
+            PreparedStatement statement= connexion.prepareStatement(query);
+
+
+
+            update=statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudJardinEnfantImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return update;
+
+    }
+
     
 }

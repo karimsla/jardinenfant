@@ -22,8 +22,7 @@ import javafx.stage.Stage;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 
-
-
+import static jardin.enfant.JardinEnfant.authenticated;
 
 
 public class LoginController implements Initializable {
@@ -65,9 +64,21 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Messages/MessageParent.fxml")));
-                    stage.setScene(scene);
-                    stage.show();
+                    if(authenticated.getRole().contains("ADMIN")){
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/FXML.fxml")));
+                        stage.setScene(scene);
+                        stage.show();
+                    }else if(authenticated.getRole().contains("RESPONSABLE")){
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Responsable.fxml")));
+                        stage.setScene(scene);
+                        stage.show();
+                    } else if(authenticated.getRole().contains("PARENT")){
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml")));
+                        stage.setScene(scene);
+                        stage.show();
+                    }
+
+
 
                 } catch (IOException ex) {
                     System.err.println(ex.getMessage());

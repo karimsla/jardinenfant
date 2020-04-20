@@ -5,13 +5,17 @@
  */
 package Views.Club;
 
+import Entities.Activite;
 import Entities.Club;
 import IServices.ClubServices;
 import Utils.ConnexionBD;
-import Views.ConsulterActiviteController;
+import Views.Activity.ConsulterActiviteController;
+import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,13 +23,18 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -37,6 +46,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -69,12 +82,23 @@ public class ConsulterClubController implements Initializable {
     private TextField mod_club;
     @FXML
     private TextArea mod_descr;
-    @FXML
-    private Button Refresh;
 
     private String id;
     @FXML
     private Button Supprimer;
+    @FXML
+    private TextField nom_text;
+    @FXML
+    private Button search;
+    @FXML
+    private Button afficher;
+
+    private String nom;
+    private String description;
+    private String url;
+    
+    
+    
 
     /**
      * Initializes the controller class.
@@ -94,7 +118,7 @@ public class ConsulterClubController implements Initializable {
             }
         });
         
-     
+        
 
     }
 
@@ -103,6 +127,11 @@ public class ConsulterClubController implements Initializable {
         if (club_liste.getSelectionModel().getSelectedItem() != null) {
             Club selectedOne = club_liste.getSelectionModel().getSelectedItem();
             id = Integer.toString(selectedOne.getId());
+            nom = selectedOne.getName();
+            description = selectedOne.getDescription();
+            url = selectedOne.getPhoto();
+           
+            
 
             mod_club.setText(selectedOne.getName());
             mod_descr.setText(selectedOne.getDescription());
@@ -136,7 +165,7 @@ public class ConsulterClubController implements Initializable {
 
         nom_Club.setCellValueFactory(new PropertyValueFactory<Club, String>("Name"));
         Description.setCellValueFactory(new PropertyValueFactory<Club, String>("Description"));
-        Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
+        //  Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
         club_liste.setItems(data);
     }
 
@@ -149,44 +178,34 @@ public class ConsulterClubController implements Initializable {
     }
 
     @FXML
-    private void Modifier(ActionEvent event) {
+    private void Modifier(ActionEvent event) throws IOException {
 
-        String club_nom = mod_club.getText();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierClub.fxml"));
 
-        String descp = mod_descr.getText();
-        int i = Integer.parseInt(id);
-        ClubServices S = new ClubServices();
-        int AS = S.modifier(club_nom, descp, i);
-        if (AS > 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("modification est faite");
-            alert.setHeaderText("INFO");
-            alert.showAndWait();
+        Parent root = (Parent) loader.load();
+        
+        
+        
+        ModifierClubController mc = loader.getController();
+        
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("nop");
-            alert.showAndWait();
-        }
 
+        mc.GetData(nom, description, url);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
-
-    private void Annuler(ActionEvent event) throws IOException {
+    /*  private void Annuler(ActionEvent event) throws IOException {
         if (event.getSource() == Annuler) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Views/Accueil.fxml"));
             root.getChildren().setAll(pane);
-        }
-    }
+        }*/
+    
 
     @FXML
-    private void Refresh(ActionEvent event) {
-
-        Afficher();
-    }
-
-    @FXML
-    private void DELETE(ActionEvent event) {
-         int i = Integer.parseInt(id);
+    private void DELETE(ActionEvent event
+    ) {
+        int i = Integer.parseInt(id);
         ClubServices S = new ClubServices();
         int AS = S.Delete(i);
         if (AS > 0) {
@@ -194,11 +213,60 @@ public class ConsulterClubController implements Initializable {
             alert.setTitle("Suppression est faite");
             alert.setHeaderText("INFO");
             alert.showAndWait();
+            Afficher();
+            mod_club.clear();
+            mod_descr.clear();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("erroooooor");
             alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void web(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/WebView.fxml"));
+        root.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void Search() {
+
+        data.clear();
+        String nom = nom_text.getText();
+
+        try {
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            String res = "Select * from Club where name Like '%" + nom + "%' ";
+
+            Statement statement = con.createStatement();
+
+            ResultSet rs = statement.executeQuery(res);
+            while (rs.next()) {
+                Club p = new Club();
+                p.setName(rs.getString("name"));
+                p.setDescription(rs.getString("description"));
+                // p.setPhoto(rs.get("photo"));
+
+                data.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsulterActiviteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        nom_Club.setCellValueFactory(new PropertyValueFactory<Club, String>("name"));
+        Description.setCellValueFactory(new PropertyValueFactory<Club, String>("description"));
+        Photo.setCellValueFactory(new PropertyValueFactory<Club, Image>("photo"));
+        club_liste.setItems(data);
+
+    }
+
+    @FXML
+    private void TakeMeToAffichage(ActionEvent event) throws IOException {
+        if (event.getSource() == afficher) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("Affichage.fxml"));
+            root.getChildren().setAll(pane);
         }
     }
 
