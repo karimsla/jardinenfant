@@ -9,15 +9,14 @@ import Entities.AbonEnf;
 import Entities.AdmEnf;
 import IServices.EnfantService;
 import Utils.ConnexionBD;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-
-import com.itextpdf.text.pdf.PdfWriter;
-
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Component;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
@@ -47,6 +46,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javax.swing.JFileChooser;
 
 /**
  * FXML Controller class
@@ -287,7 +288,7 @@ public class AdminEnfantController implements Initializable {
         
         try {
             
-          path="C:\\Users\\FERID\\Documents\\NetBeansProjects\\";
+          path="C:\\Users\\Karim\\Documents\\NetBeansProjects\\";
             
         
         

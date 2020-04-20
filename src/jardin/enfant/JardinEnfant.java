@@ -48,7 +48,7 @@ public class JardinEnfant extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/Jardin/rechercheJardinEnfant2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Enfant/AdminEnfant.fxml"));
         events(primaryStage,root);
 
         Scene scene = new Scene(root);

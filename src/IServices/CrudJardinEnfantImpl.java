@@ -74,7 +74,7 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
     public List<Jardin> findByNum(String numTel) {
 
         List<Jardin> allJardin = new ArrayList<>();
-        String query = "select * from jardin where numtel='" + numTel + "'";
+        String query = "select * from jardin where numtem LIKE '%" + numTel + "%'";
 
         try {
             Statement statement = connexion.createStatement();
@@ -104,7 +104,7 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
     public List<Jardin> findByEtat(String etat) {
 
             List<Jardin> allJardin = new ArrayList<>();
-        String query="select * from jardin where Etat='"+etat+"'";
+        String query="select * from jardin where Etat LIKE'%"+etat+"%'";
         try{
             Statement statement= connexion.createStatement();
             ResultSet rs= statement.executeQuery(query);
@@ -157,7 +157,7 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
     @Override
     public List<Jardin> findByAdresse(String adresse) {
      List<Jardin> allJardin = new ArrayList<>();
-        String query="select * from jardin where Adresse='"+adresse+"'";
+        String query="select * from jardin where Adresse LIKE '%"+adresse+"%'";
         try{
             Statement statement= connexion.createStatement();
             ResultSet rs= statement.executeQuery(query);

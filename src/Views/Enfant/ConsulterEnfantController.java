@@ -6,6 +6,9 @@
 package Views.Enfant;
 
 import Entities.AbonEnf;
+import Entities.Activite;
+import Entities.Enfant;
+import Entities.Parents;
 import IServices.EnfantService;
 import Utils.ConnexionBD;
 import java.io.IOException;
@@ -16,7 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +35,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-//import com.teknikindustries.bulksms.SMS;
+import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import com.teknikindustries.bulksms.SMS;
+import java.net.URL;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -254,7 +262,7 @@ public class ConsulterEnfantController implements Initializable {
       }
    
     }
-/*
+
     @FXML
     private void sms(ActionEvent event) {
         
@@ -273,7 +281,7 @@ public class ConsulterEnfantController implements Initializable {
 			}
         
        
-	}*/
+	}
 
     
 

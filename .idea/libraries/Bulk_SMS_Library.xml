@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Bulk_SMS_Library">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/Bulk_SMS_Library.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
