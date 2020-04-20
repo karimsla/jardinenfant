@@ -4,8 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dorra%20Kerrou/Documents/NetBeansProjects/jardinenfant/src/Views/Club/ConsulterClubController.java</file>
-            <file>file:/C:/Users/Dorra%20Kerrou/Documents/NetBeansProjects/jardinenfant/src/Views/ConsulterActiviteController.java</file>
-            <file>file:/C:/Users/Dorra%20Kerrou/Documents/NetBeansProjects/jardinenfant/src/Views/ModifyActiviteController.java</file>
+            <file>file:/C:/Users/Dorra%20Kerrou/Documents/NetBeansProjects/jardinenfant/src/Views/Club/AffichageController.java</file>
+            <file>file:/C:/Users/Dorra%20Kerrou/Documents/NetBeansProjects/jardinenfant/src/Views/Club/ModifierClubController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -123,14 +123,19 @@ public class ConsulterActiviteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Afficher();
+
         map = new HashMap<>();
         LoadData();
 
         for (int i = 0; i < nom.size(); i++) {
+            
             club_box.setValue((String) nom.get(i));
 
         }
+
+      
         club_box.setItems(nom);
+        club_box.setPromptText("Select");
 
         tableAct.setOnMouseClicked((MouseEvent event1) -> {
 

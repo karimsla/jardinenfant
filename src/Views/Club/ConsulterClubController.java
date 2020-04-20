@@ -98,7 +98,7 @@ public class ConsulterClubController implements Initializable {
     private String url;
     
     
-    private Image image;
+    
 
     /**
      * Initializes the controller class.
@@ -130,6 +130,7 @@ public class ConsulterClubController implements Initializable {
             nom = selectedOne.getName();
             description = selectedOne.getDescription();
             url = selectedOne.getPhoto();
+           
             
 
             mod_club.setText(selectedOne.getName());
@@ -154,7 +155,7 @@ public class ConsulterClubController implements Initializable {
                 C.setId(rs.getInt("id"));
                 C.setName(rs.getString("Name"));
                 C.setDescription(rs.getString("Description"));
-                // C.setPhoto(rs.getString("photo"));
+                C.setPhoto(rs.getString("photo"));
 
                 data.add(C);
             }
@@ -182,13 +183,14 @@ public class ConsulterClubController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierClub.fxml"));
 
         Parent root = (Parent) loader.load();
-
+        
+        
+        
         ModifierClubController mc = loader.getController();
         
-        
-      
 
-        mc.GetData(nom, description, url,image);
+
+        mc.GetData(nom, description, url);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();

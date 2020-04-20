@@ -45,10 +45,6 @@ public class ModifierClubController implements Initializable {
     @FXML
     private ImageView imageview;
     @FXML
-    private ComboBox<String> combo;
-    @FXML
-    private Button club;
-    @FXML
     private Button Modifier;
 
     /**
@@ -160,11 +156,11 @@ public class ModifierClubController implements Initializable {
     }
 
     
-    public void GetData(String nom, String Description, String photo, Image image){
+    public void GetData(String nom, String Description, String url){
         club_text.setText(nom);
         descr_text.setText(Description);
-        image_label.setText(photo);
-        imageview.setImage(image);
+        image_label.setText(url);
+        imageview.setImage(new Image((new File(url)).toURI().toString()));
         
         
     
