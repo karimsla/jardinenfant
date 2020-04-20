@@ -72,7 +72,7 @@ public class LoginController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
                     }else if(authenticated.getRole().contains("RESPONSABLE")){
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Jardin/payment.fxml")));
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Jardin/Responsable.fxml")));
                         stage.setScene(scene);
                         stage.show();
                     } else if(authenticated.getRole().contains("PARENT")){

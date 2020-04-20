@@ -5,21 +5,22 @@
  */
 package Views.Jardin;
 
+import Entities.Jardin;
 import Entities.Paiement;
-import IServices.CrudPayment;
-import IServices.IserviceUser;
-import IServices.PaiementCrud;
-import IServices.ServiceUser;
+import IServices.*;
 import Utils.ConnexionBD;
+import Views.Reclamation.FixeController;
+import com.teknikindustries.bulksms.SMS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -27,6 +28,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import static jardin.enfant.JardinEnfant.authenticated;
@@ -39,6 +41,8 @@ import static jardin.enfant.JardinEnfant.authenticated;
  */
 public class PaymentController implements Initializable {
 
+    @FXML
+    private Label montant;
     @FXML
     private TextField carte;
     @FXML
@@ -63,6 +67,7 @@ public class PaymentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // TODO
     }
 
@@ -98,27 +103,47 @@ public class PaymentController implements Initializable {
         {
 
 
-            IserviceUser su=new ServiceUser();
+            //IserviceUser su=new ServiceUser();
             payment.setMontant(250);
             payment.setDate(date);
-            payment.setJardin(su.jardinid(authenticated.getId()));
+            HandleButton(event);
+            //payment.setJardin(su.jardinid(authenticated.getId()));
+
 
             // payment.setProv(JardinEnfant);
-            int x= crud.create(payment);
-            if(x!=0){
-                alert1.setTitle("success");
-                alert1.setContentText("payement effectuer avec succees" );
-                alert1.show();
-            }
-            else{
-                alert.setTitle("error");
-                alert.setContentText("payment failed" );
-                alert.show();
-            }
+
         }
 
 
 
+    }
+
+    public void HandleButton(ActionEvent event){
+        IserviceUser su=new ServiceUser();
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Jardin/VerifyCode.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            VerifyCodeController fc=fxmlLoader.getController();
+            String SALTCHARS = "1234567890";
+            StringBuilder salt = new StringBuilder();
+            Random rnd = new Random();
+            while (salt.length() < 6) { // length of the random string.
+                int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+                salt.append(SALTCHARS.charAt(index));
+            }
+            String saltStr = salt.toString();
+            //hidden id
+
+            fc.setLabelText(su.jardinid(authenticated.getId()),saltStr);
+
+
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     @FXML
@@ -129,6 +154,44 @@ public class PaymentController implements Initializable {
         code.clear();
 
 
+    }
+
+
+    public void envoyer(String msg) throws SQLException {
+        IserviceUser su=new ServiceUser();
+        CrudJardinEnfant sj=new CrudJardinEnfantImpl();
+
+        int j=su.jardinid(authenticated.getId());
+        Jardin jar=sj.findById(j);
+        String numtel=jar.getNumtel();
+
+        if (numtel.matches("[0-9]*")){
+            if (!(numtel).equals("")){
+
+
+                SMS s = new SMS();
+
+                s.SendSMS("ferid", "Feridferid1",msg,numtel,"https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+                Alert ale= new Alert(Alert.AlertType.INFORMATION);
+                ale.setTitle("INFORMATION");
+                ale.setHeaderText("Message envoyé");
+                ale.showAndWait();
+            }
+            else{
+                Alert ale= new Alert(Alert.AlertType.INFORMATION);
+                ale.setTitle("INFORMATION");
+                ale.setHeaderText("Le champs doit comporter un message");
+                ale.showAndWait();
+            }
+
+        }
+        else{
+
+            Alert ale= new Alert(Alert.AlertType.INFORMATION);
+            ale.setTitle("INFORMATION");
+            ale.setHeaderText("Le champs doit comporter des nombres");
+            ale.showAndWait();
+        }
     }
 
 }
