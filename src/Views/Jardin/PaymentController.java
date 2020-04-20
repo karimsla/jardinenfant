@@ -5,8 +5,8 @@
  */
 package Views.Jardin;
 
-import Entities.Payment;
-import IServices.CrudPaymentImpl;
+import Entities.Paiement;
+import IServices.PaiementCrud;
 import Utils.ConnexionBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,7 +56,7 @@ public class PaymentController implements Initializable {
     public PaymentController() {
         connection= ConnexionBD.getInstance().getCnx();
     }
-              ObservableList<Payment> listu  = FXCollections.observableArrayList();
+              ObservableList<Paiement> listu  = FXCollections.observableArrayList();
 
 
     /**
@@ -69,14 +69,14 @@ public class PaymentController implements Initializable {
 
     @FXML
     private void payerHandler(ActionEvent event) throws SQLException {
-        CrudPaymentImpl crud = new CrudPaymentImpl();
+        PaiementCrud crud = new PaiementCrud();
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
           
 Date date = new Date(System.currentTimeMillis());
         Alert alert = new Alert(Alert.AlertType.WARNING);
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 
-        Payment payment = new Payment();
+        Paiement payment = new Paiement();
         if(jardin.getText().isEmpty()||carte.getText().length()!=13||!mail.getText().contains("@")||
                code.getText().length()!=3){
             alert.setTitle("error");
@@ -85,7 +85,7 @@ Date date = new Date(System.currentTimeMillis());
         }
         else
         {
-           payment.setMontant(250.0);
+           payment.setMontant(250);
            payment.setDate(date);
            
            //payment.setProv(jardin.getId());

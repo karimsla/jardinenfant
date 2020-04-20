@@ -23,7 +23,10 @@ public class Paiement {
    
     private int jardin;
 
-    public Paiement( Date date, float montant, int jardin) {
+    public Paiement() {
+    }
+
+    public Paiement(Date date, float montant, int jardin) {
 
         this.date = date;
         this.montant = montant;

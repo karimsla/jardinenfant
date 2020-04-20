@@ -38,7 +38,7 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
          
 
                 
-                String req="SELECT * FROM jardin WHERE Name='"+nom+"'";
+                String req="SELECT * FROM jardin WHERE Name LIKE '%"+nom+"%'";
             Statement stm=connexion.createStatement();
             ResultSet rs=stm.executeQuery(req);
                 

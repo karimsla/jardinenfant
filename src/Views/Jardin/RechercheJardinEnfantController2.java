@@ -114,9 +114,9 @@ public class RechercheJardinEnfantController2 implements Initializable {
         tarif.setCellValueFactory(new PropertyValueFactory<>("Tarif"));
         description.setCellValueFactory(new PropertyValueFactory<>("Description"));
         adresse.setCellValueFactory(new PropertyValueFactory<>("Adresse"));
-        numtel.setCellValueFactory(new PropertyValueFactory<>("numTel"));
+        numtel.setCellValueFactory(new PropertyValueFactory<>("numtel"));
         etat.setCellValueFactory(new PropertyValueFactory<>("Etat"));
-        colnom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        colnom.setCellValueFactory(new PropertyValueFactory<>("name"));
         
         
         
