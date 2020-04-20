@@ -205,7 +205,7 @@ public class RechercheJardinEnfantController2 implements Initializable {
          JardinEnfant selectedForEdit = jardin.getSelectionModel().getSelectedItem();
         if (selectedForEdit == null) {
                         alert.setTitle("error");
-                        alert.setContentText("No Space selected ,Please select a Space for edit" );
+                        alert.setContentText(" selected ,Please select a Jardin for edit" );
                         alert.show();
             return;
         }
@@ -217,7 +217,7 @@ public class RechercheJardinEnfantController2 implements Initializable {
             controller.inflateUI(selectedForEdit);
            esi.delet(selectedForEdit.getId());
             Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("edit Space");
+            stage.setTitle("edit JArdin");
             stage.setScene(new Scene(parent));
             stage.show();
 
