@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,21 +35,13 @@ import javafx.scene.control.TextField;
  */
 public class PaymentController implements Initializable {
 
-  @FXML
-    private TextField jardin;
- 
-    @FXML
-    private TextField mail;
-    @FXML
+     @FXML
+    private TextField carte;
+       @FXML
+    private DatePicker expire;
+     @FXML
     private TextField code;
     @FXML
-    private TextField carte;
-    
-    @FXML
-    
-    private DatePicker expire;
-    @FXML
-    
     private Button valider;
     @FXML
     private Button annuler;
@@ -79,10 +72,22 @@ Date date = new Date(System.currentTimeMillis());
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 
         Payment payment = new Payment();
-        if(jardin.getText().isEmpty()||carte.getText().length()!=13||!mail.getText().contains("@")||
+        if(carte.getText().length()!=13){
+            alert.setTitle("error");
+                        alert.setContentText("verifier champs num de carte" );
+                        alert.show();
+        }
+        else if (
                code.getText().length()!=3){
             alert.setTitle("error");
-                        alert.setContentText("verifier champs" );
+                        alert.setContentText("verifier champs mot de passe " );
+                        alert.show();
+        }
+        else if (
+        expire.getValue().compareTo(LocalDate.now())<0)
+        {
+        alert.setTitle("error");
+                        alert.setContentText("verifier champs date ! date invalide " );
                         alert.show();
         }
         else
@@ -90,7 +95,7 @@ Date date = new Date(System.currentTimeMillis());
            payment.setMontant(250.0);
            payment.setDate(date);
            
-           //payment.setProv(jardin.getId());
+          // payment.setProv(JardinEnfant);
            int x= crud.create(payment);
            if(x!=0){
              alert1.setTitle("success");
@@ -111,10 +116,10 @@ Date date = new Date(System.currentTimeMillis());
     @FXML
     private void annulerHandler(ActionEvent event) {
         expire.getEditor().clear();
-        jardin.clear();
+  
         carte.clear();
         code.clear();
-        mail.clear();
+     
         
     }
     
