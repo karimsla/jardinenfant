@@ -151,7 +151,8 @@ public class AbonEnf {
         this.numtel = numtel;
     }
     
-    
+    public String toString() {
+   return ""+this.prenom;}
     
     
 }
