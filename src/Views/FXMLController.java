@@ -62,7 +62,7 @@ public class FXMLController implements Initializable {
         load(demandes,"Demandes/demandejar.fxml");
         load(reclams,"Reclamation/ListeReclamation.fxml");
         load(Lpar,"Parent/ListeParent.fxml");
-        load(pay,"Reclamation/ListeReclamation.fxml");
+        load(pay,"Jardin/paymentList.fxml");
 
 
 

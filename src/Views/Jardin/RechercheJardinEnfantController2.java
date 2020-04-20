@@ -190,7 +190,7 @@ public class RechercheJardinEnfantController2 implements Initializable {
         }
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/view/jardin/EditJardin.fxml"));
+                    .getResource("/Views/Jardin/EditJardin.fxml"));
             Parent parent = loader.load();
             EditJardinController controller = (EditJardinController) loader.getController();
             controller.inflateUI(selectedForEdit);

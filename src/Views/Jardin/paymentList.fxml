@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="563.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Jardin.PayementList">
+   <children>
+      <Pane layoutX="40.0" layoutY="37.0" prefHeight="501.0" prefWidth="765.0">
+         <children>
+            <TableView fx:id="tabpay" layoutX="1.0" layoutY="2.0" prefHeight="427.0" prefWidth="765.0">
+              <columns>
+                <TableColumn fx:id="coljar" prefWidth="75.0" text="Jardin" />
+                <TableColumn fx:id="colmont" prefWidth="75.0" text="Montant" />
+                  <TableColumn fx:id="coldate" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="id" prefWidth="75.0" text="ID" visible="false" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -118,7 +118,7 @@ import java.util.logging.Logger;
         @Override
         public List<Paiement> findAll() {
             List<Paiement> allPaiement = new ArrayList<>();
-            String query="select * from jardin";
+            String query="select p.*, j.Name from paiement as p,jardin as j where j.id=p.jardin_id ";
             try{
                 Statement statement= connexion.createStatement();
                 ResultSet resultSet= statement.executeQuery(query);
@@ -126,7 +126,7 @@ import java.util.logging.Logger;
                     allPaiement.add(new Paiement(
                             resultSet.getDate("date"),
                             (float) resultSet.getDouble("Montant"),
-                            resultSet.getInt("jardin_id" )
+                            resultSet.getString("Name" )
 
                     ));
                 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="915.0" style="-fx-background-color: #ededed;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Tuteur.TuteurController">
+   <children>
+      <TableView fx:id="tv" layoutX="51.0" layoutY="65.0" prefHeight="370.0" prefWidth="507.0">
+        <columns>
+          <TableColumn fx:id="nom_col" prefWidth="168.0" text="Nom" />
+          <TableColumn fx:id="prenom_col" prefWidth="195.0" text="Prenom" />
+            <TableColumn fx:id="sexe_col" prefWidth="143.0" text="Sexe" />
+        </columns>
+      </TableView>
+      <Pane fx:id="info" layoutX="663.0" layoutY="56.0" prefHeight="403.0" prefWidth="221.0" style="-fx-background-color: #d6d6d6;" styleClass="box" stylesheets="@../../Assets/style.css" visible="false">
+         <children>
+            <TextField fx:id="nom" layoutX="71.0" layoutY="105.0" prefHeight="25.0" prefWidth="136.0" />
+            <TextField fx:id="prenom" layoutX="75.0" layoutY="164.0" prefHeight="25.0" prefWidth="136.0" />
+            <Button fx:id="supp" layoutX="51.0" layoutY="345.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="38.0" prefWidth="119.0" text="Supprimer" />
+            <Button fx:id="modif" layoutX="51.0" layoutY="292.0" mnemonicParsing="false" onAction="#modifier" prefHeight="38.0" prefWidth="119.0" text="Modifier" />
+            <Label layoutX="71.0" layoutY="14.0" text="Informations">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="109.0" text="Nom" />
+            <Label layoutX="14.0" layoutY="167.0" text="Prenom" />
+            <Label layoutX="15.0" layoutY="232.0" text="Sexe" />
+            <ComboBox fx:id="sexe" layoutX="91.0" layoutY="230.0" prefHeight="25.0" prefWidth="119.0" />
+         </children>
+      </Pane>
+      <TextField fx:id="search" layoutX="51.0" layoutY="40.0" onKeyReleased="#search" prefHeight="25.0" prefWidth="169.0" promptText="Chercher..." />
+      <Button layoutX="718.0" layoutY="14.0" mnemonicParsing="false" onAction="#activer" prefHeight="20.0" prefWidth="112.0" text="Ajouter" />
+      <Pane fx:id="info_a" layoutX="664.0" layoutY="56.0" prefHeight="403.0" prefWidth="221.0" style="-fx-background-color: #d6d6d6;" styleClass="box" stylesheets="@../../Assets/style.css" visible="false">
+         <children>
+            <TextField fx:id="nom_a" layoutX="71.0" layoutY="77.0" prefHeight="25.0" prefWidth="136.0" />
+            <TextField fx:id="prenom_a" layoutX="71.0" layoutY="119.0" prefHeight="25.0" prefWidth="136.0" />
+            <Label layoutX="71.0" layoutY="14.0" text="Ajouter tuteur">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="81.0" text="Nom" />
+            <Label layoutX="14.0" layoutY="123.0" text="Prenom" />
+            <Label layoutX="15.0" layoutY="249.0" text="Sexe" />
+            <ComboBox fx:id="sexe_a" layoutX="91.0" layoutY="245.0" prefHeight="25.0" prefWidth="119.0" />
+            <Button fx:id="ajout" layoutX="51.0" layoutY="292.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="38.0" prefWidth="119.0" text="Ajouter" />
+            <TextField fx:id="email_a" layoutX="72.0" layoutY="162.0" prefHeight="25.0" prefWidth="136.0" />
+            <Label layoutX="13.0" layoutY="166.0" text="Email" />
+            <TextField fx:id="username_a" layoutX="72.0" layoutY="202.0" prefHeight="25.0" prefWidth="136.0" />
+            <Label layoutX="12.0" layoutY="207.0" text="Username" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -23,6 +23,17 @@ public class Paiement {
    
     private int jardin;
 
+    private String jard;
+
+
+    public String getJard() {
+        return jard;
+    }
+
+    public void setJard(String jard) {
+        this.jard = jard;
+    }
+
     public Paiement() {
     }
 
@@ -31,6 +42,12 @@ public class Paiement {
         this.date = date;
         this.montant = montant;
         this.jardin = jardin;
+    }
+    public Paiement(Date date, float montant, String jard) {
+
+        this.date = date;
+        this.montant = montant;
+        this.jard = jard;
     }
 
     public int getId() {

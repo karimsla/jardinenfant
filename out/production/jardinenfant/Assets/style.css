@@ -9,7 +9,27 @@
     -fx-background-color:   white;
     -fx-background-radius: 30;
 }
+.profile{
+    
+}
+.profile:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(199, 30, 195,0.8), 10, 0, 0, 0);
 
+    -fx-background-color:   white;
+    
+    -fx-background-radius:  4;
+    
+}
+.sideBtnP {
+
+}
+
+.sideBtnP:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(6, 17, 156,0.8), 10, 0, 0, 0);
+
+    -fx-background-color:   white;
+    -fx-background-radius: 30;
+}
 .box{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 

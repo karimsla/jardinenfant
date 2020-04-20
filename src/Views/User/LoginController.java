@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import javafx.fxml.FXMLLoader;;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 
@@ -69,14 +72,17 @@ public class LoginController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
                     }else if(authenticated.getRole().contains("RESPONSABLE")){
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Responsable.fxml")));
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Jardin/payment.fxml")));
                         stage.setScene(scene);
                         stage.show();
                     } else if(authenticated.getRole().contains("PARENT")){
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml")));
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Views/Parent.fxml")));
                         stage.setScene(scene);
                         stage.show();
+                    }else {
+                        JOptionPane.showConfirmDialog(null,"non autorisé","Attention",JOptionPane.YES_NO_OPTION);
                     }
+
 
 
 

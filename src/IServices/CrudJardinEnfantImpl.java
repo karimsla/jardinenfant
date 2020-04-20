@@ -263,7 +263,7 @@ public class CrudJardinEnfantImpl implements CrudJardinEnfant {
                 "numtel=?"+
                 "Adresse=?"+
                 "Etat=?"+
-                "Tarif=?";
+                "Tarif=? WHERE id=?";
         try {
             
           PreparedStatement statement= connexion.prepareStatement(query);
