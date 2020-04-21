@@ -16,7 +16,7 @@
       <Button fx:id="Club_btn" layoutX="573.0" layoutY="447.0" mnemonicParsing="false" onAction="#TakeMeToClub" prefHeight="25.0" prefWidth="97.0" text="Club" />
       <Button fx:id="modifier_btn" layoutX="558.0" layoutY="206.0" mnemonicParsing="false" onAction="#redirect2" prefHeight="25.0" prefWidth="125.0" text="Modifier" />
       <Button fx:id="btn" layoutX="557.0" layoutY="172.0" mnemonicParsing="false" onAction="#redirect" prefHeight="25.0" prefWidth="125.0" text="Ajouter" />
-      <ComboBox fx:id="club_box" promptText="choisir un club" layoutX="172.0" layoutY="23.0" prefWidth="150.0" />
+      <ComboBox fx:id="club_box" layoutX="172.0" layoutY="23.0" prefWidth="150.0" promptText="choisir un club" />
       <Button fx:id="det_btn" layoutX="336.0" layoutY="23.0" mnemonicParsing="false" onAction="#Detail" prefHeight="25.0" prefWidth="61.0" text="Afficher" />
       <Label layoutX="63.0" layoutY="27.0" text="Choisir le Club : " textFill="WHITE">
          <font>
@@ -44,5 +44,6 @@
       <Line endX="440.0" endY="1.0" layoutX="109.0" layoutY="62.0" startX="-109.0" startY="1.0" stroke="#6f6a5d" strokeWidth="3.0" />
       <Button fx:id="qr" layoutX="558.0" layoutY="269.0" mnemonicParsing="false" onAction="#qrCode" prefHeight="25.0" prefWidth="125.0" text="QR" />
       <Button fx:id="weather_btn" layoutX="558.0" layoutY="304.0" mnemonicParsing="false" onAction="#TakeMeToWeather" prefHeight="25.0" prefWidth="125.0" text="METEO" />
+      <Button layoutX="573.0" layoutY="416.0" mnemonicParsing="false" onAction="#TakeMeToParent" prefHeight="25.0" prefWidth="97.0" text="Parent" />
    </children>
 </AnchorPane>

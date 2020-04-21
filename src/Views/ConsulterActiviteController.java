@@ -297,4 +297,11 @@ public class ConsulterActiviteController implements Initializable {
 
     }
 
+    @FXML
+    private void TakeMeToParent(ActionEvent event) throws IOException {
+        
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ParentClub.fxml"));
+            root.getChildren().setAll(pane);
+    }
+
 }
