@@ -7,8 +7,8 @@ package IServices;
 
 import Entities.Categorie;
 import Utils.ConnexionBD;
+
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,16 +22,24 @@ import java.util.logging.Logger;
  * @author Emna
  */
 public class CategorieService {
+    
+      private Connection cnx;
+   
+   public CategorieService()
+   {
+       cnx= ConnexionBD.getInstance().getCnx();
+   }
+   
+    
+    
     public void ajouter(Categorie c){
       
           try{
              
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="Insert into Categorie(libelle) values (?)";
-            PreparedStatement pre = con.prepareStatement(res);
-            pre.setString(2,c.getLibelle());
-            pre.executeUpdate();
-            
+            String req="Insert into Categorie(libelle) values ('"+c.getLibelle()+"')";
+            Statement statement=cnx.createStatement();
+            statement.executeUpdate(req);
+            System.out.println("Ajout réussi!");   
             
         }catch(SQLException ex){
             System.out.println(ex);
@@ -39,6 +47,7 @@ public class CategorieService {
     
     }
 
+ /**   
    public void ModifierCategorie(int id_C,String libelle_C){
             
          try{
@@ -57,33 +66,33 @@ public class CategorieService {
             System.out.println(e);
         }    
               
-     }   
+     }   */
 
             public void supprimerCategorie(int id)
    {
        try {
-           Connection cnx = (Connection) ConnexionBD.getInstance().getCnx();
 
-           String res="Delete from Categorie where id="+id;
+           String req="Delete from Categorie where id="+id;
            Statement st=cnx.createStatement();
-           st =cnx.createStatement();
-           st.executeUpdate(res);
+           st.executeUpdate(req);
            System.out.println("Suppression réussie!");
        } catch (SQLException ex) {
            Logger.getLogger(EvenementService.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
+     
           
-     public List<Categorie> afficherAll(){
+     public List<Categorie> afficherEvenementCategorie(int id){
            List<Categorie> lc=new ArrayList<Categorie>();
-           String req="Select * from Categorie";
+           String req="Select * from Categorie where evenement_id="+id;
        try {
            Connection cnx = (Connection) ConnexionBD.getInstance().getCnx();
 
            Statement statement= cnx.createStatement();
            ResultSet rs=statement.executeQuery(req);
            while (rs.next())
-           {Categorie c=new Categorie(rs.getString(2));
+           {
+               Categorie c=new Categorie(rs.getString(2));
            c.setId(rs.getInt(1));
            lc.add(c);
            }
@@ -93,11 +102,49 @@ public class CategorieService {
        return lc;
    }       
     
-    
-    
-    
-
-
-
+     public List<Categorie> afficherAll(){
+           List<Categorie> lc=new ArrayList<Categorie>();
+           String req="Select * from categorie";
+       try {
+           cnx=(Connection) ConnexionBD.getInstance().getCnx();
+           Statement statement= cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);
+           
+           while (rs.next())
+           {
+               Categorie c=new Categorie(rs.getString("libelle"));
+           System.out.println(c);
+           c.setId(rs.getInt(1));
+           lc.add(c);
+           }
+       } catch (Exception ex) {
+           System.out.println(ex);
+       }
+       return lc;
+   }       
+            
+      
+    public Categorie find(int id)
+    {
+         String req="Select * from Categorie where id="+id;
+        Categorie e=new Categorie(0,"");
+         try {
+           Statement statement=cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);       
+           rs.next();
+           e=new Categorie(rs.getInt(1),rs.getString(2));
+       } catch (SQLException ex) {
+           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return e;
+       
+    }
 }
+     
+   
+    
+
+
+
+
 
