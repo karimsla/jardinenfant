@@ -40,6 +40,8 @@ public class ParentController implements Initializable {
     @FXML
     private Pane trajets, activites, messages, evenements, jardins, enfants, retour, logout, profil;
     @FXML
+    private Pane abonnements,remarques,mesenfants;
+    @FXML
     private Label nom;
 
 
@@ -88,6 +90,28 @@ public class ParentController implements Initializable {
             }
         });
     }
+
+
+
+    @FXML
+    public void UI_enfant()
+    {
+        if(!mesenfants.isVisible())
+        {mesenfants.setVisible(true);
+            abonnements.setVisible(true);
+            remarques.setVisible(true);
+        }else{mesenfants.setVisible(false);
+            abonnements.setVisible(false);
+            remarques.setVisible(false);
+        }
+
+
+
+
+    }
+
+
+
 }
      
  

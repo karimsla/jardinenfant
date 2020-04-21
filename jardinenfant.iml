@@ -12,7 +12,6 @@
     <orderEntry type="library" name="javafx-swt" level="project" />
     <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="javax.activation-1.2.0" level="project" />
-    <orderEntry type="library" name="json-20190722" level="project" />
     <orderEntry type="library" name="com.jfoenix:jfoenix:9.0.9" level="project" />
     <orderEntry type="library" name="com.sun.activation:javax.activation:1.2.0" level="project" />
     <orderEntry type="library" name="org.json:json:201907221" level="project" />
