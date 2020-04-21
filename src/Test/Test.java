@@ -17,6 +17,6 @@ public class Test {
         // TODO code application logic here
         
         ConnexionBD cnx1 = ConnexionBD.getInstance();
-    
+          
 }
 }

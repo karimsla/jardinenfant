@@ -137,7 +137,6 @@ ChauffeurService cs=new ChauffeurService();
    c.setCin(cin.getText());
    c.setSexe(sexe.getText());
    c.setTel(tel.getText());
-   
    cs.modifierChauffeur(c);
         
     }

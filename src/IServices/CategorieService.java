@@ -33,11 +33,11 @@ public class CategorieService {
    
     
     
-    public void ajouter(Categorie c,int id){
+    public void ajouter(Categorie c){
       
           try{
              
-            String req="Insert into Categorie(evenement_id,libelle) values ("+id+",'"+c.getLibelle()+"')";
+            String req="Insert into Categorie(libelle) values ('"+c.getLibelle()+"')";
             Statement statement=cnx.createStatement();
             statement.executeUpdate(req);
             System.out.println("Ajout réussi!");   
@@ -102,11 +102,48 @@ public class CategorieService {
        return lc;
    }       
     
-    
-    
-    
-
-
-
+     public List<Categorie> afficherAll(){
+           List<Categorie> lc=new ArrayList<Categorie>();
+           String req="Select * from categorie";
+       try {
+           cnx=(Connection)ConnexionBD.getInstance().getCnx();
+           Statement statement= cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);
+           
+           while (rs.next())
+           {Categorie c=new Categorie(rs.getString("libelle"));
+           System.out.println(c);
+           c.setId(rs.getInt(1));
+           lc.add(c);
+           }
+       } catch (Exception ex) {
+           System.out.println(ex);
+       }
+       return lc;
+   }       
+            
+      
+    public Categorie find(int id)
+    {
+         String req="Select * from Categorie where id="+id;
+        Categorie e=new Categorie(0,"");
+         try {
+           Statement statement=cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);       
+           rs.next();
+           e=new Categorie(rs.getInt(1),rs.getString(2));
+       } catch (SQLException ex) {
+           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return e;
+       
+    }
 }
+     
+   
+    
+
+
+
+
 

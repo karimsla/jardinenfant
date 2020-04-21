@@ -25,6 +25,7 @@ import javafx.stage.StageStyle;
  *
  * @author karim
  */
+
 public class JardinEnfant extends Application {
        private double xOffset;
 private double yOffset;  
@@ -62,6 +63,7 @@ public void events(Stage stage,Parent scene)
     public static void main(String[] args) {
         
         launch(args);
+             
         
     }
     
