@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@../Assets/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.ResponsableController">
+<AnchorPane fx:id="all" id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@../Assets/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Views.ResponsableController">
    <children>
       <Pane prefHeight="114.0" prefWidth="915.0" style="-fx-background-color: #393d72 #393d72;">
          <children>
@@ -22,9 +23,18 @@
                   <Font name="Britannic Bold" size="32.0" />
                </font>
             </Label>
+            <Pane fx:id="retour" layoutX="8.0" layoutY="115.0" prefHeight="35.0" prefWidth="38.0" styleClass="profile" stylesheets="@../Assets/style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/retour.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <AnchorPane fx:id="body" layoutY="114.0" prefHeight="486.0" prefWidth="915.0">
+      <AnchorPane fx:id="body" layoutY="149.0" prefHeight="486.0" prefWidth="915.0">
          <children>
             <Pane fx:id="abonnements" layoutX="100.0" layoutY="100.0" prefHeight="132.0" prefWidth="162.0" stylesheets="@../Assets/style.css">
                <children>
@@ -136,5 +146,14 @@
             </Pane>
          </children>
       </AnchorPane>
+      <Pane fx:id="logout" layoutX="860.0" layoutY="45.0" prefHeight="40.0" prefWidth="47.0" styleClass="profile" stylesheets="@../Assets/style.css">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/logout.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="553.0" prefWidth="689.0" style="-fx-background-color: #84869c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Club.ConsulterClubController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="553.0" prefWidth="689.0" style="-fx-background-color: #84869c;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Club.ConsulterClubController">
    <children>
       <Button fx:id="Ajouter" layoutX="564.0" layoutY="160.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="25.0" prefWidth="111.0" text="Ajouter un Club" />
       <Pane layoutX="-1.0" layoutY="65.0" prefHeight="490.0" prefWidth="556.0" style="-fx-background-color: #393d72;">
@@ -39,5 +33,6 @@
       <Button fx:id="afficher" layoutX="564.0" layoutY="128.0" mnemonicParsing="false" onAction="#TakeMeToAffichage" prefHeight="25.0" prefWidth="111.0" text="Affichage" />
       <Button fx:id="Modifier" layoutX="564.0" layoutY="192.0" mnemonicParsing="false" onAction="#Modifier" prefHeight="25.0" prefWidth="111.0" text="Modifier un Club" />
       <Button fx:id="Supprimer" layoutX="564.0" layoutY="227.0" mnemonicParsing="false" onAction="#DELETE" prefHeight="25.0" prefWidth="111.0" text="Supprimer" />
+      <Button fx:id="actbtn" layoutX="594.0" layoutY="399.0" mnemonicParsing="false" onAction="#activite" text="Activité" />
    </children>
 </AnchorPane>

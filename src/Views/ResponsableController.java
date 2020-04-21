@@ -53,6 +53,7 @@ public class ResponsableController implements Initializable {
         load(messages, "Messages/MessagesList.fxml",body);
         load(tuteurs, "Tuteur/Tuteur.fxml",body);
         load(retour, "Responsable.fxml", all);
+        logout();
 
     }
 

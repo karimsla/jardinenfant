@@ -31,6 +31,8 @@ public class ParentAjAboController implements Initializable {
     private Button btn_ajt;
     @FXML
     private TextField montant;
+    @FXML
+    private TextField idjardin;
 
     /**
      * Initializes the controller class.
@@ -47,6 +49,11 @@ public class ParentAjAboController implements Initializable {
         EnfantService en = new EnfantService();
         en.ajouterAbonnement(1, 7, "2019-02-25", "bus", "attente", "555");
         
+    }
+
+
+    public void Setjardin(int id){
+        idjardin.setText(String.valueOf(id));
     }
     
 }

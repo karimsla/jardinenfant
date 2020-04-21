@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="692.0" prefWidth="967.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Jardin.Alljardin">
+    <children>
+        <Pane layoutX="-10.0" prefHeight="695.0" prefWidth="976.0" />
+        <StackPane layoutX="1.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="967.0">
+            <children>
+                <AnchorPane prefHeight="625.0" prefWidth="874.0">
+                    <children>
+                        <Text layoutX="319.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher jardin d'enfant " textAlignment="CENTER" wrappingWidth="237.02099609375">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="recherche" layoutX="23.0" layoutY="90.0" text="votre choix.." />
+                        <MenuButton fx:id="fwith" layoutX="631.0" layoutY="90.0" mnemonicParsing="false" text="chercher avec ..">
+                            <items>
+                                <MenuItem fx:id="bnom" mnemonicParsing="false" onAction="#fnNom" text="Trouver avec nom" />
+                                <MenuItem fx:id="badresse" mnemonicParsing="false" onAction="#fnAdresse" text="Trouver avec adresse" />
+                                <MenuItem fx:id="btarif" mnemonicParsing="false" onAction="#fnTarif" text="Trouver avec tarif" />
+                                <MenuItem fx:id="btel" mnemonicParsing="false" onAction="#fnNum" text="Trouver avec numero tel" />
+                                <MenuItem fx:id="betat" mnemonicParsing="false" onAction="#fnEtat" text="Trouver avec etat" />
+                            </items>
+                        </MenuButton>
+                        <TableView fx:id="jardin" layoutX="23.0" layoutY="147.0" prefHeight="434.0" prefWidth="722.0">
+                            <columns>
+                                <TableColumn fx:id="id" prefWidth="75.0" text="id" visible="false" />
+                                <TableColumn fx:id="colnom" prefWidth="75.0" text="Nom" />
+                                <TableColumn fx:id="adresse" prefWidth="75.0" text="Adresse" />
+
+                                <TableColumn fx:id="description" prefWidth="75.0" text="Description" />
+                                <TableColumn fx:id="tarif" prefWidth="75.0" text="Tarif" />
+                                <TableColumn fx:id="numtel" prefWidth="75.0" text="Numero Tel" />
+
+
+                            </columns>
+
+                        </TableView>
+
+                    </children>
+                </AnchorPane>
+            </children>
+        </StackPane>
+
+    </children>
+</AnchorPane>
