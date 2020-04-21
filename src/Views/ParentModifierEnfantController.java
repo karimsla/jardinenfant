@@ -5,16 +5,20 @@
  */
 package views;
 
+import Entities.AbonEnf;
 import IServices.EnfantService;
+import Utils.ConnexionBD;
+import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.Year;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -28,9 +32,9 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author FERID
  */
-public class ParentAjouterEnfantController implements Initializable {
+public class ParentModifierEnfantController implements Initializable {
 
-    @FXML
+      @FXML
     private AnchorPane root;
     @FXML
     private Button btn_ajt;
@@ -42,21 +46,56 @@ public class ParentAjouterEnfantController implements Initializable {
     private DatePicker dat;
     @FXML
     private ComboBox<String> sex;
-    int ids=6;
+    static int ids;
+    int suc=0;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        System.out.println(ids);
         sex.getItems().addAll("Homme","Femme");
+         try{
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            String res="SELECT en.nom,en.prenom,en.datenaiss,en.sexe FROM enfant en WHERE en.id="+ids ;
+          
+            Statement statement = con.createStatement();
+          
+            ResultSet rs =  statement.executeQuery(res);
+            while(rs.next()){
+                 AbonEnf p = new AbonEnf();
+                 p.setNom(rs.getString("nom"));
+                 p.setPrenom(rs.getString("prenom"));
+                  p.setDatenaiss(rs.getDate("datenaiss"));
+                  p.setSexe(rs.getString("sexe"));
+                 
+                 LocalDate f=p.getDatenaiss().toLocalDate();
+                  
+                 nom.setText(p.getNom());
+                 prenom.setText(p.getPrenom());
+                 sex.setValue(p.getSexe());
+                 dat.setValue(f);
+               
+                
+                
+            }
+        } catch (SQLException ex) {
+           
+         }
         
       
     }    
+    
+    
+     public static void getid(int id){
+      
+         ids=id;
+        
+    }
 
     @FXML
-    private void ajouter(ActionEvent event) {
+    private void ajouter(ActionEvent event) throws IOException {
         
         LocalDate lt = LocalDate.now();
          
@@ -74,8 +113,15 @@ public class ParentAjouterEnfantController implements Initializable {
                  
              
         EnfantService en = new EnfantService();
-        en.ajouterEnfant(ids, nom.getText(), prenom.getText(), dat.getValue().toString(), sex.getSelectionModel().getSelectedItem());
-    }}
+        suc= en.modifierParent(ids, nom.getText(), prenom.getText(), dat.getValue().toString(), sex.getSelectionModel().getSelectedItem());
+          if (suc>0){
+          Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("modification faite !");
+          ale.showAndWait();     
+           
+       
+    }}}
          else {
              
              if ((nom.getText().equals("")) && (prenom.getText().equals("")) && (dat.getValue()==null) && (sex.getValue()==null)  ){
@@ -129,12 +175,13 @@ public class ParentAjouterEnfantController implements Initializable {
              
             
     
-         
+          if(event.getSource() == btn_ajt){
+    AnchorPane pane = FXMLLoader.load(getClass().getResource("ParentAfficherEnf.fxml"));
+            root.getChildren().setAll(pane);
     
-    
-    }
+    }}
     
 
-    
+   
     
 }

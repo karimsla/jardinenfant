@@ -136,6 +136,27 @@ public class EnfantService {
       System.out.println(ex); }
    }
       
+    public static int modifierParent(int pid,String nom,String prenom,String date,String sexe){
+      int ac=0;
+        try{
+             Connection con = ConnexionBD.getInstance().getCnx();
+            String res="Update enfant SET nom=?,prenom=?,datenaiss=?,sexe=?  WHERE id="+pid;
+            PreparedStatement pre = con.prepareStatement(res); 
+            pre.setString(1,nom);
+            pre.setString(2,prenom);
+            pre.setString(3,date);
+            pre.setString(4,sexe);
+            
+            ac= pre.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        catch(Exception es)
+        {
+            System.err.println(es);
+        }
+      return ac;
+  }  
       
     
 }

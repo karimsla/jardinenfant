@@ -68,6 +68,7 @@ public class ParentAfficherEnfController implements Initializable {
     private Button ajouter;
     @FXML
     private Button modifier;
+    int pid;
     /**
      * Initializes the controller class.
      */
@@ -125,6 +126,12 @@ public class ParentAfficherEnfController implements Initializable {
         if (enfcons.getSelectionModel().getSelectedItem() != null) {
             AdmEnf selectedOne = enfcons.getSelectionModel().getSelectedItem();
             id=Integer.toString(selectedOne.getId());
+            pid=selectedOne.getId();
+            
+            System.out.println(selectedOne.getId());
+            
+             ParentModifierEnfantController.getid(pid);
+           // 
             
            
         }
@@ -263,5 +270,19 @@ public class ParentAfficherEnfController implements Initializable {
         }
         
     }
+   
+
+    @FXML
+    private void modifredirect(ActionEvent event) throws IOException {
+        
+         if(event.getSource() == modifier){
+             
+             
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ParentModifierEnfant.fxml"));
+            root.getChildren().setAll(pane);
+            
+        }
+    }
+        
     
 }
