@@ -54,7 +54,7 @@ public class ParentModifierEnfantController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(ids);
+       
         sex.getItems().addAll("Homme","Femme");
          try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();

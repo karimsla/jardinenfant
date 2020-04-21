@@ -128,7 +128,7 @@ public class ParentAfficherEnfController implements Initializable {
             id=Integer.toString(selectedOne.getId());
             pid=selectedOne.getId();
             
-            System.out.println(selectedOne.getId());
+           
             
              ParentModifierEnfantController.getid(pid);
            // 
@@ -276,12 +276,17 @@ public class ParentAfficherEnfController implements Initializable {
     private void modifredirect(ActionEvent event) throws IOException {
         
          if(event.getSource() == modifier){
-             
-             
+             if (pid==0){
+                 Alert ale= new Alert(Alert.AlertType.ERROR);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Veuillez selectionner une personne");
+          ale.showAndWait();
+             }
+             else{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ParentModifierEnfant.fxml"));
             root.getChildren().setAll(pane);
             
-        }
+        }}
     }
         
     
