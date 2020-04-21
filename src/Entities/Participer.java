@@ -1,53 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entities;
 
-/**
- *
- * @author karim
- */
 public class Participer {
-     private int id;
+
+        private int id;
 
 
-    private Enfant enfant;
-    
-    private Evenement evenement;
+        private Enfant enfant;
 
-    public int getId() {
-        return id;
-    }
+        private Evenement evenement;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public Enfant getEnfant() {
-        return enfant;
-    }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    public void setEnfant(Enfant enfant) {
-        this.enfant = enfant;
-    }
+        public Enfant getEnfant() {
+            return enfant;
+        }
 
-    public Evenement getEvenement() {
-        return evenement;
-    }
+        public void setEnfant(Enfant enfant) {
+            this.enfant = enfant;
+        }
 
-    public void setEvenement(Evenement evenement) {
-        this.evenement = evenement;
-    }
+        public Evenement getEvenement() {
+            return evenement;
+        }
 
-    @Override
-    public String toString() {
-        return "Participer{" + "id=" + id + ", enfant=" + enfant + ", evenement=" + evenement + '}';
-    }
-    
-    
-    
-    
+        public void setEvenement(Evenement evenement) {
+            this.evenement = evenement;
+        }
+
+        @Override
+        public String toString() {
+            return "Participer{" + "id=" + id + ", enfant=" + enfant + ", evenement=" + evenement + '}';
+        }
+
+
+
+
+
+
 }
-

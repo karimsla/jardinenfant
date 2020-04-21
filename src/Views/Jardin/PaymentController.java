@@ -135,7 +135,7 @@ public class PaymentController implements Initializable {
 
             fc.setLabelText(su.jardinid(authenticated.getId()),saltStr);
 
-            envoyer(saltStr);
+           // envoyer(saltStr);
 
 
             Stage stage = new Stage();
