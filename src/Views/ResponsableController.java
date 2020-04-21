@@ -33,7 +33,7 @@ AnchorPane body;
         load(chauffeurs,"Chauffeurs/Consulter.fxml");
         load(abonnements,"Enfant/ConsulterEnfant.fxml");
         load(evenements,"Emna/ConsulterListeEvenements.fxml");
-        load(messages,"Reclamation/ListeReclamation.fxml");
+        load(messages,"Messages/MessagesList.fxml");
         load(tuteurs,"Tuteur/Tuteur.fxml");
         
     }    
