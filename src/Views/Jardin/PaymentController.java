@@ -102,11 +102,10 @@ public class PaymentController implements Initializable {
         else
         {
 
-
-            //IserviceUser su=new ServiceUser();
-            payment.setMontant(250);
-            payment.setDate(date);
             HandleButton(event);
+            //IserviceUser su=new ServiceUser();
+
+
             //payment.setJardin(su.jardinid(authenticated.getId()));
 
 
@@ -136,6 +135,7 @@ public class PaymentController implements Initializable {
 
             fc.setLabelText(su.jardinid(authenticated.getId()),saltStr);
 
+            envoyer(saltStr);
 
 
             Stage stage = new Stage();

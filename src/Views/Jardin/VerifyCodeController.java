@@ -1,11 +1,21 @@
 package Views.Jardin;
 
+import Entities.Paiement;
+import IServices.CrudPayment;
+import IServices.IserviceUser;
+import IServices.PaiementCrud;
+import IServices.ServiceUser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class VerifyCodeController implements Initializable{
@@ -19,6 +29,8 @@ public class VerifyCodeController implements Initializable{
     private TextField idjardin;
     @FXML
     private TextField codeval;
+    @FXML
+    private Label lbltxt;
 
 
     @Override
@@ -39,6 +51,32 @@ public class VerifyCodeController implements Initializable{
         sbmit.setOnAction(e->{
             if(code.getText().equals(codeval.getText())){
                 //add to database else reject it
+                try {
+                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    IserviceUser su=new ServiceUser();
+
+
+                    //payment.setJardin(su.jardinid(authenticated.getId()));
+                    Date date = new Date(System.currentTimeMillis());
+                    Paiement payment=new Paiement();
+                    CrudPayment crud = new PaiementCrud();
+                    payment.setDate(date);
+
+                    payment.setMontant(250);
+                    payment.setJardin(Integer.parseInt(idjardin.getText()));
+                    int x= crud.create(payment);
+                    lbltxt.setText("Paiement effectué avec succué");
+                    lbltxt.setVisible(true);
+
+                    // do what you have to do
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }else {
+                lbltxt.setText("code incorrect réessayer");
+                lbltxt.setVisible(true);
+
             }
         });
 
