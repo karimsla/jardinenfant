@@ -94,7 +94,7 @@ public class ConsulterActiviteController implements Initializable {
         data.clear();
         try {
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res = "SELECT typeact,detailles, date FROM `activite";
+            String res = "SELECT typeact,detailles, date FROM activite";
 
             Statement statement = con.createStatement();
 
@@ -150,7 +150,7 @@ public class ConsulterActiviteController implements Initializable {
     private void redirect(ActionEvent event) throws IOException {
 
         if (event.getSource() == btn) {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/AjoutActivite.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/Activity/AjoutActivite.fxml"));
             root.getChildren().setAll(pane);
         }
     }
@@ -158,7 +158,7 @@ public class ConsulterActiviteController implements Initializable {
     @FXML
     private void redirect2(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyActivite.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Activity/ModifyActivite.fxml"));
 
         Parent root = (Parent) loader.load();
 
@@ -238,7 +238,7 @@ public class ConsulterActiviteController implements Initializable {
     private void TakeMeToClub(ActionEvent event) throws IOException {
 
         {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("Club/ConsulterClub.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/Club/ConsulterClub.fxml"));
             root.getChildren().setAll(pane);
         }
     }

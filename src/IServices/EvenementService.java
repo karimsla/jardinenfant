@@ -42,7 +42,7 @@ public class EvenementService {
             
          try{
               cnx=(Connection) ConnexionBD.getInstance().getCnx();
-              String res ="Update Evenement Set titre='"+e.getTitre()+"',description='"+e.getDescription()+"',date='"+e.getDate()+"','"
+              String res ="Update Evenement Set titre='"+e.getTitre()+"',description='"+e.getDescription()+"',date='"+e.getDate()+"'"
               + "where id="+e.getId();
          
              Statement st=cnx.createStatement();
@@ -94,11 +94,33 @@ public class EvenementService {
            System.out.println(ex);
        }
        return le;
-   }       
-             
- 
-     
-     
+   }
+    public List<Evenement> findmine(int id){
+        CategorieService cs=new CategorieService();
+        List<Evenement> le=new ArrayList<Evenement>();
+        String req="Select * from Evenement where jardin_id="+id;
+        try {
+            cnx=(Connection) ConnexionBD.getInstance().getCnx();
+            Statement statement= cnx.createStatement();
+            ResultSet rs=statement.executeQuery(req);
+
+            while (rs.next())
+            {
+                Evenement e=new Evenement(rs.getString("titre"),rs.getDate("date").toString(),rs.getString("description"),rs.getString("image"));
+                e.setId(rs.getInt(1));
+                e.setCategorie(cs.find(rs.getInt("categorie_id")));
+                System.out.println(e);
+                le.add(e);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return le;
+    }
+
+
+
+
     public Evenement find(int id)
     {
          String req="Select * from evenement where id="+id;

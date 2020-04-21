@@ -8,4 +8,8 @@ public interface IserviceUser extends CrudGeneric<User> {
 
     public String Login(String username,String password) throws IOException;
     int jardinid(int respid);
+
+    public String nompar();
+    public String nomresp();
+
 }

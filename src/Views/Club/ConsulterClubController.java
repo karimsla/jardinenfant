@@ -92,6 +92,8 @@ public class ConsulterClubController implements Initializable {
     private Button search;
     @FXML
     private Button afficher;
+    @FXML
+    private Button actbtn;
 
     private String nom;
     private String description;
@@ -203,8 +205,7 @@ public class ConsulterClubController implements Initializable {
     
 
     @FXML
-    private void DELETE(ActionEvent event
-    ) {
+    private void DELETE(ActionEvent event) {
         int i = Integer.parseInt(id);
         ClubServices S = new ClubServices();
         int AS = S.Delete(i);
@@ -268,6 +269,14 @@ public class ConsulterClubController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Affichage.fxml"));
             root.getChildren().setAll(pane);
         }
+    }
+
+
+    @FXML
+    private void activite(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/Activity/ConsulterActivite.fxml"));
+        root.getChildren().setAll(pane);
+
     }
 
 }

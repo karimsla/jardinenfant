@@ -1,5 +1,6 @@
 package IServices;
 
+import Entities.Parents;
 import Entities.User;
 import Utils.ConnexionBD;
 
@@ -122,6 +123,60 @@ public class ServiceUser implements IserviceUser {
 
         return id;
     }
+
+       @Override
+    public String nompar() {
+        con = ConnexionBD.getInstance().getCnx();
+        String req = "Select p.nom,p.Prenom from parent as p where id=" + authenticated.getId();
+        int id=0;
+
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            rs.next();
+
+            return rs.getString("nom")+" "+rs.getString("prenom");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        return null;
+    }
+
+
+
+    @Override
+    public String nomresp() {
+        con = ConnexionBD.getInstance().getCnx();
+        String req = "Select Name from jardin where id="+jardinid(authenticated.getId());
+        int id=0;
+
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            rs.next();
+
+            return rs.getString("Name");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        return null;
+    }
+
+
 
     @Override
     public User findById(int id) {
