@@ -87,7 +87,16 @@ public class ParticiperParentController implements Initializable {
     @FXML
     private void ADD(ActionEvent event) throws IOException {
         
+        
+        
+        
          String nom = combo_enfant.getSelectionModel().getSelectedItem();
+         
+         PartActServices p1 = new PartActServices();
+         Enfant v = p1.verifier(nom);
+         
+         if ( v == null){
+         
                                 int id = map.get(nom);
                                 
                                 LocalDate dateA = date_act.getValue();
@@ -112,7 +121,7 @@ public class ParticiperParentController implements Initializable {
                                 PartActServices AS = new PartActServices();
                                 int a = AS.ajouter(p);
                                 if (a > 0) {
-                                    JOptionPane.showMessageDialog(null, "Ajout est fait");
+                                    JOptionPane.showMessageDialog(null, "La participation est enregistré !!");
                                    
                                     
                                 } else {
@@ -120,6 +129,11 @@ public class ParticiperParentController implements Initializable {
                                     alert.setTitle("Erreur");
                                     alert.showAndWait();
                                 }
+         }else {
+              JOptionPane.showMessageDialog(null, "Ton fils participe déjà à cette activité");
+                                    AnchorPane pane = FXMLLoader.load(getClass().getResource("AfficherActiParent.fxml"));
+                                    root.getChildren().setAll(pane);
+         }
 
     }
 
