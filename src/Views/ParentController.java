@@ -58,8 +58,10 @@ public class ParentController implements Initializable {
         load(jardins, "Jardin/AllJardin.fxml", body);
         load(evenements, "Emna/ConsulterListeEvenements.fxml", body);
         load(messages, "Messages/MessageParent.fxml", body);
-        load(enfants, "Tuteur/Tuteur.fxml", body);
+       // load(enfants, "Enfant/ParentEnfant.fxml", body);
         load(retour, "Parent.fxml", all);
+        load(remarques, "Remarques/MesRemarques.fxml", body);
+        load(abonnements, "Enfant/ParentEnfant.fxml", body);
 
         logout();
 

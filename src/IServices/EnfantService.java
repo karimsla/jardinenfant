@@ -146,7 +146,7 @@ public class EnfantService {
             String res="Insert into abonnement (jardin_id,enfant_id,date,type,etat,montant) values ('"+jid+"','"+jenf+"','"+date+"','"+type+"','"+etat+"','"+montant+"')";
             Statement statement=cnx.createStatement();
             statement.executeUpdate(res);
-            System.out.println("ajout réussie!");
+
         } catch (SQLException ex) {
             System.out.println(ex); }
     }

@@ -5,15 +5,16 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Enfant.ParentAjAboController">
+
    <children>
       <SplitPane layoutX="86.0" layoutY="14.0" orientation="VERTICAL" prefHeight="350.0" prefWidth="402.0">
          <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="442.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="442.0">
                <children>
                   <Text layoutX="47.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="33.580078125" />
                   <Text layoutX="47.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enfant" />
-                  <ComboBox fx:id="enf" layoutX="114.0" layoutY="100.0" prefWidth="150.0" />
-                  <ComboBox fx:id="type" layoutX="114.0" layoutY="158.0" prefWidth="150.0" />
+                  <ComboBox fx:id="enf" layoutX="114.0" layoutY="100.0" onAction="#recupenf" prefWidth="150.0" promptText="Choix" />
+                  <ComboBox fx:id="type" layoutX="114.0" layoutY="158.0" onAction="#mod" prefWidth="150.0" promptText="Choix" />
                   <Button fx:id="btn_ajt" layoutX="129.0" layoutY="264.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="26.0" prefWidth="108.0" text="Ajouter" />
                   <Text layoutX="64.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Abonnement">
                      <font>
@@ -21,8 +22,11 @@
                      </font>
                   </Text>
                   <Text layoutX="35.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant" />
-                  <TextField fx:id="montant" layoutX="115.0" layoutY="213.0" />
                   <TextField fx:id="idjardin" layoutX="23.0" layoutY="309.0" prefHeight="25.0" prefWidth="23.0" visible="false" />
+                  <TextField fx:id="montant" alignment="CENTER" editable="false" layoutX="115.0" layoutY="213.0" opacity="0.53">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></TextField>
                </children>
             </AnchorPane>
          </items>

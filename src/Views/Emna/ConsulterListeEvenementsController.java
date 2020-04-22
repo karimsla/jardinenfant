@@ -6,12 +6,29 @@
 package Views.Emna;
 
 
-import Entities.Categorie;
 import Entities.Evenement;
+
+import Entities.Categorie;
 import IServices.CategorieService;
+
 import IServices.EvenementService;
-import IServices.IserviceUser;
-import IServices.ServiceUser;
+
+import Utils.ConnexionBD;
+import java.io.File;
+import java.io.IOException;
+
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,22 +37,28 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.A;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import static jardin.enfant.JardinEnfant.authenticated;
+import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -46,7 +69,7 @@ import static jardin.enfant.JardinEnfant.authenticated;
 public class ConsulterListeEvenementsController implements Initializable {
     
     @FXML
-    private TextField txt_tit,txt_titre,txt_lib,txt_libellecat,image; 
+    private TextField txt_tit,txt_titre,txt_lib,txt_libellecat,image_area; 
      @FXML
     private TextArea txt_des,txt_desc;
      @FXML
@@ -86,7 +109,13 @@ public class ConsulterListeEvenementsController implements Initializable {
   
       private final ObservableList<String> categorieE =FXCollections.observableArrayList() ;
 
-     
+          
+   @FXML
+   private ImageView imageview;
+    private Image image;
+      private File file;
+    private FileChooser fileChooser;
+   
    
    
    
@@ -104,14 +133,14 @@ public class ConsulterListeEvenementsController implements Initializable {
         getDataCat(categories);
         getData(data);
         Listeners();
+     
+       
         
     }
-        public void getData(ObservableList data) {
-                data.clear();
+        public void getData(ObservableList data) 
+     {data.clear();
                 es=new EvenementService();
-            IserviceUser su=new ServiceUser();
-            int id=su.jardinid(authenticated.getId());
-                 List<Evenement> ls=es.findmine(id);
+                 List<Evenement> ls=es.afficherAll();
                 data.addAll(ls);
                 
         Lv_event.setItems(data);
@@ -130,14 +159,14 @@ public class ConsulterListeEvenementsController implements Initializable {
 }
            
              public void getDataCat(ObservableList data) 
-     {data.clear();
+            {data.clear();
                 cs=new CategorieService();
                  List<Categorie> ls=cs.afficherAll();
                  System.out.println(ls);
                 data.addAll(ls);
                 
-        lv_cat.setItems(data);
-     } 
+               lv_cat.setItems(data);
+             } 
            
            public void Listeners(){
             Lv_event.setOnMouseClicked((event) -> {
@@ -145,10 +174,26 @@ public class ConsulterListeEvenementsController implements Initializable {
             Anchorpane_ajout.setVisible(false);
             add_cat.setVisible(false);
 
-       Evenement e=new Evenement();
+       Evenement  e=new Evenement();
         e=Lv_event.getSelectionModel().getSelectedItem();
-       txt_titre.setText(e.getTitre());
-        txt_desc.setText(e.getDescription());
+          txt_titre.setText(e.getTitre());
+          txt_desc.setText(e.getDescription());
+        
+          Date d= Date.valueOf(e.getDate());
+     System.out.println(e.getDate());
+
+   LocalDate l= d.toLocalDate();
+   
+    date_ev.setValue(l);
+
+    e.setDate(Date.valueOf(date_ev.getValue()).toString()); 
+    
+          
+          
+        File f=new File(e.getImage());
+        image = new Image(f.toURI().toString());
+        imageview.setImage(image);
+        
          listeCat(comb_catM,categorieE);
       getDataCat(categories);
       comb_catM.setValue(e.getCategorie());
@@ -186,7 +231,7 @@ public class ConsulterListeEvenementsController implements Initializable {
     public void ajouter()
     { EvenementService es=new EvenementService();
     Date d=Date.valueOf(date_pickAdd.getValue());
-    Evenement e=new Evenement(txt_tit.getText(),d.toString(),txt_des.getText(),"");
+    Evenement e=new Evenement(txt_tit.getText(),d.toString(),txt_des.getText(),image_area.getText().toString());
     e.setCategorie(comb_cat.getSelectionModel().getSelectedItem());
     es.Ajouter(e);
     txt_tit.clear();
@@ -203,7 +248,8 @@ public class ConsulterListeEvenementsController implements Initializable {
       
      Categorie c=new Categorie(txt_libellecat.getText());
      cs.ajouter(c);
-   
+       txt_libellecat.clear();
+
      getDataCat(categories);
    
     
@@ -213,14 +259,25 @@ public class ConsulterListeEvenementsController implements Initializable {
     public void modifier()
     {
     EvenementService es=new EvenementService();
-
+   
     Evenement e=Lv_event.getSelectionModel().getSelectedItem();
     e.setTitre(txt_titre.getText());
     e.setDescription(txt_desc.getText());
-    e.setDate(Date.valueOf(date_ev.getValue()).toString());
+    
+    Date d= Date.valueOf(e.getDate());
+     System.out.println(e.getDate());
+
+   LocalDate f= d.toLocalDate();
+   
+    date_ev.setValue(f);
+
+    e.setDate(Date.valueOf(date_ev.getValue()).toString()); 
+    
     es.ModifierEvenement(e);
-  
+   
     }
+  
+ 
     
     public void supprimer()
     {
@@ -271,34 +328,31 @@ public class ConsulterListeEvenementsController implements Initializable {
     
     }
     
+       
     
+       @FXML
+    private void uploadImage(ActionEvent event) throws IOException {
 
-public boolean checkDate(String date)
-     {int i=0;
-         while(i<date.length())
-         {if (((date.toUpperCase().charAt(i)<'0')||(date.toUpperCase().charAt(i)>'9'))&&(date.charAt(i)!='/'))
-         {             return false;
-         }
-         i++;}
-         return true;
-     }
+        fileChooser = new FileChooser();
+        Stage stage = (Stage) Add_Ima.getScene().getWindow();
+        file = fileChooser.showOpenDialog(stage);
+        image_area.setText(file.getName());
+        File f = new File("src\\" + image_area.getText().toString());
 
+        if (file != null) {
+            image_area.setText(file.getAbsolutePath());
 
-   private boolean Check(String cin,char a,char b,boolean space)
-    {int i=0;
-        while (i<cin.length())
-        {if(!space)
-        {   if (cin.toUpperCase().charAt(i)>b||cin.toUpperCase().charAt(i)<a)
-            return false;
+            image = new Image(file.toURI().toString());
+
+            imageview.setImage(image);
+
         }
-        else
-        {   if( cin.charAt(i)!=' ' && (cin.toUpperCase().charAt(i)>b || cin.toUpperCase().charAt(i)<a))
-            return false;
-        } 
-        i++;   
-        }
-        return true;
     }
+
+
+
+
+ 
    
     private boolean saisie(String titre, String libelle)
     {
