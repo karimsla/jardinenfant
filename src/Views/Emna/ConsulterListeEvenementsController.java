@@ -72,112 +72,39 @@ import javax.swing.JOptionPane;
  */
 public class ConsulterListeEvenementsController implements Initializable {
 
-
     @FXML
-    private AnchorPane root;
-
+    private TextField txt_tit,txt_titre,txt_lib,txt_libellecat,image_area;
     @FXML
-    private AnchorPane root2;
-
+    private TextArea txt_des,txt_desc;
     @FXML
-    private ListView<Evenement> Lv_event;
-
+    private DatePicker  date_pickAdd,date_ev;
     @FXML
-    private AnchorPane Anchorpane_ajout;
-
+    private ComboBox<Categorie> comb_cat,comb_catM;
     @FXML
-    private Button leAdd_btn;
-
+    private Rectangle rec_im;
     @FXML
-    private TextField txt_tit;
-
+    private Button leAdd_btn,Add_bt,aff_bt,modif_bt,supp_bt,Add_Ima,stat_btn;
     @FXML
-    private TextArea txt_des;
-
-    @FXML
-    private DatePicker date_pickAdd;
-
-    @FXML
-    private ComboBox<Categorie> comb_cat;
-
+    private AnchorPane Anchorpane_ajout,root,add_cat;
     @FXML
     private Label src;
-
     @FXML
-    private Button Add_Ima;
-
-    @FXML
-    private TextField txt_tit2;
-    @FXML
-    private TextField txt_tit3;
-
-    @FXML
-    private ImageView imageview;
-
-    @FXML
-    private TextField image_area;
-
-    @FXML
-    private Button Add_bt;
-
-    @FXML
-    private Pane pane_detEvent;
-
-    @FXML
-    private Button modif_bt;
-
-    @FXML
-    private Button supp_bt2;
-
-    @FXML
-    private TextField txt_titre;
-
-    @FXML
-    private TextArea txt_desc;
-
-    @FXML
-    private DatePicker date_ev;
-
-    @FXML
-    private ComboBox<Categorie> comb_catM;
-
-    @FXML
-    private ImageView imageview2;
-
-    @FXML
-    private Button Add_bt1;
-
-    @FXML
-    private AnchorPane add_cat;
-
-    @FXML
-    private TextField txt_libellecat;
-
-    @FXML
-    private Button Addcat_bt;
-
-    @FXML
-    private ListView<Categorie> lv_cat;
-
-    @FXML
-    private Button supp_bt;
-
-    @FXML
-    private Button stat_bt;
+    private ListView<Evenement> Lv_event;
     EvenementService es;
     private final ObservableList<Evenement> dataC =FXCollections.observableArrayList() ;
 
     @FXML
-    private Pane pane_stat;
+    private Pane pane_detEvent,pane_stat;
     @FXML
     private TableView<Evenement> tb_aff;
     @FXML
     private TableColumn<Evenement, String> titre;
     @FXML
-    private TableColumn<Categorie, ?> categorie;
+    private TableColumn<?, ?> categorie;
     @FXML
     private ListView listview;
-
+    @FXML
+    private ListView<Categorie> lv_cat;
     private final ObservableList<Categorie> data =FXCollections.observableArrayList() ;
     CategorieService cs;
     @FXML
@@ -187,7 +114,10 @@ public class ConsulterListeEvenementsController implements Initializable {
     private final ObservableList<String> categorieE =FXCollections.observableArrayList() ;
 
 
-
+    @FXML
+    private ImageView imageview;
+    @FXML
+    private ImageView imageviewaff;
     private Image image;
     private File file;
     private FileChooser fileChooser;
@@ -226,7 +156,7 @@ public class ConsulterListeEvenementsController implements Initializable {
     public void getDataC(ObservableList data)
     {          data.clear();
         cs=new CategorieService();
-        Evenement e= Lv_event.getSelectionModel().getSelectedItem();
+        Evenement e=Lv_event.getSelectionModel().getSelectedItem();
         List<Categorie> ls=cs.afficherEvenementCategorie(e.getId());
         data.addAll(ls);
 
@@ -268,7 +198,7 @@ public class ConsulterListeEvenementsController implements Initializable {
 
             File f=new File(e.getImage());
             image = new Image(f.toURI().toString());
-            imageview2.setImage(image);
+            imageview.setImage(image);
 
             listeCat(comb_catM,categorieE);
             getDataCat(categories);
@@ -308,10 +238,10 @@ public class ConsulterListeEvenementsController implements Initializable {
     { EvenementService es=new EvenementService();
         Date d=Date.valueOf(date_pickAdd.getValue());
         Evenement e=new Evenement(txt_tit.getText(),d.toString(),txt_des.getText(),image_area.getText().toString());
-        IserviceUser su=new ServiceUser();
-
         e.setCategorie(comb_cat.getSelectionModel().getSelectedItem());
-        es.Ajouter(e,su.jardinid(authenticated.getId()));
+        IserviceUser su=new ServiceUser();
+        int idjar=su.jardinid(authenticated.getId());
+        es.Ajouter(e,idjar);
         txt_tit.clear();
         txt_des.clear();
         data.clear();
@@ -422,13 +352,10 @@ public class ConsulterListeEvenementsController implements Initializable {
 
             image = new Image(file.toURI().toString());
 
-            imageview2.setImage(image);
+            imageview.setImage(image);
 
         }
     }
-
-
-
 
 
 

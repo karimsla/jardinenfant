@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static jardin.enfant.JardinEnfant.authenticated;
+
 /**
  *
  * @author Dorra Kerrou
@@ -29,14 +31,16 @@ public class ClubServices {
      public static int  ajouter(Club a){
       int ac = 0 ;
           try{
-             
+              IserviceUser su =new ServiceUser();
+             int id=su.jardinid(authenticated.getId());
              Connection con = ConnexionBD.getInstance().getCnx();
-            String res="Insert into Club(Name,Description,photo) values (?,?,?)";
+            String res="Insert into Club(Name,Description,photo,jardin_id) values (?,?,?,?)";
             PreparedStatement pre = con.prepareStatement(res);
             pre.setString(1,a.getName());
             pre.setString(2,a.getDescription());
                       
             pre.setString(3,a.getPhoto());
+              pre.setInt(4,id);
             
             ac= pre.executeUpdate();
             

@@ -263,17 +263,19 @@ listview.setItems(data);
 
     @FXML
     public void map() {
-        Parent root = null;
+
         try {
-            root = FXMLLoader.load(getClass().getResource("Maps.fxml"));
+
+            Parent   root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/ConsulterMap.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = new Stage();
+            primaryStage.setScene(scene);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
 
     }
 

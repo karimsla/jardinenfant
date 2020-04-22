@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="589.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Emna.ConsulterListeEvenementsController">
+<AnchorPane id="AnchorPane" fx:id="main" prefHeight="589.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Views.Emna.ConsulterListeEvenementsController">
    <children>
       <AnchorPane fx:id="root" prefHeight="589.0" prefWidth="285.0" style="-fx-background-color: #393D72;">
          <children>
@@ -71,7 +72,7 @@
                </font>
             </Label>
             <Button fx:id="modif_bt" layoutX="78.0" layoutY="458.0" mnemonicParsing="false" onAction="#modifier" prefHeight="27.0" prefWidth="81.0" text="Modifier" textFill="#bf1b7a" />
-            <Button fx:id="supp_bt" layoutX="240.0" layoutY="457.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="27.0" prefWidth="87.0" text="Supprimer" textFill="#bf1b7a" />
+            <Button fx:id="supp_btn" layoutX="240.0" layoutY="457.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="27.0" prefWidth="87.0" text="Supprimer" textFill="#bf1b7a" />
             <Label layoutX="15.0" layoutY="386.0" prefHeight="29.0" prefWidth="93.0" text="Catégories" textFill="WHITE">
                <font>
                   <Font size="16.0" />
@@ -96,7 +97,7 @@
             <TextArea fx:id="txt_desc" layoutX="118.0" layoutY="270.0" prefHeight="81.0" prefWidth="167.0" />
             <DatePicker fx:id="date_ev" layoutX="117.0" layoutY="216.0" prefHeight="27.0" prefWidth="140.0" />
             <ComboBox fx:id="comb_catM" layoutX="116.0" layoutY="387.0" prefHeight="27.0" prefWidth="167.0" />
-            <ImageView fx:id="imageview" fitHeight="140.0" fitWidth="160.0" layoutX="257.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageviewaff" fitHeight="140.0" fitWidth="160.0" layoutX="257.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
       <Button fx:id="Add_bt1" layoutX="445.0" layoutY="14.0" mnemonicParsing="false" onAction="#activate" prefHeight="27.0" prefWidth="140.0" text="Ajouter catégorie" textFill="#bf1b7a" />
