@@ -54,7 +54,7 @@ public class ParentController implements Initializable {
         nom.setText(su.nompar());
         // TODO
         load(activites, "ConsulterActivite.fxml", body);
-        load(trajets, "Chauffeurs/Consulter.fxml", body);
+        load(trajets, "Trajets/Trajets.fxml", body);
         load(jardins, "Jardin/AllJardin.fxml", body);
         load(evenements, "Emna/ConsulterListeEvenements.fxml", body);
         load(messages, "Messages/MessageParent.fxml", body);

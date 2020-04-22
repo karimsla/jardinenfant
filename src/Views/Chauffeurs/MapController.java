@@ -3,11 +3,14 @@ package Views.Chauffeurs;
 
 import Entities.MapModel;
 import Entities.Trajet;
+import IServices.IserviceUser;
+import IServices.ServiceUser;
 import IServices.TrajetService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jardin.enfant.JardinEnfant;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -45,13 +48,13 @@ public class MapController implements Initializable {
     @FXML
     public void update() throws Exception
     {
-
+       IserviceUser us=new ServiceUser(); 
         TrajetService ts=new TrajetService();
-        List<Trajet> lt=ts.afficherTrajet();
+        List<Trajet> lt=ts.afficherTrajet(us.jardinid(JardinEnfant.authenticated.getId()));
         List<MapModel> mp=new ArrayList<MapModel>();
         Gson gson=new Gson();
         for(Trajet t : lt)
-        {  System.out.println(t.getAdresse());
+        { 
             String sURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/"+t.getAdresse()+".json?access_token=pk.eyJ1Ijoic2FtaWtyIiwiYSI6ImNrOHRieWk3dDBuaTQzbGxvZDh2ZGJrZjgifQ.ZXvwJ489e09-HnnWfWpWtA&limit=1";
             String json = readUrl(sURL);
             JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();

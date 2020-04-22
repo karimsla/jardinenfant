@@ -10,7 +10,10 @@ import Entities.Evenement;
 import Entities.Trajet;
 import IServices.ChauffeurService;
 import IServices.EvenementService;
+import IServices.IserviceUser;
+import IServices.ServiceUser;
 import IServices.TrajetService;
+import jardin.enfant.JardinEnfant;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -93,9 +96,9 @@ private final ObservableList<Chauffeur> data =FXCollections.observableArrayList(
     }    
     
      public void getData(ObservableList data) 
-     {
+     {IserviceUser  js= new ServiceUser();
                 cs=new ChauffeurService();
-  List<Chauffeur> ls=cs.afficherAll();
+  List<Chauffeur> ls=cs.afficherAll(js.jardinid(JardinEnfant.authenticated.getId()));
                 data.addAll(ls);
 listview.setItems(data);
 }
@@ -103,11 +106,11 @@ listview.setItems(data);
      
  @FXML
  public void chercher()
- {
+ { IserviceUser  js= new ServiceUser();
      String ch=search.getText();
       cs=new ChauffeurService();
       data.clear();
-  List<Chauffeur> ls=cs.afficherAll().stream().filter(p->p.getNom().toUpperCase().contains(ch.toUpperCase())).collect(Collectors.toList());
+  List<Chauffeur> ls=cs.afficherAll(js.jardinid(JardinEnfant.authenticated.getId())).stream().filter(p->p.getNom().toUpperCase().contains(ch.toUpperCase())).collect(Collectors.toList());
   data.addAll(ls);
 listview.setItems(data);
        

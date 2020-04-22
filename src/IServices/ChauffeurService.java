@@ -45,9 +45,9 @@ public class ChauffeurService {
     }
 
 
-    public List<Chauffeur> afficherAll(){
+    public List<Chauffeur> afficherAll(int id){
         List<Chauffeur> lp=new ArrayList<Chauffeur>();
-        String req="Select * from chauffeur";
+        String req="Select * from chauffeur where jardin_id="+id;
         try {
             Statement statement=cnx.createStatement();
             ResultSet rs=statement.executeQuery(req);
