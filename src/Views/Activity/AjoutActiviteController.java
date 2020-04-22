@@ -114,7 +114,7 @@ public class AjoutActiviteController implements Initializable {
                                 Club c = new Club();
                                 c.setId(id);
                                 Activite A = new Activite();
-                                A.setDate(java.sql.Date.valueOf(date));
+                                A.setDate(String.valueOf(date));
                                 A.setTypeact(activite);
                                 A.setDetailles(description);
                                 A.setClub(c);

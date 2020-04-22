@@ -45,7 +45,7 @@ public class ParticiperService {
     
     public void participer(Evenement e,Enfant en)
     {
-        String res="INSERT INTO participer(enfant_id,evenement_id) values("+e.getId()+","+en.getId()+")";
+        String res="INSERT INTO participer(enfant_id,evenement_id) values("+en.getId()+","+e.getId()+")";
          try
         {Connection cnx=ConnexionBD.getInstance().getCnx();
         Statement statement=cnx.createStatement();
@@ -55,7 +55,7 @@ public class ParticiperService {
         }
         catch(SQLException ex)
         {
-            
+            System.out.println(ex);
         }
        
     }

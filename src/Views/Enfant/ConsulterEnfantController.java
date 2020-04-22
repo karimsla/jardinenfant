@@ -125,58 +125,63 @@ public class ConsulterEnfantController implements Initializable {
         modifier.setDisable(true);
         list_rec.getItems().addAll("nom","prenom","etat","type");
          modi.getItems().addAll("bus","normal");
-    }    
-    
-    @FXML
-    private void Afficher(){
+
+
+
         data.clear();
-      recherc.clear();
+        recherc.clear();
         try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND ab.etat LIKE '%"+names+"%'" ;
-          
+
             Statement statement = con.createStatement();
-          
+
             ResultSet rs =  statement.executeQuery(res);
             while(rs.next()){
-                 AbonEnf p = new AbonEnf();
-                 p.setNom(rs.getString("nom"));
-                 p.setPrenom(rs.getString("prenom"));
-                  p.setDatenaiss(rs.getDate("datenaiss"));
-                  p.setEtat(rs.getString("etat"));
-                  p.setType(rs.getString("type"));
-                  p.setDate(rs.getDate("date"));
-                  p.setId(rs.getInt("id"));
-                  p.setNumtel(rs.getString("numtel"));
-                  
-                 
-               
-                
+                AbonEnf p = new AbonEnf();
+                p.setNom(rs.getString("nom"));
+                p.setPrenom(rs.getString("prenom"));
+                p.setDatenaiss(rs.getDate("datenaiss"));
+                p.setEtat(rs.getString("etat"));
+                p.setType(rs.getString("type"));
+                p.setDate(rs.getDate("date"));
+                p.setId(rs.getInt("id"));
+                p.setNumtel(rs.getString("numtel"));
+
+
+
+
                 data.add(p);
             }
         } catch (SQLException ex) {
-           
-         }
-        
+
+        }
+
         nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
         date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+        etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+        type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
         dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
         tel.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("numtel"));
-       
+
         afficher.setItems(data);
-         
-       
-        
-        
+
+
+
+
         afficher.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 1) {
                 onEdit();
             }
         });
-        
+
+
+    }    
+    
+    @FXML
+    private void Afficher(){
+
         
         
        
@@ -203,7 +208,7 @@ public class ConsulterEnfantController implements Initializable {
     @FXML
     private void redirect(ActionEvent event) throws IOException {
         if(event.getSource() == ajou){
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("AjouterEnfant.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Views/Enfant/AjouterEnfant.fxml"));
             root.getChildren().setAll(pane);
         }
     }
@@ -267,7 +272,7 @@ public class ConsulterEnfantController implements Initializable {
     private void sms(ActionEvent event) {
         
         try{
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Msg.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Enfant/Msg.fxml"));
 				Parent root1 = (Parent) fxmlLoader.load();
 				MsgController fc=fxmlLoader.getController();
 				//hidden id

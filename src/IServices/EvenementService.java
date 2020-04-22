@@ -22,12 +22,13 @@ import java.util.logging.Logger;
 public class EvenementService {
       private Connection cnx;
 
-      public void Ajouter(Evenement e){
+      public void Ajouter(Evenement e,int id){
       
           try{
              
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="Insert into Evenement(titre,date,description,image,categorie_id) values ('"+e.getTitre()+"','"+e.getDate()+"','"+e.getDescription()+"','"+e.getImage()+"',"+e.getCategorie().getId()+")";
+            String res="Insert into Evenement(titre,date,description,image,categorie_id,jardin_id)" +
+                    " values ('"+e.getTitre()+"','"+e.getDate()+"','"+e.getDescription()+"','"+e.getImage()+"',"+e.getCategorie().getId()+","+id+")";
             PreparedStatement pre = con.prepareStatement(res);
            
             pre.executeUpdate();

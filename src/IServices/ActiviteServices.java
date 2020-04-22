@@ -39,7 +39,7 @@ public class ActiviteServices {
             PreparedStatement pre = con.prepareStatement(res);
             pre.setString(1,a.getTypeact());
             pre.setString(2,a.getDetailles());
-            pre.setDate(3,a.getDate());
+            pre.setString(3,a.getDate());
             pre.setInt(4,a.getClub().getId());
             ac= pre.executeUpdate();
             
@@ -65,7 +65,7 @@ public class ActiviteServices {
             PreparedStatement pre = con.prepareStatement(res); 
             pre.setString(1,A.getTypeact());
             pre.setString(2,A.getDetailles());
-            pre.setDate(3,A.getDate());
+            pre.setString(3,A.getDate());
             pre.setInt(4,A.getClub().getId());
             pre.setString(5,A.getTypeact());
             ac= pre.executeUpdate();
@@ -99,7 +99,7 @@ public class ActiviteServices {
                  c.setId(rs.getInt("club_id"));
                  A.setTypeact(rs.getString("typeact"));
                  A.setDetailles(rs.getString("detailles"));
-                 A.setDate(rs.getDate("date"));
+                 A.setDate(rs.getString("date"));
                  A.setClub(c);
               
              }
