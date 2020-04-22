@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Views.Enfant;
-
 import Entities.AbonEnf;
 import IServices.EnfantService;
 import Utils.ConnexionBD;
@@ -89,211 +88,211 @@ public class AjouterEnfantController implements Initializable {
         try{
             Connection cone = (Connection) ConnexionBD.getInstance().getCnx();
             String rese="SELECT Count(*) AS cou FROM  abonnement WHERE etat LIKE '%"+noms+"%' " ;
-          
+
             Statement statement = cone.createStatement();
-          
+
             ResultSet rse =  statement.executeQuery(rese);
             while(rse.next()){
                 compt.setText(rse.getString("cou"));
-                
+
             }}
-            catch(SQLException e){}
-       
-       try{
+        catch(SQLException e){}
+
+        try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
             String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en,abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'AND en.id=ab.enfant_id " ;
-          
+
             Statement statement = con.createStatement();
-          
+
             ResultSet rs =  statement.executeQuery(res);
             while(rs.next()){
-                 AbonEnf p = new AbonEnf();
-                 p.setNom(rs.getString("nom"));
-                 p.setPrenom(rs.getString("prenom"));
-                  p.setDatenaiss(rs.getDate("datenaiss"));
-                  p.setEtat(rs.getString("etat"));
-                  p.setType(rs.getString("type"));
-                  p.setDate(rs.getDate("date"));
-                  p.setId(rs.getInt("id"));
-                  
-                 
-               
-                
+                AbonEnf p = new AbonEnf();
+                p.setNom(rs.getString("nom"));
+                p.setPrenom(rs.getString("prenom"));
+                p.setDatenaiss(rs.getDate("datenaiss"));
+                p.setEtat(rs.getString("etat"));
+                p.setType(rs.getString("type"));
+                p.setDate(rs.getDate("date"));
+                p.setId(rs.getInt("id"));
+
+
+
+
                 data.add(p);
             }
         }
-      
-       
-       catch (SQLException ex) {
-           
-         }
-        
+
+
+        catch (SQLException ex) {
+
+        }
+
         nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
         date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+        etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+        type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
         dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
-       
+
         afficher.setItems(data);
-        
-          afficher.setOnMouseClicked((MouseEvent event) -> {
+
+        afficher.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 1) {
                 onEdit();
             }
         });
-        
-    }    
+
+    }
     public void onEdit() {
         // check the table's selected item and get selected item
         if (afficher.getSelectionModel().getSelectedItem() != null) {
             AbonEnf selectedOne = afficher.getSelectionModel().getSelectedItem();
             id=Integer.toString(selectedOne.getId());
-            
-           
+
+
         }
     }
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     private void modif(ActionEvent event) {
         EnfantService en= new EnfantService();
         try{
-        int mo=Integer.parseInt(id);
-         al=en.modifier(mo);}
+            int mo=Integer.parseInt(id);
+            al=en.modifier(mo);}
         catch(Exception e){}
-      if (al>0){
-          Alert ale= new Alert(Alert.AlertType.INFORMATION);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("modification faite !");
-          ale.showAndWait();
-          data.clear();
-          try{
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en,abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'AND en.id=ab.enfant_id " ;
-          
-            Statement statement = con.createStatement();
-          
-            ResultSet rs =  statement.executeQuery(res);
-            while(rs.next()){
-                 AbonEnf p = new AbonEnf();
-                 p.setNom(rs.getString("nom"));
-                 p.setPrenom(rs.getString("prenom"));
-                  p.setDatenaiss(rs.getDate("datenaiss"));
-                  p.setEtat(rs.getString("etat"));
-                  p.setType(rs.getString("type"));
-                  p.setDate(rs.getDate("date"));
-                  p.setId(rs.getInt("id"));
-                  
-                 
-               
-                
-                data.add(p);
+        if (al>0){
+            Alert ale= new Alert(Alert.AlertType.INFORMATION);
+            ale.setTitle("INFORMATION");
+            ale.setHeaderText("modification faite !");
+            ale.showAndWait();
+            data.clear();
+            try{
+                Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+                String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en,abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'AND en.id=ab.enfant_id " ;
+
+                Statement statement = con.createStatement();
+
+                ResultSet rs =  statement.executeQuery(res);
+                while(rs.next()){
+                    AbonEnf p = new AbonEnf();
+                    p.setNom(rs.getString("nom"));
+                    p.setPrenom(rs.getString("prenom"));
+                    p.setDatenaiss(rs.getDate("datenaiss"));
+                    p.setEtat(rs.getString("etat"));
+                    p.setType(rs.getString("type"));
+                    p.setDate(rs.getDate("date"));
+                    p.setId(rs.getInt("id"));
+
+
+
+
+                    data.add(p);
+                }
             }
+
+
+            catch (SQLException ex) {
+
+            }
+
+            nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+            prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+            date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+            etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+            type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+            dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
+
+            afficher.setItems(data);
+
         }
-      
-       
-       catch (SQLException ex) {
-           
-         }
-        
-        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
-        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
-       
-        afficher.setItems(data);
-        
-      }
-      else {
-           Alert aler= new Alert(Alert.AlertType.ERROR);
+        else {
+            Alert aler= new Alert(Alert.AlertType.ERROR);
             aler.setTitle("erreur !");
             aler.setHeaderText("Veuillez selectionner une personne!");
             aler.showAndWait();
-          
-      }
-        
-        
+
+        }
+
+
     }
 
     @FXML
     private void supprime(ActionEvent event) {
-        
+
         EnfantService ens= new EnfantService();
         try{
-        int mos=Integer.parseInt(id);
-        as= ens.supprimer(mos);}
-         catch (Exception e){}
-       if (as>0){
-          Alert ale= new Alert(Alert.AlertType.INFORMATION);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("suppression faite !");
-          ale.showAndWait();
-          data.clear();
-          try{
-            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en,abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'AND en.id=ab.enfant_id " ;
-          
-            Statement statement = con.createStatement();
-          
-            ResultSet rs =  statement.executeQuery(res);
-            while(rs.next()){
-                 AbonEnf p = new AbonEnf();
-                 p.setNom(rs.getString("nom"));
-                 p.setPrenom(rs.getString("prenom"));
-                  p.setDatenaiss(rs.getDate("datenaiss"));
-                  p.setEtat(rs.getString("etat"));
-                  p.setType(rs.getString("type"));
-                  p.setDate(rs.getDate("date"));
-                  p.setId(rs.getInt("id"));
-                  
-                 
-               
-                
-                data.add(p);
+            int mos=Integer.parseInt(id);
+            as= ens.supprimer(mos);}
+        catch (Exception e){}
+        if (as>0){
+            Alert ale= new Alert(Alert.AlertType.INFORMATION);
+            ale.setTitle("INFORMATION");
+            ale.setHeaderText("suppression faite !");
+            ale.showAndWait();
+            data.clear();
+            try{
+                Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+                String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en,abonnement AS ab WHERE ab.etat LIKE '%"+noms+"%'AND en.id=ab.enfant_id " ;
+
+                Statement statement = con.createStatement();
+
+                ResultSet rs =  statement.executeQuery(res);
+                while(rs.next()){
+                    AbonEnf p = new AbonEnf();
+                    p.setNom(rs.getString("nom"));
+                    p.setPrenom(rs.getString("prenom"));
+                    p.setDatenaiss(rs.getDate("datenaiss"));
+                    p.setEtat(rs.getString("etat"));
+                    p.setType(rs.getString("type"));
+                    p.setDate(rs.getDate("date"));
+                    p.setId(rs.getInt("id"));
+
+
+
+
+                    data.add(p);
+                }
             }
+
+
+            catch (SQLException ex) {
+
+            }
+
+            nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+            prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+            date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+            etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+            type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+            dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
+
+            afficher.setItems(data);
+
         }
-      
-       
-       catch (SQLException ex) {
-           
-         }
-        
-        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
-        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
-       
-        afficher.setItems(data);
-        
-      }
-       else{
+        else{
             Alert ale= new Alert(Alert.AlertType.ERROR);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("Selectionnez une personne !");
-          ale.showAndWait();
-       }
+            ale.setTitle("INFORMATION");
+            ale.setHeaderText("Selectionnez une personne !");
+            ale.showAndWait();
+        }
     }
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-     
-          if(event.getSource() == rtn){
+
+        if(event.getSource() == rtn){
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ConsulterEnfant.fxml"));
             root.getChildren().setAll(pane);
         }
@@ -301,78 +300,78 @@ public class AjouterEnfantController implements Initializable {
 
     @FXML
     private void rechercher(KeyEvent event) {
-         recherc.clear();
-       
-         if(txt_re.getText().equals(null)){
+        recherc.clear();
+
+        if(txt_re.getText().equals(null)){
+            Alert ale= new Alert(Alert.AlertType.ERROR);
+            ale.setTitle("INFORMATION");
+            ale.setHeaderText("veuillez écrire quelque chose !");
+            ale.showAndWait();
+        }
+        else{
+            if (cmb_rec.getSelectionModel().getSelectedItem()==null){
                 Alert ale= new Alert(Alert.AlertType.ERROR);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("veuillez écrire quelque chose !");
-          ale.showAndWait();
+                ale.setTitle("INFORMATION");
+                ale.setHeaderText("veuillez choisir un mode !");
+                ale.showAndWait();
+
+
             }
             else{
-                if (cmb_rec.getSelectionModel().getSelectedItem()==null){
-                    Alert ale= new Alert(Alert.AlertType.ERROR);
-          ale.setTitle("INFORMATION");
-          ale.setHeaderText("veuillez choisir un mode !");
-          ale.showAndWait();
-          
-                    
+
+                for (int i=0;i<data.size();i++){
+                    if (cmb_rec.getSelectionModel().getSelectedItem().equals("nom")){
+                        if (data.get(i).getNom().contains(txt_re.getText())){
+
+                            recherc.add(data.get(i));
+
+
+                        }}
+                    if (cmb_rec.getSelectionModel().getSelectedItem().equals("prenom")){
+                        if (data.get(i).getPrenom().contains(txt_re.getText())){
+                            recherc.add(data.get(i));
+
+
+                        }}
+                    if (cmb_rec.getSelectionModel().getSelectedItem().equals("etat")){
+                        if (data.get(i).getEtat().contains(txt_re.getText())){
+                            recherc.add(data.get(i));
+
+
+                        }}
+                    if (cmb_rec.getSelectionModel().getSelectedItem().equals("type")){
+                        if (data.get(i).getType().contains(txt_re.getText())){
+                            recherc.add(data.get(i));
+
+
+                        }}
+
                 }
-                else{
-         
-           for (int i=0;i<data.size();i++){
-               if (cmb_rec.getSelectionModel().getSelectedItem().equals("nom")){
-            if (data.get(i).getNom().contains(txt_re.getText())){
-                
-                recherc.add(data.get(i));
-               
-                
+
+
+                nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
+                prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
+                date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
+                etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
+                type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
+                dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
+
+                afficher.setItems(recherc);
+
+
+
+
+
+
+
+
             }}
-                if (cmb_rec.getSelectionModel().getSelectedItem().equals("prenom")){
-            if (data.get(i).getPrenom().contains(txt_re.getText())){
-                recherc.add(data.get(i));
-               
-                
-            }}
-                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("etat")){
-            if (data.get(i).getEtat().contains(txt_re.getText())){
-                recherc.add(data.get(i));
-               
-                
-            }}
-                 if (cmb_rec.getSelectionModel().getSelectedItem().equals("type")){
-            if (data.get(i).getType().contains(txt_re.getText())){
-                recherc.add(data.get(i));
-               
-                
-            }}
-               
-        }
-         
-        
-        nom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("prenom"));
-        date.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("datenaiss"));
-         etat.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("etat"));
-         type.setCellValueFactory(new PropertyValueFactory<AbonEnf,String>("type"));
-        dateex.setCellValueFactory(new PropertyValueFactory<AbonEnf,Date>("date"));
-       
-        afficher.setItems(recherc);
-        
-        
-        
-        
-        
-        
-        
-        
-                }}
-        
+
     }
 
-   
-    
 
-   
-    
+
+
+
+
 }

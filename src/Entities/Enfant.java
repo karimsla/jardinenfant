@@ -125,6 +125,12 @@ public class Enfant {
         this.datenaiss=datenaiss;
         this.sexe=sexe;
     }
+    public  Enfant(){
 
-    
+    }
+
+    @Override
+    public String toString() {
+        return  prenom;
+    }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Views.Activity.AfficherActiParentController"
+            prefHeight="400.0" prefWidth="600.0">
+     <children>
+            <Pane layoutX="14.0" layoutY="53.0" prefHeight="334.0" prefWidth="484.0" style="-fx-background-color: #FFFF;">
+                <children>
+                    <TableView fx:id="table_act" layoutX="20.0" layoutY="31.0" prefHeight="294.0" prefWidth="433.0">
+                        <columns>
+                            <TableColumn fx:id="nom_field" prefWidth="103.0" text="Nom" />
+                            <TableColumn fx:id="description_field" prefWidth="182.0" text="Description" />
+                            <TableColumn fx:id="date_field" prefWidth="147.0" text="Date" />
+                        </columns>
+                    </TableView>
+                </children>
+            </Pane>
+            <Button fx:id="participer" layoutX="506.0" layoutY="109.0" mnemonicParsing="false" onAction="#Participer" prefHeight="25.0" prefWidth="91.0" text="Participer" />
+            <TextField fx:id="club_name" layoutX="33.0" layoutY="21.0" onKeyPressed="#Recherche" prefHeight="25.0" prefWidth="206.0" promptText="entrer le nom que vous recherchez" />
+            <Label fx:id="id_textt" layoutX="524.0" layoutY="369.0" />
+        </children>
+    </AnchorPane>

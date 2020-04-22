@@ -109,7 +109,7 @@ public class ModifyActiviteController implements Initializable {
                                 // A.setId(id);
                                 A.setTypeact(activite);
                                 A.setDetailles(descp);
-                                A.setDate(java.sql.Date.valueOf(date));
+                                A.setDate(String.valueOf(date));
                                 Club c = new Club();
                                 c.setId(id);
                                 A.setClub(c);
