@@ -1,11 +1,6 @@
 package Views.Activity;
 
-import javafx.fxml.Initializable;
-
-import Entities.Activite;
-import Entities.Club;
-import Entities.Enfant;
-import Entities.PartActivite;
+import Entities.*;
 import IServices.ActiviteServices;
 import IServices.PartActServices;
 import Utils.ConnexionBD;
@@ -36,6 +31,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javax.swing.JOptionPane;
 
+import static jardin.enfant.JardinEnfant.authenticated;
+
+/**
+ * FXML Controller class
+ *
+ * @author Dorra Kerrou
+ */
 public class ParticiperParentController implements Initializable {
 
     @FXML
@@ -47,7 +49,7 @@ public class ParticiperParentController implements Initializable {
     @FXML
     private DatePicker date_act;
     @FXML
-    private ComboBox<String> combo_enfant;
+    private ComboBox<AbonEnf> combo_enfant;
     @FXML
     private Button Participer;
 
@@ -67,50 +69,81 @@ public class ParticiperParentController implements Initializable {
         // TODO
         map = new HashMap<>();
         LoadEnfant();
+        try{
+            Connection con = (Connection) ConnexionBD.getInstance().getCnx();
+            String res="SELECT en.nom,en.prenom,en.id FROM enfant en,parent AS pa WHERE en.parent_id=pa.id AND pa.id="+authenticated.getId() ;
 
-        for (int i = 0; i < data.size(); i++) {
-            combo_enfant.setValue((String) data.get(i));
+            Statement statement = con.createStatement();
+
+            ResultSet rs =  statement.executeQuery(res);
+            while(rs.next()){
+                AbonEnf p = new AbonEnf();
+                p.setNom(rs.getString("nom"));
+                p.setPrenom(rs.getString("prenom"));
+                p.setId(rs.getInt("id"));
+
+
+
+
+                combo_enfant.getItems().addAll(p);
+
+
+            }
+        } catch (SQLException ex) {
 
         }
-        combo_enfant.setItems(data);
+
 
     }
 
     @FXML
     private void ADD(ActionEvent event) throws IOException {
 
-        String nom = combo_enfant.getSelectionModel().getSelectedItem();
-        int id = map.get(nom);
-
-        LocalDate dateA = date_act.getValue();
-        String activite = nom_act.getText();
-
-        String date = dateA.toString();
-
-        Enfant e = new Enfant();
-        e.setId(id);
-
-        Activite A = new Activite();
 
 
-        A.setId(Integer.parseInt(id_act.getText()));
+
+        AbonEnf e = combo_enfant.getSelectionModel().getSelectedItem();
+
+        PartActServices p1 = new PartActServices();
+       boolean v = p1.verifier(e.getId(),Integer.parseInt(id_act.getText()));
+
+        if ( v ){
+
+           // int id = map.get(nom);
+
+            LocalDate dateA = date_act.getValue();
+            String activite = nom_act.getText();
+
+            String date = dateA.toString();
 
 
-        PartActivite p = new PartActivite();
-        p.setEnfant(e);
-        p.setActivite(A);
-        p.setDate(date);
 
-        PartActServices AS = new PartActServices();
-        int a = AS.ajouter(p);
-        if (a > 0) {
-            JOptionPane.showMessageDialog(null, "Ajout est fait");
+            Activite A = new Activite();
 
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.showAndWait();
+            A.setId(Integer.parseInt(id_act.getText()));
+
+
+            PartActivite p = new PartActivite();
+            p.setE(e);
+            p.setActivite(A);
+            p.setDate(date);
+
+            PartActServices AS = new PartActServices();
+            int a = AS.ajouter(p);
+            if (a > 0) {
+                JOptionPane.showMessageDialog(null, "La participation est enregistré !!");
+
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.showAndWait();
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Ton fils participe déjà à cette activité");
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("AfficherActiParent.fxml"));
+            root.getChildren().setAll(pane);
         }
 
     }
@@ -141,4 +174,5 @@ public class ParticiperParentController implements Initializable {
             System.err.println(ex);
         }
     }
+
 }

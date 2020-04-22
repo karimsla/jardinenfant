@@ -18,7 +18,16 @@ public class PartActivite {private int id;
 
 
     private Enfant enfant;
+    private AbonEnf e;
 
+
+    public AbonEnf getE() {
+        return e;
+    }
+
+    public void setE(AbonEnf e) {
+        this.e = e;
+    }
 
     private Activite activite;
 

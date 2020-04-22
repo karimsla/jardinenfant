@@ -156,10 +156,13 @@ public class ModifierClubController implements Initializable {
     }
 
     
-    public void GetData(String nom, String Description, String url){
+    public void GetData(int idc,String nom, String Description, String url){
+
+
         club_text.setText(nom);
         descr_text.setText(Description);
         image_label.setText(url);
+        id.setText(String.valueOf(idc));
         imageview.setImage(new Image((new File(url)).toURI().toString()));
         
         

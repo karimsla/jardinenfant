@@ -53,7 +53,7 @@ public class ParentController implements Initializable {
         IserviceUser su = new ServiceUser();
         nom.setText(su.nompar());
         // TODO
-        load(activites, "ConsulterActivite.fxml", body);
+        load(activites, "Activity/ParentClub.fxml", body);
         load(trajets, "Chauffeurs/Consulter.fxml", body);
         load(jardins, "Jardin/AllJardin.fxml", body);
         load(evenements, "Emna/Paticiper.fxml", body);

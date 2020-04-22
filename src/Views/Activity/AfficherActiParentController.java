@@ -1,6 +1,5 @@
 package Views.Activity;
 
-
 import Entities.Activite;
 import Utils.ConnexionBD;
 import java.io.File;
@@ -16,6 +15,9 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import Views.Activity.ConsulterActiviteController;
+import Views.Activity.ParticiperParentController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,9 +38,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
+/**
+ * FXML Controller class
+ *
+ * @author Dorra Kerrou
+ */
 public class AfficherActiParentController implements Initializable {
-
 
     @FXML
     private AnchorPane root;
@@ -117,13 +122,14 @@ public class AfficherActiParentController implements Initializable {
         //ids = Integer.parseInt(id_textt.getText().toString());
         try {
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res = "SELECT typeact,detailles, date FROM Activite WHERE club_id=" + ids;
+            String res = "SELECT id,typeact,detailles, date FROM Activite WHERE club_id=" + ids;
 
             Statement statement = con.createStatement();
 
             ResultSet rs = statement.executeQuery(res);
             while (rs.next()) {
                 Activite p = new Activite();
+                p.setId(rs.getInt("id"));
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
                 p.setDate(rs.getString("date"));
@@ -194,4 +200,5 @@ public class AfficherActiParentController implements Initializable {
         date_field.setCellValueFactory(new PropertyValueFactory<Activite, Date>("date"));
         table_act.setItems(data);
     }
+
 }
