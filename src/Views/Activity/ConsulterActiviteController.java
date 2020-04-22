@@ -103,7 +103,7 @@ public class ConsulterActiviteController implements Initializable {
                 Activite p = new Activite();
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
-                p.setDate(rs.getDate("date"));
+                p.setDate(rs.getString("date"));
 
                 data.add(p);
             }
@@ -127,12 +127,12 @@ public class ConsulterActiviteController implements Initializable {
         LoadData();
 
         for (int i = 0; i < nom.size(); i++) {
-            
+
             club_box.setValue((String) nom.get(i));
 
         }
 
-      
+
         club_box.setItems(nom);
         club_box.setPromptText("Select");
 
@@ -158,7 +158,7 @@ public class ConsulterActiviteController implements Initializable {
     @FXML
     private void redirect2(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Activity/ModifyActivite.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyActivite.fxml"));
 
         Parent root = (Parent) loader.load();
 
@@ -177,7 +177,7 @@ public class ConsulterActiviteController implements Initializable {
             //id = Integer.toString(selectedOne.getId());
             nom_t = selectedOne.getTypeact();
             description_t = selectedOne.getDetailles();
-            date_t =selectedOne.getDate().toLocalDate();
+            date_t = LocalDate.parse(selectedOne.getDate());
 
         }
     }
@@ -199,7 +199,7 @@ public class ConsulterActiviteController implements Initializable {
                 Activite p = new Activite();
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
-                p.setDate(rs.getDate("date"));
+                p.setDate(rs.getString("date"));
 
                 data.add(p);
             }
@@ -281,7 +281,7 @@ public class ConsulterActiviteController implements Initializable {
                 Activite p = new Activite();
                 p.setTypeact(rs.getString("typeact"));
                 p.setDetailles(rs.getString("detailles"));
-                p.setDate(rs.getDate("date"));
+                p.setDate(rs.getString("date"));
 
                 data.add(p);
             }
@@ -294,6 +294,13 @@ public class ConsulterActiviteController implements Initializable {
         date.setCellValueFactory(new PropertyValueFactory<Activite, Date>("date"));
         tableAct.setItems(data);
 
+    }
+
+    @FXML
+    private void TakeMeToParent(ActionEvent event) throws IOException {
+
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ParentClub.fxml"));
+        root.getChildren().setAll(pane);
     }
 
 }

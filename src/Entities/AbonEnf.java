@@ -150,8 +150,9 @@ public class AbonEnf {
     public void setNumtel(String numtel) {
         this.numtel = numtel;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return prenom ;
+    }
 }

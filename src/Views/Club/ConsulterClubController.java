@@ -192,7 +192,7 @@ public class ConsulterClubController implements Initializable {
         
 
 
-        mc.GetData(nom, description, url);
+        mc.GetData(Integer.parseInt(id),nom, description, url);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();

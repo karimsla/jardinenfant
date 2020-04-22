@@ -58,7 +58,12 @@ public class Trajet {
     public void setChauffeur(Chauffeur chauffeur) {
         this.chauffeur = chauffeur;
     }
+
+    @Override
+    public String toString() {
+        return "Trajet{" + "id=" + id + ", adresse=" + adresse + ", heure=" + heure + ", chauffeur=" + chauffeur + '}';
+    }
     
     
-    
+     
 }

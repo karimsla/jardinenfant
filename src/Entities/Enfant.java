@@ -117,5 +117,20 @@ public class Enfant {
         this.participerActivite = participerActivite;
     }
 
-    
+
+    public  Enfant(int id,String nom,String prenom,Date datenaiss,String sexe){
+        this.id=id;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.datenaiss=datenaiss;
+        this.sexe=sexe;
+    }
+    public  Enfant(){
+
+    }
+
+    @Override
+    public String toString() {
+        return  prenom;
+    }
 }

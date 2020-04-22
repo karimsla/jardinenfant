@@ -41,18 +41,20 @@ public class TrajetService {
       System.out.println(ex); }
    }
    
-   public List<Trajet> afficherTrajet(){
+   public List<Trajet> afficherTrajet(int jardinId){
           List<Trajet> lp=new ArrayList<Trajet>();
            ChauffeurService cs=new ChauffeurService();
-           String req="Select * from trajet";
+         String req="Select t.id,chauffeur_id,heure,adresse from trajet t,chauffeur c where chauffeur_id=c.id and jardin_id="+jardinId;
        try {
            Statement statement=cnx.createStatement();
            ResultSet rs=statement.executeQuery(req);
            while (rs.next())
            {
+            
            Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
           c.setChauffeur(cs.find(rs.getInt(2)));
            lp.add(c);
+         System.out.println(c);
            }
        } catch (SQLException ex) 
        {
@@ -91,7 +93,28 @@ public class TrajetService {
        }
    }
    
-   
-    
+    public List<Trajet> afficherTrajetParent(int parentId)
+    {
+        String req="Select * from trajet t,chauffeur c WHERE t.chauffeur_id=c.id and c.jardin_id IN (SELECT abo.jardin_id FROM abonnement abo,enfant en WHERE abo.enfant_id=en.id and en.parent_id="+parentId+")";
+
+  List<Trajet> lp=new ArrayList<Trajet>();
+           ChauffeurService cs=new ChauffeurService();
+       try {
+           Statement statement=cnx.createStatement();
+           ResultSet rs=statement.executeQuery(req);
+           while (rs.next())
+           {
+            
+           Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
+          c.setChauffeur(cs.find(rs.getInt(2)));
+           lp.add(c);
+         System.out.println(c);
+           }
+       } catch (SQLException ex) 
+       {
+           Logger.getLogger(ChauffeurService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return lp;
+    }
     
 }

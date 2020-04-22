@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="483.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Emna.PaticiperController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="2.0" prefHeight="477.0" prefWidth="617.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView fx:id="listview" layoutY="6.0" prefHeight="466.0" prefWidth="179.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="444.0" style="-fx-background-color: #393D72;">
+               <children>
+                  <ComboBox fx:id="combo_enfant" layoutX="133.0" layoutY="366.0" prefWidth="150.0" />
+                  <Button fx:id="bt_part" layoutX="171.0" layoutY="420.0" mnemonicParsing="false" onAction="#part" text="participer" textFill="#d00d8f" />
+                  <Label layoutX="130.0" layoutY="324.0" text="Sélectionnez enfant " textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="det" layoutX="14.0" layoutY="14.0" prefHeight="265.0" prefWidth="403.0" style="-fx-background-color: #393D72;">
+                     <children>
+                        <Label layoutX="123.0" layoutY="13.0" prefHeight="22.0" prefWidth="157.0" text="Détails événement" textFill="WHITE">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="165.0" layoutX="231.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label layoutX="14.0" layoutY="88.0" prefHeight="17.0" prefWidth="77.0" text="Description" textFill="WHITE" />
+                        <Label layoutX="13.0" layoutY="184.0" prefHeight="17.0" prefWidth="77.0" text="Date" textFill="WHITE" />
+                        <TextArea fx:id="txt_area" layoutX="91.0" layoutY="92.0" prefHeight="80.0" prefWidth="132.0" />
+                        <TextField fx:id="txt_filed" layoutX="90.0" layoutY="187.0" prefHeight="27.0" prefWidth="132.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

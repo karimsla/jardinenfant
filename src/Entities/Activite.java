@@ -28,7 +28,7 @@ public class Activite {
 
    
 
-    private Date Date;
+    private String Date;
 
 
    
@@ -47,13 +47,13 @@ public class Activite {
     public Activite() {
     }
 
-    public Activite(String typeact, String detailles, Date Date) {
+    public Activite(String typeact, String detailles, String Date) {
         this.typeact = typeact;
         this.detailles = detailles;
         this.Date = Date;
     }
 
-    public Activite(int id, String typeact, String detailles, String photo, Date Date, Date dateDebut, Date dateFin, Date dateCreation, Club club, Collection<PartActivite> participation) {
+    public Activite(int id, String typeact, String detailles, String photo, String Date, Date dateDebut, Date dateFin, Date dateCreation, Club club, Collection<PartActivite> participation) {
         this.id = id;
         this.typeact = typeact;
         this.detailles = detailles;
@@ -98,11 +98,11 @@ public class Activite {
         this.photo = photo;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return Date;
     }
 
-    public void setDate(Date Date) {
+    public void setDate(String Date) {
         this.Date = Date;
     }
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #feacc3;"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Activity.ParticiperParentController">
+    <children>
+        <Pane layoutY="55.0" prefHeight="293.0" prefWidth="600.0" style="-fx-background-color: #FFFF;">
+            <children>
+                <TextField fx:id="nom_act" editable="false" layoutX="238.0" layoutY="23.0" />
+                <TextArea fx:id="desc_act" editable="false" layoutX="212.0" layoutY="53.0" prefHeight="78.0" prefWidth="200.0" />
+                <DatePicker fx:id="date_act" editable="false" layoutX="225.0" layoutY="144.0" />
+                <ComboBox fx:id="combo_enfant" layoutX="237.0" layoutY="198.0" prefWidth="150.0" promptText="Les Enfants" />
+                <Label layoutX="55.0" layoutY="27.0" text="Nom de l'activite :">
+                    <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                    </font></Label>
+                <Label layoutX="61.0" layoutY="63.0" prefHeight="17.0" prefWidth="95.0" text="Description :">
+                    <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                    </font></Label>
+                <Label layoutX="78.0" layoutY="157.0" text="Date :">
+                    <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                    </font></Label>
+                <Label layoutX="33.0" layoutY="202.0" text="L'enfant qui participe :">
+                    <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                    </font></Label>
+            </children>
+        </Pane>
+        <Button fx:id="Participer" layoutX="496.0" layoutY="355.0" mnemonicParsing="false" onAction="#ADD" prefHeight="25.0" prefWidth="90.0" text="Participer">
+            <font>
+                <Font name="Calibri Bold" size="15.0" />
+            </font></Button>
+        <Label fx:id="id_act" layoutX="37.0" layoutY="359.0" prefHeight="17.0" prefWidth="31.0" visible="false" />
+    </children>
+</AnchorPane>

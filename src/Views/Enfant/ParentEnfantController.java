@@ -8,6 +8,8 @@ package Views.Enfant;
 import Entities.AbonEnf;
 import IServices.EnfantService;
 import Utils.ConnexionBD;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -19,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -30,6 +33,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
+import static jardin.enfant.JardinEnfant.authenticated;
 
 /**
  * FXML Controller class
@@ -69,7 +74,7 @@ public class ParentEnfantController implements Initializable {
      public ObservableList<AbonEnf> data = FXCollections.observableArrayList();
       public ObservableList<AbonEnf> datam = FXCollections.observableArrayList();
     public ObservableList<AbonEnf> recherc = FXCollections.observableArrayList();
-    int ids=6;
+
     String id="";
     int as=0;
     String resm="";
@@ -91,7 +96,7 @@ public class ParentEnfantController implements Initializable {
       modi.getItems().addAll("bus","normal");
         try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id  AND pa.id="+ids ;
+            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id  AND pa.id="+authenticated.getId() ;
           
             Statement statement = con.createStatement();
           
@@ -135,7 +140,7 @@ public class ParentEnfantController implements Initializable {
         
          try{
             Connection cone = (Connection) ConnexionBD.getInstance().getCnx();
-            String rese="SELECT Count(*) AS cou FROM abonnement,enfant WHERE abonnement.enfant_id=enfant.id AND enfant.parent_id="+ids ;
+            String rese="SELECT Count(*) AS cou FROM abonnement,enfant WHERE abonnement.enfant_id=enfant.id AND enfant.parent_id="+authenticated.getId() ;
           
             Statement statement = cone.createStatement();
           
@@ -181,7 +186,10 @@ public class ParentEnfantController implements Initializable {
     }
 
     @FXML
-    private void redirect(ActionEvent event) {
+    private void redirect(ActionEvent event) throws IOException {
+
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ParentAjAbo.fxml"));
+        root.getChildren().setAll(pane);
     }
 
     @FXML
@@ -280,7 +288,7 @@ public class ParentEnfantController implements Initializable {
           
           try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND pa.id="+ids ;
+            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id,pa.numtel FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND pa.id="+authenticated.getId() ;
           
             Statement statement = con.createStatement();
           
@@ -324,7 +332,7 @@ public class ParentEnfantController implements Initializable {
        
           try{
             Connection cone = (Connection) ConnexionBD.getInstance().getCnx();
-            String rese="SELECT Count(*) AS cou FROM abonnement,enfant WHERE abonnement.enfant_id=enfant.id AND enfant.parent_id="+ids ;
+            String rese="SELECT Count(*) AS cou FROM abonnement,enfant WHERE abonnement.enfant_id=enfant.id AND enfant.parent_id="+authenticated.getId() ;
           
             Statement statement = cone.createStatement();
           
@@ -353,7 +361,7 @@ public class ParentEnfantController implements Initializable {
           data.clear();
            try{
             Connection con = (Connection) ConnexionBD.getInstance().getCnx();
-            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND en.parent_id="+ids;
+            String res="SELECT en.nom,en.prenom,en.datenaiss,ab.etat,ab.type,ab.date,ab.id FROM enfant en, abonnement AS ab,parent AS pa WHERE en.id=ab.enfant_id AND en.parent_id=pa.id AND en.parent_id="+authenticated.getId();
           
             Statement statement = con.createStatement();
           

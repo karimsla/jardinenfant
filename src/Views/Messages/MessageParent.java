@@ -124,7 +124,7 @@ public class MessageParent implements Initializable {
 
 
         String msg=txtMsg.getText();
-        if(!msg.isBlank()||!msg.isEmpty()){
+        if(!msg.isEmpty()){
             int id=authenticated.getId();
 
             String idjj=idjardin.getText();
