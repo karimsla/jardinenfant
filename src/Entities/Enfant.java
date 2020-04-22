@@ -45,6 +45,10 @@ public class Enfant {
     
     private  Collection<PartActivite> participerActivite;
 
+    public Enfant(int aInt, String string, String string0, Date date, String string1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }
@@ -116,6 +120,28 @@ public class Enfant {
     public void setParticiperActivite(Collection<PartActivite> participerActivite) {
         this.participerActivite = participerActivite;
     }
+
+    public Enfant() {
+        
+    }
+
+    public Enfant(int id, String nom, String prenom, Date datenaiss, String sexe, Collection<Abonnement> $abonnements, Parents parent, Collection<Participer> participation, Collection<PartActivite> participerActivite) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.datenaiss = datenaiss;
+        this.sexe = sexe;
+        this.$abonnements = $abonnements;
+        this.parent = parent;
+        this.participation = participation;
+        this.participerActivite = participerActivite;
+    }
+
+    @Override
+    public String toString() {
+        return  nom + prenom;
+    }
+    
 
     
 }
