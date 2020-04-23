@@ -7,8 +7,8 @@
    <children>
       <Pane layoutX="7.0" layoutY="10.0" prefHeight="380.0" prefWidth="579.0">
          <children>
-            
 
+            <WebView fx:id="wb" layoutX="26.0" layoutY="34.0" prefHeight="349.0" prefWidth="552.0" />
 
          </children>
       </Pane>

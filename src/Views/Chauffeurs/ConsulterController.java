@@ -266,7 +266,7 @@ listview.setItems(data);
 
         try {
 
-            Parent   root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/ConsulterMap.fxml"));
+            Parent   root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Maps.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = new Stage();
             primaryStage.setScene(scene);

@@ -100,7 +100,7 @@ public class LoginController implements Initializable {
 
         IserviceUser su = new ServiceUser();
 
-        String status = "Success";
+        String status ;
         String email = txtUsername.getText();
         String password = txtPassword.getText();
         if (email.isEmpty() || password.isEmpty()) {
