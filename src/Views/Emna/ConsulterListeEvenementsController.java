@@ -38,6 +38,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -234,9 +235,18 @@ public class ConsulterListeEvenementsController implements Initializable {
     Evenement e=new Evenement(txt_tit.getText(),d.toString(),txt_des.getText(),image_area.getText().toString());
     e.setCategorie(comb_cat.getSelectionModel().getSelectedItem());
     es.Ajouter(e);
+   
+          
     txt_tit.clear();
     txt_des.clear();
+    image_area.clear();
+
     data.clear();
+    
+     Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Ajout réussi!");
+          ale.showAndWait();
     getData(data);
     
     }
@@ -249,7 +259,10 @@ public class ConsulterListeEvenementsController implements Initializable {
      Categorie c=new Categorie(txt_libellecat.getText());
      cs.ajouter(c);
        txt_libellecat.clear();
-
+ Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Ajout réussi!");
+          ale.showAndWait();
      getDataCat(categories);
    
     
@@ -274,7 +287,10 @@ public class ConsulterListeEvenementsController implements Initializable {
     e.setDate(Date.valueOf(date_ev.getValue()).toString()); 
     
     es.ModifierEvenement(e);
-   
+    Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Modification réussie!");
+          ale.showAndWait();
     }
   
  
@@ -284,7 +300,10 @@ public class ConsulterListeEvenementsController implements Initializable {
         EvenementService es=new EvenementService();
         Evenement e= Lv_event.getSelectionModel().getSelectedItem();
        es.supprimerEvenement(e.getId());
-       data.clear();
+        Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Suppression réussie!");
+          ale.showAndWait();
        getData(data);
     }
     
@@ -293,7 +312,10 @@ public class ConsulterListeEvenementsController implements Initializable {
         CategorieService cs=new CategorieService();
         Categorie c= lv_cat.getSelectionModel().getSelectedItem();
        cs.supprimerCategorie(c.getId());
-       data.clear();
+        Alert ale= new Alert(Alert.AlertType.INFORMATION);
+          ale.setTitle("INFORMATION");
+          ale.setHeaderText("Suppression réussie!");
+          ale.showAndWait();
        getDataCat(categories);
     }
     
@@ -350,9 +372,6 @@ public class ConsulterListeEvenementsController implements Initializable {
     }
 
 
-
-
- 
    
     private boolean saisie(String titre, String libelle)
     {

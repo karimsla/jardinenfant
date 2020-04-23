@@ -24,7 +24,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="444.0" style="-fx-background-color: #393D72;">
                <children>
                   <ComboBox fx:id="combo_enfant" layoutX="133.0" layoutY="366.0" prefWidth="150.0" />
-                  <Button fx:id="bt_part" layoutX="171.0" layoutY="420.0" mnemonicParsing="false" onAction="#part" text="participer" textFill="#d00d8f" />
+                  <Button fx:id="bt_part" layoutX="108.0" layoutY="421.0" mnemonicParsing="false" onAction="#part" text="participer" textFill="#d00d8f" />
                   <Label layoutX="130.0" layoutY="324.0" text="Sélectionnez enfant " textFill="WHITE">
                      <font>
                         <Font size="17.0" />
@@ -44,6 +44,7 @@
                         <TextField fx:id="txt_filed" layoutX="90.0" layoutY="187.0" prefHeight="27.0" prefWidth="132.0" />
                      </children>
                   </Pane>
+                  <Button fx:id="bt_part1" layoutX="238.0" layoutY="420.0" mnemonicParsing="false" onAction="#part" text="Annuler" textFill="#d00d8f" />
                </children>
             </AnchorPane>
         </items>
