@@ -7,26 +7,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #feacc3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AfficherActiParentController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="486.0" prefWidth="915.0" style="-fx-background-color: #e9e9e9;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AfficherActiParentController">
    <children>
-      <Pane layoutY="53.0" prefHeight="347.0" prefWidth="498.0" style="-fx-background-color: #FFFF;">
+      <Pane layoutY="71.0" prefHeight="415.0" prefWidth="915.0" style="-fx-background-color: #f4b3bd;">
          <children>
-            <TableView fx:id="table_act" layoutX="33.0" layoutY="39.0" prefHeight="294.0" prefWidth="433.0">
+            <TableView fx:id="table_act" layoutX="162.0" layoutY="61.0" prefHeight="301.0" prefWidth="601.0">
               <columns>
-                <TableColumn fx:id="nom_field" prefWidth="103.0" text="Nom" />
-                <TableColumn fx:id="description_field" prefWidth="182.0" text="Description" />
-                  <TableColumn fx:id="date_field" prefWidth="147.0" text="Date" />
+                <TableColumn fx:id="nom_field" prefWidth="156.0" text="Nom" />
+                <TableColumn fx:id="description_field" prefWidth="239.0" text="Description" />
+                  <TableColumn fx:id="date_field" prefWidth="205.0" text="Date" />
               </columns>
             </TableView>
-            <TextField fx:id="club_name" layoutX="260.0" layoutY="2.0" onKeyPressed="#Recherche" prefHeight="25.0" prefWidth="206.0" promptText="entrer le nom que vous recherchez" />
+            <TextField fx:id="club_name" layoutX="368.0" layoutY="21.0" onKeyPressed="#Recherche" prefHeight="25.0" prefWidth="206.0" promptText="entrer le nom que vous recherchez" />
+            <Line endX="727.0" layoutX="188.0" startX="-188.0" stroke="#8598ab" strokeWidth="5.0" />
          </children>
       </Pane>
-      <Button fx:id="participer" layoutX="498.0" layoutY="140.0" mnemonicParsing="false" onAction="#Participer" prefHeight="25.0" prefWidth="102.0" text="Participer">
+      <Button fx:id="participer" layoutX="775.0" layoutY="28.0" mnemonicParsing="false" onAction="#Participer" prefHeight="27.0" prefWidth="119.0" text="Participer">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font></Button>
       <Label fx:id="id_textt" layoutX="524.0" layoutY="369.0" visible="false" />
+      <Label layoutX="90.0" layoutY="30.0" text="La Liste des Activités du club ">
+         <font>
+            <Font name="Calibri Bold Italic" size="17.0" />
+         </font></Label>
    </children>
 </AnchorPane>

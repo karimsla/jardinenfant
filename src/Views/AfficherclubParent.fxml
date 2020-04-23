@@ -5,25 +5,42 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #feacc3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AfficherclubParentController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="486.0" prefWidth="915.0" style="-fx-background-color: #f4b3bd;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AfficherclubParentController">
    <children>
-      <Pane layoutX="24.0" layoutY="28.0" prefHeight="347.0" prefWidth="550.0" style="-fx-background-color: #FFFA;">
+      <Pane layoutX="24.0" layoutY="28.0" prefHeight="434.0" prefWidth="867.0" style="-fx-background-color: #FFFA;">
          <children>
-            <Label fx:id="nom_text" layoutX="73.0" layoutY="52.0" prefHeight="31.0" prefWidth="158.0" text="Label" />
-            <Label fx:id="descr_text" layoutX="73.0" layoutY="135.0" prefHeight="114.0" prefWidth="158.0" text="Label" />
-            <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="313.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="TakeAct" layoutX="403.0" layoutY="283.0" mnemonicParsing="false" onAction="#VoirLesActivites" prefHeight="25.0" prefWidth="110.0" text="voir les activités">
-               <font>
-                  <Font name="Calibri Bold" size="13.0" />
-               </font></Button>
-            <Button fx:id="Retour" layoutX="302.0" layoutY="283.0" mnemonicParsing="false" onAction="#Retour" prefHeight="25.0" prefWidth="92.0" text="retour">
-               <font>
-                  <Font name="Calibri Bold" size="13.0" />
-               </font></Button>
+            <Label fx:id="nom_text" layoutX="138.0" layoutY="104.0" prefHeight="31.0" prefWidth="158.0" text="Label" />
+            <Label fx:id="descr_text" layoutX="138.0" layoutY="184.0" prefHeight="114.0" prefWidth="158.0" text="Label" />
+            <ImageView fx:id="imageview" fitHeight="237.0" fitWidth="382.0" layoutX="373.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="id_text" layoutX="73.0" layoutY="249.0" text="Label" visible="false" />
+            <Pane layoutX="1.0" layoutY="348.0" prefHeight="85.0" prefWidth="866.0" style="-fx-background-color: #e9e9e9;">
+               <children>
+                  <Button fx:id="Retour" layoutX="359.0" layoutY="27.0" mnemonicParsing="false" onAction="#Retour" prefHeight="31.0" prefWidth="187.0" text="retour">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Line endX="742.0" layoutX="124.0" startX="-124.0" stroke="#6e7f91" strokeWidth="5.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="1.0" layoutY="2.0" prefHeight="79.0" prefWidth="866.0" style="-fx-background-color: #e9e9e9;">
+               <children>
+                  <Button fx:id="TakeAct" layoutX="349.0" layoutY="26.0" mnemonicParsing="false" onAction="#VoirLesActivites" prefHeight="27.0" prefWidth="209.0" text="voir les activités de ce club">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Line endX="739.0" layoutX="127.0" layoutY="79.0" startX="-124.0" stroke="#6e7f91" strokeWidth="5.0" />
+               </children>
+            </Pane>
          </children>
       </Pane>
+      <Line endX="-101.0" endY="434.0" layoutX="125.0" layoutY="28.0" startX="-100.0" stroke="#8598ab" strokeWidth="5.0" />
+      <Line endX="765.0" layoutX="126.0" layoutY="28.0" startX="-100.0" stroke="#8598ab" strokeWidth="5.0" />
+      <Line endX="100.0" layoutX="791.0" layoutY="29.0" startX="100.0" startY="433.0" stroke="#8598ab" strokeWidth="5.0" />
+      <Line endX="100.0" layoutX="790.0" layoutY="463.0" startX="-766.0" startY="-1.0" stroke="#8598ab" strokeWidth="5.0" />
    </children>
 </AnchorPane>
