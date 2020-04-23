@@ -99,7 +99,7 @@ public class PaticiperController implements Initializable {
 
             imageview.setImage(image);
             data_comb.clear();
-            System.out.println("im here");
+
 
             ps = new ParticiperService();
             List<Enfant> ls = ps.ConsulterEnfantParent(authenticated.getId());

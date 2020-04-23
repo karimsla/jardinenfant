@@ -51,7 +51,7 @@ public class TrajetService {
            while (rs.next())
            {
             
-           Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
+           Trajet c=new Trajet(rs.getInt(1),rs.getString("adresse"),rs.getString("heure"));
           c.setChauffeur(cs.find(rs.getInt(2)));
            lp.add(c);
          System.out.println(c);
@@ -71,7 +71,7 @@ public class TrajetService {
            ResultSet rs=statement.executeQuery(req);
            while (rs.next())
            {
-           Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
+           Trajet c=new Trajet(rs.getInt(1),rs.getString("adresse"),rs.getString("heure"));
           c.setChauffeur(cs.find(id));
            lp.add(c);
            }
@@ -105,7 +105,7 @@ public class TrajetService {
            while (rs.next())
            {
             
-           Trajet c=new Trajet(rs.getInt(1),rs.getString(4),rs.getString(3));
+           Trajet c=new Trajet(rs.getInt(1),rs.getString("adresse"),rs.getString("heure"));
           c.setChauffeur(cs.find(rs.getInt(2)));
            lp.add(c);
          System.out.println(c);

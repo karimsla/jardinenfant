@@ -113,7 +113,8 @@ public class CategorieService {
            while (rs.next())
            {
                Categorie c=new Categorie(rs.getString("libelle"));
-           System.out.println(c);
+
+
            c.setId(rs.getInt(1));
            lc.add(c);
            }

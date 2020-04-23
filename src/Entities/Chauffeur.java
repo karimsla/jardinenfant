@@ -124,4 +124,8 @@ public class Chauffeur extends User {
         this.jardin = jardin;
     }
 
+    @Override
+    public String toString() {
+        return  nom ;
+    }
 }

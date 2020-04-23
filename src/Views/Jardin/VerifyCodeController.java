@@ -49,6 +49,7 @@ public class VerifyCodeController implements Initializable{
 
 
         sbmit.setOnAction(e->{
+            System.out.println(codeval.getText());
             if(code.getText().equals(codeval.getText())){
                 //add to database else reject it
                 try {

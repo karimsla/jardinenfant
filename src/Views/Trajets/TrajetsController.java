@@ -16,12 +16,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import jardin.enfant.JardinEnfant;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,39 +43,50 @@ import javafx.scene.web.WebView;
  */
 public class TrajetsController implements Initializable {
 
- private final ObservableList<Trajet> trajets =FXCollections.observableArrayList() ;
+    private final ObservableList<Trajet> trajets = FXCollections.observableArrayList();
 
     @FXML
     WebView webview;
     String data;
     WebEngine webEngine;
- @FXML
+    @FXML
     private TableView<Trajet> tv_trajets;
-    @FXML 
+    @FXML
     private TableColumn<Trajet, String> adresse;
     @FXML
     private TableColumn<Trajet, String> heure;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        webEngine=webview.getEngine();
-        data="this is working";
+        webEngine = webview.getEngine();
+        data = "this is working";
         final URL urlGoogleMaps = getClass().getResource("/Assets/index.html");
 
         webEngine.load(urlGoogleMaps.toExternalForm());
-getTable();
+        getTable();
+
+        tv_trajets.setOnMouseClicked((event) -> {
+            try {
+                Trajet t = tv_trajets.getSelectionModel().getSelectedItem();
+
+                point(t);
+            } catch (Exception ex) {
+                Logger.getLogger(TrajetsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
     }
+
     @FXML
-    public void update() throws Exception
-    {
-       IserviceUser us=new ServiceUser(); 
-        TrajetService ts=new TrajetService();
-        
-        List<Trajet> lt=ts.afficherTrajetParent(JardinEnfant.authenticated.getId());
-        List<MapModel> mp=new ArrayList<MapModel>();
-        Gson gson=new Gson();
-        for(Trajet t : lt)
-        { 
+    public void update() throws Exception {
+        IserviceUser us = new ServiceUser();
+        TrajetService ts = new TrajetService();
+
+        List<Trajet> lt = ts.afficherTrajetParent(JardinEnfant.authenticated.getId());
+        List<MapModel> mp = new ArrayList<MapModel>();
+        Gson gson = new Gson();
+        for (Trajet t : lt) {
             String sURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/"+t.getAdresse()+".json?access_token=pk.eyJ1Ijoic2FtaWtyIiwiYSI6ImNrOHRieWk3dDBuaTQzbGxvZDh2ZGJrZjgifQ.ZXvwJ489e09-HnnWfWpWtA&limit=1";
             String json = readUrl(sURL);
             JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
@@ -79,14 +94,10 @@ getTable();
             JsonArray center = arr.get(0).getAsJsonObject().get("center").getAsJsonArray();
             double lat=center.get(0).getAsDouble();
             double lan=center.get(1).getAsDouble();
-            System.out.println(center.get(0).getAsString());
-            MapModel m=new MapModel(lat,lan, t.getAdresse(), t.getHeure());
-            mp.add(m);
+            webEngine.executeScript("setMarker('" + lan + "','" + lat + "','" + t.getAdresse() + "','" +t.getHeure()  + "')");
+
         }
 
-
-        for(int i=0;i<mp.size();i++)
-            webEngine.executeScript("setMarker('"+mp.get(i).getLat()+"','"+mp.get(i).getLan()+"','"+mp.get(i).getNom()+"','"+mp.get(i).getHeure()+"')");
 
     }
 
@@ -107,17 +118,29 @@ getTable();
                 reader.close();
         }
     }
-    
-     public void getTable()
-     {
-            trajets.clear();
-         TrajetService e=new TrajetService();
-          List<Trajet> ls=new ArrayList<Trajet>();
-      ls=e.afficherTrajetParent(JardinEnfant.authenticated.getId());
-          trajets.addAll(ls);
-          
-        adresse.setCellValueFactory(new PropertyValueFactory<Trajet,String>("adresse"));
-        heure.setCellValueFactory(new PropertyValueFactory<Trajet,String>("heure"));
+
+    public void getTable() {
+        trajets.clear();
+        TrajetService e = new TrajetService();
+        List<Trajet> ls = new ArrayList<Trajet>();
+        ls = e.afficherTrajetParent(JardinEnfant.authenticated.getId());
+        trajets.addAll(ls);
+
+        adresse.setCellValueFactory(new PropertyValueFactory<Trajet, String>("adresse"));
+        heure.setCellValueFactory(new PropertyValueFactory<Trajet, String>("heure"));
         tv_trajets.setItems(trajets);
-     }
+    }
+
+
+    public void point(Trajet t) throws Exception {
+        String sURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/tunis,manouba.json?access_token=pk.eyJ1Ijoic2FtaWtyIiwiYSI6ImNrOHRieWk3dDBuaTQzbGxvZDh2ZGJrZjgifQ.ZXvwJ489e09-HnnWfWpWtA&limit=1";
+        String json = readUrl(sURL);
+        JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+        JsonArray arr = jsonObject.getAsJsonArray("features");
+        JsonArray center = arr.get(0).getAsJsonObject().get("center").getAsJsonArray();
+        double lat = center.get(0).getAsDouble();
+        double lan = center.get(1).getAsDouble();
+        webEngine.executeScript("moveTo('" + lat + "','" + lan + "')");
+
+    }
 }

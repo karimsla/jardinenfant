@@ -14,10 +14,10 @@ import IServices.EnfantService;
 import IServices.TrajetService;
 import Utils.ConnexionBD;
 import Views.Enfant.AdminEnfantController;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
+import com.lowagie.text.*;
+import com.lowagie.text.Font;
+import com.lowagie.text.Image;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -30,25 +30,29 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -366,19 +370,49 @@ try{
 
 
 
+
+
+
+
+
             Document doc=new Document();
             PdfWriter.getInstance(doc, new FileOutputStream(path+"enfant.pdf"));
             doc.open();
-            Paragraph para = new Paragraph("LISTE DES ENFANTS:");
+
+
+
+            Rectangle rect= new Rectangle(595,760);
+
+
+            rect.enableBorderSide(4);
+            rect.setBorder(Rectangle.BOX);
+            rect.setBorderWidth(4);
+            rect.setBorderColor(Color.DARK_GRAY);
+
+            doc.add(rect);
+
+            Image im=Image.getInstance(path+"kgpng.png\\");
+
+            doc.add(im);
+
+
+            Font reds = new Font(null, 12, Font.NORMAL, Color.MAGENTA);
+            Chunk redTexts = new Chunk(" LISTE DES ENFANTS:",reds);
+            Paragraph para = new Paragraph(redTexts);
             doc.add(para);
+
+
             Paragraph paras = new Paragraph(" ");
             doc.add(paras);
             Paragraph parass = new Paragraph(" ");
             doc.add(parass);
 
             PdfPTable th1=new PdfPTable(5);
+            th1.setWidthPercentage(100);
+
             PdfPCell c1=new PdfPCell(new Phrase("Nom"));
             th1.addCell(c1);
+
             PdfPCell c2=new PdfPCell(new Phrase("Prenom"));
             th1.addCell(c2);
             PdfPCell c3=new PdfPCell(new Phrase("Sexe"));
@@ -413,6 +447,18 @@ try{
 
             doc.add(th1);
 
+
+            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            String text = df.format(date);
+            Paragraph paress = new Paragraph(" "
+                    + " "
+                    + " "
+                    + " ");
+            doc.add(paress);
+            Paragraph paresss = new Paragraph(" ");
+            doc.add(paresss);
+
             doc.close();
 
 
@@ -422,6 +468,10 @@ try{
             Logger.getLogger(AdminEnfantController.class.getName()).log(Level.SEVERE, null, ex);
 
 
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 

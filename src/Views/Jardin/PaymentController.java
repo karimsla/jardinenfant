@@ -135,7 +135,8 @@ public class PaymentController implements Initializable {
 
             fc.setLabelText(su.jardinid(authenticated.getId()),saltStr);
 
-           // envoyer(saltStr);
+            System.out.printf(saltStr);
+            envoyer(saltStr);
 
 
             Stage stage = new Stage();
@@ -170,12 +171,10 @@ public class PaymentController implements Initializable {
 
 
                 SMS s = new SMS();
+                System.out.printf(numtel+"/"+msg);
 
-                s.SendSMS("ferid", "Feridferid1",msg,numtel,"https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
-                Alert ale= new Alert(Alert.AlertType.INFORMATION);
-                ale.setTitle("INFORMATION");
-                ale.setHeaderText("Message envoyé");
-                ale.showAndWait();
+                s.SendSMS("dorraa", "Dorra123",msg,"216"+numtel,"https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+
             }
             else{
                 Alert ale= new Alert(Alert.AlertType.INFORMATION);

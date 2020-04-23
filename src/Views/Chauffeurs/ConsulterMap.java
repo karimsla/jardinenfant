@@ -60,7 +60,7 @@ public class ConsulterMap implements Initializable {
             JsonArray center = arr.get(0).getAsJsonObject().get("center").getAsJsonArray();
             double lat=center.get(0).getAsDouble();
             double lan=center.get(1).getAsDouble();
-            System.out.println(center.get(0).getAsString());
+
             MapModel m=new MapModel(lat,lan, t.getChauffeur().getNom(), t.getHeure());
             mp.add(m);
         }

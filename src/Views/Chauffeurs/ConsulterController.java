@@ -14,6 +14,7 @@ import IServices.IserviceUser;
 import IServices.ServiceUser;
 import IServices.TrajetService;
 import jardin.enfant.JardinEnfant;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -95,42 +96,39 @@ public class ConsulterController implements Initializable {
         sexe_a.setItems(obs);
         sexe.setItems(obs);
 
-    }    
-    
-     public void getData(ObservableList data) 
-     {IserviceUser  js= new ServiceUser();
-                cs=new ChauffeurService();
-  List<Chauffeur> ls=cs.afficherAll(js.jardinid(JardinEnfant.authenticated.getId()));
-                data.addAll(ls);
-listview.setItems(data);
-}
- 
-     
- @FXML
- public void chercher()
- { IserviceUser  js= new ServiceUser();
-     String ch=search.getText();
-      cs=new ChauffeurService();
-      data.clear();
-  List<Chauffeur> ls=cs.afficherAll(js.jardinid(JardinEnfant.authenticated.getId())).stream().filter(p->p.getNom().toUpperCase().contains(ch.toUpperCase())).collect(Collectors.toList());
-  data.addAll(ls);
-listview.setItems(data);
-       
- }
-     
-     
-     
-     
-     public void getTable(Chauffeur c)
-     {
-            trajets.clear();
-         TrajetService e=new TrajetService();
-          List<Trajet> ls=new ArrayList<Trajet>();
-      ls=e.afficherTrajetChauffeur(c.getId());
-          trajets.addAll(ls);
-          
-        col_a.setCellValueFactory(new PropertyValueFactory<Trajet,String>("adresse"));
-        col_h.setCellValueFactory(new PropertyValueFactory<Trajet,String>("heure"));
+    }
+
+    public void getData(ObservableList data) {
+        IserviceUser js = new ServiceUser();
+        cs = new ChauffeurService();
+        List<Chauffeur> ls = cs.afficherAll(js.jardinid(JardinEnfant.authenticated.getId()));
+        data.addAll(ls);
+        listview.setItems(data);
+    }
+
+
+    @FXML
+    public void chercher() {
+        IserviceUser js = new ServiceUser();
+        String ch = search.getText();
+        cs = new ChauffeurService();
+        data.clear();
+        List<Chauffeur> ls = cs.afficherAll(js.jardinid(JardinEnfant.authenticated.getId())).stream().filter(p -> p.getNom().toUpperCase().contains(ch.toUpperCase())).collect(Collectors.toList());
+        data.addAll(ls);
+        listview.setItems(data);
+
+    }
+
+
+    public void getTable(Chauffeur c) {
+        trajets.clear();
+        TrajetService e = new TrajetService();
+        List<Trajet> ls = new ArrayList<Trajet>();
+        ls = e.afficherTrajetChauffeur(c.getId());
+        trajets.addAll(ls);
+
+        col_a.setCellValueFactory(new PropertyValueFactory<Trajet, String>("adresse"));
+        col_h.setCellValueFactory(new PropertyValueFactory<Trajet, String>("heure"));
         tv.setItems(trajets);
     }
 
@@ -266,7 +264,7 @@ listview.setItems(data);
 
         try {
 
-            Parent   root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Maps.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/Chauffeurs/Maps.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = new Stage();
             primaryStage.setScene(scene);
@@ -274,7 +272,6 @@ listview.setItems(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
     }

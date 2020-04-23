@@ -36,7 +36,7 @@ public class ResponsableController implements Initializable {
     @FXML
     private Label jardin_nom;
     @FXML
-    private Pane logout,retour;
+    private Pane logout,retour,payment;
 
     /**
      * Initializes the controller class.
@@ -53,6 +53,7 @@ public class ResponsableController implements Initializable {
         load(messages, "Messages/MessagesList.fxml",body);
         load(tuteurs, "Tuteur/Tuteur.fxml",body);
         load(retour, "Responsable.fxml", all);
+        load(payment,"Jardin/payment.fxml",body);
         logout();
 
     }

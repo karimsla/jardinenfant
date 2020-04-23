@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="all" id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@../Assets/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Views.ResponsableController">
+<AnchorPane id="AnchorPane" fx:id="all" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@../Assets/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.ResponsableController">
    <children>
       <Pane prefHeight="114.0" prefWidth="915.0" style="-fx-background-color: #393d72 #393d72;">
          <children>
@@ -18,6 +15,7 @@
                   <Image url="@../Assets/logo-4.png" />
                </image>
             </ImageView>
+           
             <Label fx:id="jardin_nom" alignment="CENTER" contentDisplay="BOTTOM" layoutX="252.0" layoutY="11.0" prefHeight="99.0" prefWidth="412.0" text="Jardin d'enfant" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Britannic Bold" size="32.0" />
@@ -29,6 +27,13 @@
                      <image>
                         <Image url="@../Assets/retour.png" />
                      </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="payment" layoutX="804.0" layoutY="53.0" prefHeight="40.0" prefWidth="35.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="47.0" layoutX="-8.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../Assets/payment.png" />
                   </ImageView>
                </children>
             </Pane>
