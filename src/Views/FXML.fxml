@@ -51,6 +51,11 @@
                         <Insets left="40.0" />
                      </padding>
                   </Button>
+                  <Button fx:id="logout" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="255.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="277.0" styleClass="button1" stylesheets="@../Assets/fullpackstyling.css" text="Se déconnecter" textFill="WHITE">
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Button>
                </children>
             </VBox>
             <Pane layoutY="111.0" prefHeight="57.0" prefWidth="272.0" style="-fx-background-color: #343c74; -fx-background-radius: 5;">
