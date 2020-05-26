@@ -28,7 +28,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <Label fx:id="montant" layoutX="14.0" layoutY="369.0" prefHeight="17.0" prefWidth="195.0" text="Vous allez payer 250 Dinars Tunisien" textFill="#e80b0b" />
+      <Label fx:id="montant" layoutX="14.0" layoutY="369.0" prefHeight="17.0" prefWidth="195.0" text="Vous allez payer un montant en dinars Tunisien" textFill="#e80b0b" />
       <Label layoutX="10.0" layoutY="339.0" text="NB*:" />
    </children>
 </AnchorPane>

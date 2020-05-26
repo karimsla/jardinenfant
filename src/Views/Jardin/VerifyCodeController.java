@@ -16,6 +16,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class VerifyCodeController implements Initializable{
@@ -31,6 +32,8 @@ public class VerifyCodeController implements Initializable{
     private TextField codeval;
     @FXML
     private Label lbltxt;
+    int id;
+    public int nbr;
 
 
     @Override
@@ -60,10 +63,13 @@ public class VerifyCodeController implements Initializable{
                     //payment.setJardin(su.jardinid(authenticated.getId()));
                     Date date = new Date(System.currentTimeMillis());
                     Paiement payment=new Paiement();
-                    CrudPayment crud = new PaiementCrud();
+                    PaiementCrud crud = new PaiementCrud();
                     payment.setDate(date);
+                    int cb= crud.findclub();
+                    int ev = crud.findevent();
+                    float mont= cb*5+ev*6+100;
 
-                    payment.setMontant(250);
+                    payment.setMontant(mont);
                     payment.setJardin(Integer.parseInt(idjardin.getText()));
                     int x= crud.create(payment);
                     lbltxt.setText("Paiement effectué avec succué");

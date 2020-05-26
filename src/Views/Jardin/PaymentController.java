@@ -81,13 +81,13 @@ public class PaymentController implements Initializable {
         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 
         Paiement payment = new Paiement();
-        if(carte.getText().length()!=13){
+        if(carte.getText().length()!=14){
             alert.setTitle("error");
             alert.setContentText("verifier champs num de carte" );
             alert.show();
         }
         else if (
-                code.getText().length()!=3){
+                code.getText().length()!=4){
             alert.setTitle("error");
             alert.setContentText("verifier champs mot de passe " );
             alert.show();
@@ -173,7 +173,7 @@ public class PaymentController implements Initializable {
                 SMS s = new SMS();
                 System.out.printf(numtel+"/"+msg);
 
-                s.SendSMS("dorraa", "Dorra123",msg,"216"+numtel,"https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+                s.SendSMS("lili25", "Allahouakbar12",msg,"216"+numtel,"https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
 
             }
             else{

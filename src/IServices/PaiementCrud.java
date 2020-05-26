@@ -5,6 +5,7 @@ import Entities.Jardin;
 
 import Entities.Paiement;
 import Entities.Paiement;
+import Entities.Responsable;
 import Utils.ConnexionBD;
 
 import java.sql.*;
@@ -14,17 +15,88 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-    /**
+import static jardin.enfant.JardinEnfant.authenticated;
+
+/**
      *
      * @author ASUS
      */
     public class PaiementCrud implements CrudPayment {
         Connection connexion =null;
+        int idj=0;
 
         public PaiementCrud() throws SQLException {
             connexion= ConnexionBD.getInstance().getCnx();
         }
 
+        public int findclub()
+        {
+            try{
+
+                String rese="SELECT jardin_id AS idj FROM  responsable AS ab WHERE ab.id="+authenticated.getId() ;
+
+                Statement statement = connexion.createStatement();
+
+                ResultSet rse =  statement.executeQuery(rese);
+                while(rse.next()){
+                     idj=(rse.getInt("idj"));
+
+                }}
+            catch(SQLException e){
+
+            }
+
+int clu=0;
+
+            try{
+
+                String nbr= "SELECT COUNT(*) as idj FROM club WHERE jardin_id="+idj;
+                Statement statement = connexion.createStatement();
+            ResultSet rse = statement.executeQuery(nbr);
+            while(rse.next()){
+                clu=(rse.getInt("idj"));
+
+            }}
+            catch(SQLException e){
+
+    }
+return clu;
+        }
+
+
+    public int findevent()
+    {
+        try{
+
+            String rese="SELECT jardin_id AS idj FROM  responsable AS ab WHERE ab.id="+authenticated.getId() ;
+
+            Statement statement = connexion.createStatement();
+
+            ResultSet rse =  statement.executeQuery(rese);
+            while(rse.next()){
+                idj=(rse.getInt("idj"));
+
+            }}
+        catch(SQLException e){
+
+        }
+
+        int evnt=0;
+
+        try{
+
+            String nbr= "SELECT COUNT(*) as idj FROM evenement WHERE jardin_id="+idj;
+            Statement statement = connexion.createStatement();
+            ResultSet rse = statement.executeQuery(nbr);
+            while(rse.next()){
+                evnt=(rse.getInt("idj"));
+
+            }}
+        catch(SQLException e){
+
+        }
+        return evnt;
+    }
 
 
         @Override
